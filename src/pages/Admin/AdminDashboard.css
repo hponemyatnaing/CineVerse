@@ -1,0 +1,168 @@
+.admin-layout {
+  display: flex;
+  min-height: 100vh;
+  background: #020617;
+}
+
+/* ==========================
+   MAIN CONTENT
+========================== */
+
+.admin-content {
+  flex: 1;
+  padding: 40px;
+  color: white;
+}
+
+.dashboard-header {
+  margin-bottom: 35px;
+}
+
+.dashboard-header h1 {
+  font-size: 34px;
+  margin-bottom: 10px;
+}
+
+.dashboard-header p {
+  color: #94a3b8;
+  font-size: 15px;
+}
+
+/* ==========================
+   DASHBOARD CARDS
+========================== */
+
+.dashboard-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 25px;
+}
+
+.dashboard-card {
+  background: linear-gradient(
+    135deg,
+    #1e293b,
+    #334155
+  );
+
+  padding: 30px;
+
+  border-radius: 18px;
+
+  transition: .3s;
+
+  box-shadow: 0 10px 25px rgba(0,0,0,.25);
+}
+
+.dashboard-card:hover {
+  transform: translateY(-8px);
+}
+
+.dashboard-card h3 {
+  color: #94a3b8;
+  font-size: 15px;
+  margin-bottom: 8px;
+}
+
+.dashboard-card p {
+  font-size: 42px;
+  color: #7c3aed;
+  margin-top: 15px;
+  font-weight: bold;
+}
+
+/* ==========================
+   CARD ICONS
+========================== */
+
+.card-icon {
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  color: white;
+  font-size: 28px;
+}
+
+.movies {
+  background: #7c3aed;
+}
+
+.users {
+  background: #2563eb;
+}
+
+.reviews {
+  background: #f59e0b;
+}
+
+.favorites {
+  background: #ef4444;
+}
+
+/* ==========================
+   STATUS BOX
+========================== */
+
+.dashboard-section {
+  margin-top: 50px;
+}
+
+.dashboard-section h2 {
+  margin-bottom: 20px;
+}
+
+.status-box {
+  background: #1e293b;
+  border-radius: 18px;
+  padding: 25px;
+}
+
+.status-box p {
+  margin: 12px 0;
+  color: #cbd5e1;
+}
+
+/* ==========================
+   RESPONSIVE
+========================== */
+
+@media (max-width: 768px) {
+  .admin-content {
+    padding: 20px;
+  }
+
+  .dashboard-header h1 {
+    font-size: 28px;
+  }
+
+  .dashboard-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-card {
+    padding: 20px;
+  }
+}
+
+.dashboard-card{
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+
+.dashboard-card:hover{
+
+transform:translateY(-8px);
+
+box-shadow:
+0 10px 25px rgba(0,0,0,.3);
+
+}

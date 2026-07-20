@@ -1,0 +1,117 @@
+.trailer-section {
+  margin-top: 35px;
+  width: 100%;
+}
+
+
+.trailer-section h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #ffffff;
+}
+
+
+
+/* YouTube Trailer */
+
+.trailer-video {
+
+  width: 100%;
+
+  max-width: 900px;
+
+  height: 500px;
+
+  border-radius: 15px;
+
+  border: none;
+
+  box-shadow: 
+  0 10px 30px rgba(0,0,0,0.5);
+
+  background: #000;
+
+}
+
+
+
+
+
+.no-trailer {
+
+  padding: 25px;
+
+  background: rgba(255,255,255,0.05);
+
+  border-radius: 10px;
+
+  color: #aaa;
+
+  text-align: center;
+
+  font-size: 16px;
+
+}
+
+
+
+
+
+/* Responsive Tablet */
+
+@media (max-width: 992px){
+
+  .trailer-video{
+
+    height:420px;
+
+  }
+
+
+}
+
+
+
+
+
+
+/* Responsive Mobile */
+
+@media (max-width:768px){
+
+
+  .trailer-section h2{
+
+    font-size:20px;
+
+  }
+
+
+
+  .trailer-video{
+
+    height:260px;
+
+    border-radius:10px;
+
+  }
+
+
+}
+
+
+
+
+
+
+@media (max-width:480px){
+
+
+  .trailer-video{
+
+    height:220px;
+
+  }
+
+
+}

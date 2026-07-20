@@ -1,0 +1,175 @@
+.review-list {
+
+    margin-top: 40px;
+
+}
+
+
+.review-card {
+
+    background: #1f2937;
+
+    padding: 20px;
+
+    border-radius: 12px;
+
+    margin-bottom: 20px;
+
+    color: white;
+
+}
+
+
+
+.review-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-bottom: 15px;
+
+}
+
+
+
+.review-header span {
+
+    font-size: 14px;
+
+    color: #94a3b8;
+
+}
+
+
+
+.review-stars {
+
+    display: flex;
+
+    gap: 5px;
+
+    margin-bottom: 15px;
+
+}
+
+
+
+.review-stars svg {
+
+    color: #555;
+
+}
+
+
+
+.review-stars .active {
+
+    color: #FFD700;
+
+}
+
+
+
+.review-card p {
+
+    line-height: 1.7;
+
+    color: #cbd5e1;
+
+}
+
+
+
+/* Edit textarea */
+
+.review-card textarea {
+
+    width: 100%;
+
+    min-height: 100px;
+
+    padding: 12px;
+
+    border-radius: 10px;
+
+    border: none;
+
+    outline: none;
+
+    resize: none;
+
+    margin-bottom: 15px;
+
+    font-size: 15px;
+
+}
+
+
+/* Buttons */
+
+.review-card button {
+
+
+    padding: 8px 18px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: #7c3aed;
+
+    color: white;
+
+    cursor: pointer;
+
+    font-size: 14px;
+
+    margin-right: 10px;
+
+
+}
+
+.review-card button:hover {
+
+    background: #6d28d9;
+
+}
+
+.review-empty {
+
+    margin-top: 40px;
+
+    text-align: center;
+
+    color: #94a3b8;
+
+}
+
+.delete-review-btn{
+
+
+margin-top:10px;
+
+background:#e50914;
+
+color:white;
+
+border:none;
+
+padding:8px 14px;
+
+border-radius:6px;
+
+cursor:pointer;
+
+
+}
+
+
+
+.delete-review-btn:hover{
+
+opacity:0.8;
+
+}

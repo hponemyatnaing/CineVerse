@@ -1,0 +1,55 @@
+.error-box{
+
+    padding:60px 30px;
+
+    text-align:center;
+
+    background:#1f1f1f;
+
+    border-radius:15px;
+
+    margin:40px auto;
+
+    max-width:500px;
+
+}
+
+.error-box h2{
+
+    color:#ff4757;
+
+    margin-bottom:15px;
+
+}
+
+.error-box p{
+
+    color:#bbb;
+
+    margin-bottom:25px;
+
+}
+
+.error-box button{
+
+    background:#ff4757;
+
+    color:white;
+
+    border:none;
+
+    padding:12px 25px;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.error-box button:hover{
+
+    background:#ff2d55;
+
+}

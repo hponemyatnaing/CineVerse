@@ -1,0 +1,21 @@
+/* အခြား Global Elements များ */
+body {
+  margin: 0;
+  font-family: sans-serif;
+}
+
+/* ဤနေရာတွင် ထည့်ပါ */
+button {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: var(--accent);
+  color: black;
+}

@@ -1,0 +1,21 @@
+@import "../Login/Login.css";
+
+.register-error{
+
+margin-top:12px;
+
+color:#ef4444;
+
+font-size:14px;
+
+font-weight:500;
+
+}
+
+.register-btn:disabled{
+
+opacity:.7;
+
+cursor:not-allowed;
+
+}

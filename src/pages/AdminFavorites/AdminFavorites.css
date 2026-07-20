@@ -1,0 +1,253 @@
+.admin-favorites {
+
+    min-height: 100vh;
+
+    padding: 40px;
+
+    background: #0b0b0b;
+
+    color: white;
+
+}
+
+
+/* HEADER */
+
+.admin-favorites h1 {
+
+    font-size: 32px;
+
+    margin-bottom: 10px;
+
+}
+
+
+.favorite-count {
+
+    display: inline-block;
+
+    background: linear-gradient(
+        135deg,
+        #e50914,
+        #b20710
+    );
+
+    padding: 12px 25px;
+
+    border-radius: 30px;
+
+    font-size: 16px;
+
+    margin-bottom: 35px;
+
+}
+
+
+
+
+
+/* GRID */
+
+.favorite-list {
+
+    display: grid;
+
+    grid-template-columns: repeat(
+        auto-fill,
+        minmax(280px, 1fr)
+    );
+
+    gap: 25px;
+
+}
+
+
+
+
+
+/* CARD */
+
+.favorite-card {
+
+    background: rgba(255,255,255,0.08);
+
+    backdrop-filter: blur(12px);
+
+    border: 1px solid rgba(255,255,255,0.1);
+
+    border-radius: 18px;
+
+    overflow: hidden;
+
+    transition: .3s;
+
+}
+
+
+
+.favorite-card:hover {
+
+    transform: translateY(-8px);
+
+    box-shadow:
+    0 15px 35px rgba(0,0,0,.5);
+
+}
+
+
+
+
+
+/* IMAGE */
+
+.favorite-card img {
+
+    width:100%;
+
+    height:280px;
+
+    object-fit:cover;
+
+}
+
+
+
+
+
+
+.favorite-info {
+
+    padding:20px;
+
+}
+
+
+
+
+.favorite-info h3 {
+
+    font-size:20px;
+
+    margin-bottom:15px;
+
+}
+
+
+
+.favorite-info p {
+
+    color:#ccc;
+
+    margin:8px 0;
+
+}
+
+
+
+
+
+/* BUTTON */
+
+
+.favorite-card button {
+
+
+    width:calc(100% - 40px);
+
+    margin:0 20px 20px;
+
+
+    padding:12px;
+
+
+    border:none;
+
+
+    border-radius:10px;
+
+
+    background:#e50914;
+
+
+    color:white;
+
+
+    font-weight:bold;
+
+
+    cursor:pointer;
+
+
+    transition:.3s;
+
+
+}
+
+
+
+
+.favorite-card button:hover {
+
+
+    background:#ff1f1f;
+
+
+    transform:scale(1.03);
+
+
+}
+
+
+
+
+
+
+
+/* EMPTY */
+
+.favorite-list h3 {
+
+
+    background:#181818;
+
+
+    padding:40px;
+
+
+    border-radius:15px;
+
+
+    text-align:center;
+
+
+    color:#aaa;
+
+
+}
+
+
+
+
+
+
+
+@media(max-width:768px){
+
+
+    .admin-favorites{
+
+        padding:20px;
+
+    }
+
+
+
+    .admin-favorites h1{
+
+        font-size:26px;
+
+    }
+
+
+
+}

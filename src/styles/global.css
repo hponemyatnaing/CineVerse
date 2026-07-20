@@ -1,0 +1,72 @@
+@import "./variables.css";
+@import "./reset.css";
+
+* {
+  transition: all 0.2s ease;
+}
+
+:root {
+  --bg: #0f172a;
+  --card: #1e293b;
+  --primary: #7c3aed;
+  --accent: #facc15;
+  --text: #ffffff;
+  --muted: #94a3b8;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.container{
+    width:min(92%, var(--container-width));
+    margin:auto;
+}
+
+main{
+    min-height:100vh;
+}
+
+/* အခြား Global CSS များပြီးနောက်တွင် ထည့်ပါ */
+
+/* Theme: Light Mode */
+body.light {
+  background-color: #f8fafc; /* Page တစ်ခုလုံး၏ နောက်ခံအရောင်ကိုပါ ပြောင်းလဲပေးခြင်း */
+  transition: background-color 0.3s, color 0.3s;
+}
+
+body.light .movie-card {
+  background: white;
+  color: black;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* Light mode မှာ ပိုပေါ်လွင်စေရန် */
+}
+
+body.light .navbar {
+  background: white;
+  color: black;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.btn{
+    padding:12px 24px;
+    border-radius:10px;
+    transition:.3s;
+}
+
+.btn-primary{
+    background:var(--color-primary);
+    color:white;
+}
+
+.btn-primary:hover{
+    background:var(--color-primary-hover);
+}
+
+.card{
+    background:var(--color-surface);
+    border-radius:16px;
+    box-shadow:var(--shadow);
+}

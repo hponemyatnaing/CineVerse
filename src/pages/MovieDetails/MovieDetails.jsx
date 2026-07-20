@@ -1,0 +1,244 @@
+import "./MovieDetails.css";
+
+import { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+
+import { FaArrowLeft } from "react-icons/fa";
+
+import {
+  getMovieDetails,
+  getMovieVideos,
+  getSimilarMovies,
+} from "../../services/tmdbService";
+
+import {
+  saveWatchHistory,
+  getMovieById,
+  increaseMovieView,
+} from "../../services/movieService";
+
+import MovieCard from "../../components/MovieCard/MovieCard";
+
+import Trailer from "../../components/Trailer/Trailer";
+
+import ReviewForm from "../../components/ReviewForm/ReviewForm";
+
+import ReviewList from "../../components/ReviewList/ReviewList";
+
+import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
+
+function MovieDetails() {
+  const { id } = useParams();
+
+  const navigate = useNavigate();
+
+  const [movie, setMovie] = useState(null);
+
+  const [loading, setLoading] = useState(true);
+
+  const [videos, setVideos] = useState([]);
+
+  const [similarMovies, setSimilarMovies] = useState([]);
+
+  const [refreshReviews, setRefreshReviews] = useState(0);
+
+  useEffect(() => {
+    loadMovie();
+  }, [id]);
+
+  async function loadMovie() {
+    try {
+      setLoading(true);
+
+      console.log("CURRENT MOVIE ID:", id);
+
+      // =================================
+      // TMDB MOVIE
+      // =================================
+
+      if (!isNaN(id)) {
+        const movieData = await getMovieDetails(id);
+
+        const videoData = await getMovieVideos(id);
+
+        const similarData = await getSimilarMovies(id);
+
+        console.log("VIDEOS:", videoData);
+
+        console.log("SIMILAR:", similarData);
+
+        setMovie(movieData);
+
+        setVideos(videoData || []);
+
+        setSimilarMovies(similarData || []);
+
+        // Continue Watching
+
+        saveWatchHistory({
+          id: movieData.id,
+
+          title: movieData.title,
+
+          image: movieData.poster_path
+            ? `https://image.tmdb.org/t/p/w500${movieData.poster_path}`
+            : "/default-placeholder.jpg",
+
+          rating: movieData.vote_average,
+        });
+      }
+
+      // =================================
+      // FIREBASE ADMIN MOVIE
+      // =================================
+      else {
+        const firebaseMovie = await getMovieById(id);
+
+        console.log("FIREBASE MOVIE:", firebaseMovie);
+
+        if (firebaseMovie) {
+          await increaseMovieView(firebaseMovie.id);
+
+          saveWatchHistory(firebaseMovie);
+        }
+
+        setMovie(firebaseMovie);
+
+        // Admin movie does not use TMDB videos
+
+        setVideos([]);
+
+        setSimilarMovies([]);
+      }
+    } catch (error) {
+      console.log("Movie Details Error:", error);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  <LoadingSpinner text="Loading Movie..." />;
+
+  if (!movie) {
+    return <div className="details-loading">Movie Not Found</div>;
+  }
+
+  return (
+    <section className="movie-details">
+      {/* BACK BUTTON */}
+
+      <button className="back-btn" onClick={() => navigate(-1)}>
+        <FaArrowLeft />
+
+        <span>Back</span>
+      </button>
+
+      <div className="details-container">
+        {/* POSTER */}
+
+        <img
+          src={
+            movie.poster_path
+              ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+              : movie.image
+          }
+          alt={movie.title}
+        />
+
+        <div className="details-info">
+          <h1>{movie.title}</h1>
+
+          {/* RATING */}
+
+          <p>⭐{movie.vote_average || movie.rating || 0}</p>
+
+          {/* YEAR */}
+
+          <p>
+            📅
+            {movie.release_date || movie.year}
+          </p>
+
+          {/* RUNTIME */}
+
+          {movie.runtime && <p>⏰ {movie.runtime} mins</p>}
+
+          {/* GENRE */}
+
+          <div className="genres">
+            {movie.genres ? (
+              movie.genres.map((genre) => (
+                <span key={genre.id}>{genre.name}</span>
+              ))
+            ) : (
+              <span>{movie.genre}</span>
+            )}
+          </div>
+
+          <h3>Overview</h3>
+
+          <p>{movie.overview || movie.description}</p>
+
+          {/* ======================
+              TRAILER
+          ====================== */}
+
+          <Trailer
+            videos={videos}
+            trailerUrl={movie.trailerUrl}
+            movieTitle={movie.title}
+          />
+
+          {/* ======================
+              REVIEWS
+          ====================== */}
+
+          <ReviewForm
+            movieId={movie.id}
+            movieTitle={movie.title}
+            onReviewAdded={() => setRefreshReviews((prev) => prev + 1)}
+          />
+
+          <ReviewList movieId={movie.id} refresh={refreshReviews} />
+        </div>
+      </div>
+
+      {/* ======================
+          SIMILAR MOVIES
+      ====================== */}
+
+      {similarMovies.length > 0 && (
+        <>
+          <hr />
+
+          <h2>You May Also Like</h2>
+
+          <div className="similar-grid">
+            {similarMovies
+
+              .slice(0, 8)
+
+              .map((movie) => (
+                <MovieCard
+                  key={movie.id}
+                  movie={{
+                    id: movie.id,
+
+                    title: movie.title,
+
+                    image: movie.poster_path
+                      ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+                      : "/default-placeholder.jpg",
+
+                    rating: movie.vote_average,
+                  }}
+                />
+              ))}
+          </div>
+        </>
+      )}
+    </section>
+  );
+}
+
+export default MovieDetails;

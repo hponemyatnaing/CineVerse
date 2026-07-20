@@ -1,0 +1,17 @@
+.section-title {
+  font-size: 24px;
+  margin: 20px;
+  color: var(--accent);
+}
+
+/* DARK THEME (default) */
+body.dark {
+  background: #0f172a;
+  color: white;
+}
+
+/* LIGHT THEME */
+body.light {
+  background: #f1f5f9;
+  color: #0f172a;
+}

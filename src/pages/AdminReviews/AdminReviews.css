@@ -1,0 +1,105 @@
+.admin-reviews {
+
+
+    padding: 30px;
+
+    color: white;
+
+
+}
+
+
+
+.admin-reviews h1 {
+
+
+    margin-bottom: 30px;
+
+
+}
+
+
+
+
+
+.reviews-container {
+
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 20px;
+
+
+}
+
+
+
+
+.review-card {
+
+
+    background: #181818;
+
+    padding: 25px;
+
+    border-radius: 15px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+
+}
+
+
+
+
+
+.review-card p {
+
+
+    color: #ccc;
+
+
+}
+
+
+
+
+
+.review-card button {
+
+
+    background: #e50914;
+
+
+    color: white;
+
+
+    border: none;
+
+
+    padding: 10px 20px;
+
+
+    border-radius: 20px;
+
+
+    cursor: pointer;
+
+
+}
+
+
+
+.review-card button:hover {
+
+
+    background: #b20710;
+
+
+}

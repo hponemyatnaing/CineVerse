@@ -1,0 +1,302 @@
+.admin-users {
+
+    min-height: 100vh;
+
+    padding: 30px;
+
+    background: #111;
+
+    color: white;
+
+}
+
+
+/* TITLE */
+
+.admin-users h1 {
+
+    font-size: 32px;
+
+    margin-bottom: 10px;
+
+}
+
+
+
+/* TOTAL USERS */
+
+.user-count {
+
+    color: #aaa;
+
+    font-size: 18px;
+
+    margin-bottom: 30px;
+
+}
+
+
+
+/* TABLE CONTAINER */
+
+.users-table {
+
+    width: 100%;
+
+    background: #181818;
+
+    border-radius: 15px;
+
+    overflow: hidden;
+
+    border: 1px solid #333;
+
+}
+
+
+
+/* HEADER */
+
+.table-header {
+
+    display: grid;
+
+    grid-template-columns:
+        2fr 2.5fr 1fr 1.5fr 1fr;
+
+
+    padding: 18px 25px;
+
+
+    background: #222;
+
+
+    font-weight: bold;
+
+
+    color: #e50914;
+
+
+}
+
+
+
+
+/* USER ROW */
+
+.table-row {
+
+    display: grid;
+
+
+    grid-template-columns:
+        2fr 2.5fr 1fr 1.5fr 1fr;
+
+
+    align-items: center;
+
+
+    padding: 20px 25px;
+
+
+    border-bottom: 1px solid #333;
+
+
+    transition: .3s;
+
+
+}
+
+
+
+
+.table-row:hover {
+
+    background: #242424;
+
+}
+
+
+
+
+.table-row span {
+
+    color: #ddd;
+
+    font-size: 15px;
+
+}
+
+
+
+
+/* ROLE */
+
+.admin-role {
+
+
+    display: inline-block;
+
+
+    width: fit-content;
+
+
+    padding: 6px 14px;
+
+
+    border-radius: 20px;
+
+
+    background: #e50914;
+
+
+    color: white !important;
+
+
+    font-size: 13px;
+
+
+}
+
+
+
+.user-role {
+
+
+    display: inline-block;
+
+
+    width: fit-content;
+
+
+    padding: 6px 14px;
+
+
+    border-radius: 20px;
+
+
+    background: #333;
+
+
+    color: #ddd !important;
+
+
+    font-size: 13px;
+
+
+}
+
+
+
+
+/* DELETE BUTTON */
+
+.table-row button {
+
+
+    background: #e50914;
+
+
+    color: white;
+
+
+    border: none;
+
+
+    padding: 10px 15px;
+
+
+    border-radius: 8px;
+
+
+    cursor: pointer;
+
+
+    transition: .3s;
+
+
+    font-size: 14px;
+
+
+}
+
+
+
+.table-row button:hover {
+
+
+    background: #b20710;
+
+
+    transform: scale(1.05);
+
+
+}
+
+
+
+
+
+/* EMPTY */
+
+.users-table:empty {
+
+
+    text-align: center;
+
+
+}
+
+
+
+
+
+/* RESPONSIVE */
+
+
+@media(max-width:900px) {
+
+
+    .users-table {
+
+        overflow-x: auto;
+
+    }
+
+
+    .table-header,
+    .table-row {
+
+
+        min-width: 900px;
+
+
+    }
+
+
+}
+
+
+
+
+@media(max-width:600px) {
+
+
+    .admin-users {
+
+
+        padding: 15px;
+
+    }
+
+
+
+    .admin-users h1 {
+
+
+        font-size: 25px;
+
+    }
+
+
+}
