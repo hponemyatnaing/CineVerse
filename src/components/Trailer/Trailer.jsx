@@ -1,9 +1,6 @@
 import "./Trailer.css";
 
 function Trailer({ videos = [], movieTitle, trailerUrl }) {
-  // ==========================
-  // Firebase Admin Movie Trailer
-  // ==========================
 
   if (trailerUrl) {
     return (
@@ -28,10 +25,6 @@ function Trailer({ videos = [], movieTitle, trailerUrl }) {
       </div>
     );
   }
-
-  // ==========================
-  // TMDB Movie Trailer
-  // ==========================
 
   const trailer =
     videos.find(

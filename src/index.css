@@ -15,3 +15,16 @@ body.light {
   background: #f1f5f9;
   color: #0f172a;
 }
+
+button {
+
+  transition: .3s;
+
+}
+
+
+button:hover {
+
+  transform: translateY(-2px);
+
+}

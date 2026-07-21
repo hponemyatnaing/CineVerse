@@ -2,7 +2,7 @@
   background: #1e293b;
   padding: 30px;
   border-radius: 18px;
-  box-shadow: 0 15px 35px rgba(0,0,0,.35);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, .35);
 }
 
 .movie-form h2 {
@@ -47,7 +47,7 @@
 .form-group textarea:focus,
 .form-group select:focus {
   border-color: #7c3aed;
-  box-shadow: 0 0 12px rgba(124,58,237,.3);
+  box-shadow: 0 0 12px rgba(124, 58, 237, .3);
 }
 
 .form-group textarea {

@@ -35,23 +35,13 @@ function Home() {
     try {
       setLoading(true);
 
-      // 🔥 Netflix Top 10 Ranking
-
       const top = await getTop10Ranking();
-
-      // 🔥 TMDB Trending
 
       const trendingData = await getTrendingMovies();
 
-      // ⚡ TMDB Hot Today
-
       const hotData = await getHotMovies();
 
-      // 🆕 Firebase Admin Movies
-
       const adminMovies = await getMovies();
-
-      // ▶ Continue Watching
 
       const watchData = getWatchHistory();
 
@@ -62,8 +52,6 @@ function Home() {
       setHot(hotData || []);
 
       setHistory(watchData || []);
-
-      // Latest Movies
 
       const latestData = (adminMovies || [])
 

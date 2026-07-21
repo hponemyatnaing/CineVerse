@@ -42,7 +42,6 @@ function Register() {
       alert("Registration Successful!");
       navigate("/login");
     } catch (err) {
-      // Firebase error handling
       if (err.code === "auth/email-already-in-use") {
         setError("This email is already registered.");
       } else {

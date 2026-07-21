@@ -20,11 +20,8 @@ function Top10Movies({ movies }) {
             key={movie.id}
             onClick={() => navigate(`/movie/${movie.id}`)}
           >
-            {/* Rank Number */}
 
             <div className="rank-number">{index + 1}</div>
-
-            {/* Poster */}
 
             <img
               src={

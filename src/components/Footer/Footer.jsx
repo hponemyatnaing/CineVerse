@@ -13,27 +13,21 @@ function Footer() {
 
   return (
     <footer className="footer">
-
       <div className="footer-container">
-
         {/* Logo */}
         <div className="footer-section">
-
           <div className="footer-logo">
             <FaFilm />
             <span>CineVerse</span>
           </div>
 
           <p>
-            CineVerse is a modern Movie Review & Rating
-            website built with React.js.
+            CineVerse is a modern Movie Review & Rating website built with
+            React.js.
           </p>
-
         </div>
 
-        {/* Quick Links */}
         <div className="footer-section">
-
           <h3>Quick Links</h3>
 
           <Link to="/">Home</Link>
@@ -43,16 +37,12 @@ function Footer() {
           <Link to="/favorites">Favorites</Link>
 
           <Link to="/about">About</Link>
-
         </div>
 
-        {/* Social */}
         <div className="footer-section">
-
           <h3>Follow Us</h3>
 
           <div className="footer-social">
-
             <a href="#">
               <FaFacebook />
             </a>
@@ -64,20 +54,14 @@ function Footer() {
             <a href="#">
               <FaLinkedin />
             </a>
-
           </div>
-
         </div>
-
       </div>
 
       <div className="footer-bottom">
-
-        © {year} CineVerse • Made with{" "}
-        <FaHeart className="heart" /> using React.js
-
+        © {year} CineVerse • Made with <FaHeart className="heart" /> using
+        React.js
       </div>
-
     </footer>
   );
 }

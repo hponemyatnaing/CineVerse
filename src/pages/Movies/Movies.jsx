@@ -5,6 +5,8 @@ import MovieCard from "../../components/MovieCard/MovieCard";
 import MovieSkeleton from "../../components/Skeleton/MovieSkeleton";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 import { getTrendingMovies } from "../../services/tmdbService";
+import { useRef } from "react";
+import { fadeUp } from "../../utils/animations";
 
 function Movies() {
   const [movies, setMovies] = useState([]);
@@ -13,6 +15,18 @@ function Movies() {
 
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState("default");
+  const gridRef = useRef();
+
+
+  useEffect(() => {
+
+    if (!loading) {
+
+      fadeUp(gridRef.current);
+
+    }
+
+  }, [loading]);
 
   useEffect(() => {
     loadMovies();
@@ -95,7 +109,10 @@ function Movies() {
         </select>
       </div>
 
-      <div className="movies-grid">
+      <div
+        ref={gridRef}
+        className="movies-grid"
+      >
         {error ? (
           <div className="movie-error">
             <h2>{error}</h2>

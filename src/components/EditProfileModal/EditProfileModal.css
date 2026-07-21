@@ -1,77 +1,77 @@
-.modal-overlay{
+.modal-overlay {
 
-position:fixed;
+  display: flex;
 
-top:0;
-left:0;
+  position: fixed;
 
-width:100%;
-height:100%;
+  top: 0;
+  left: 0;
 
-background:rgba(0,0,0,.7);
+  width: 100%;
+  height: 100%;
 
-display:flex;
+  background: rgba(0, 0, 0, .7);
 
-align-items:center;
+  align-items: center;
 
-justify-content:center;
+  justify-content: center;
 
-z-index:999;
-
-}
-
-
-
-.edit-modal{
-
-background:#181818;
-
-padding:30px;
-
-border-radius:15px;
-
-width:350px;
-
-color:white;
+  z-index: 999;
 
 }
 
 
 
-.edit-modal input{
+.edit-modal {
 
-width:100%;
+  background: #181818;
 
-padding:12px;
+  padding: 30px;
 
-margin-bottom:15px;
+  border-radius: 15px;
 
-border-radius:8px;
+  width: 350px;
 
-border:none;
-
-}
-
-
-
-.modal-buttons{
-
-display:flex;
-
-gap:15px;
+  color: white;
 
 }
 
 
 
-.modal-buttons button{
+.edit-modal input {
 
-padding:10px 20px;
+  width: 100%;
 
-border:none;
+  padding: 12px;
 
-border-radius:8px;
+  margin-bottom: 15px;
 
-cursor:pointer;
+  border-radius: 8px;
+
+  border: none;
+
+}
+
+
+
+.modal-buttons {
+
+  display: flex;
+
+  gap: 15px;
+
+}
+
+
+
+.modal-buttons button {
+
+  padding: 10px 20px;
+
+  border: none;
+
+  border-radius: 8px;
+
+  cursor: pointer;
 
 }

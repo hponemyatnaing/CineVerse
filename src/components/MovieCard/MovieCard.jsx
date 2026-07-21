@@ -1,6 +1,8 @@
 import { FaStar, FaHeart } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useFavorites } from "../../context/FavoritesContext";
+import { useEffect, useRef } from "react";
+import { fadeUp } from "../../utils/animations";
 import "./MovieCard.css";
 
 function MovieCard({ movie }) {
@@ -8,20 +10,50 @@ function MovieCard({ movie }) {
 
   const { favorites, addToFavorites, removeFromFavorites } = useFavorites();
 
-  const isFavorite = favorites.some((item) => item.id === movie.id);
+  const isFavorite =
+    favorites.some(
+      (item) =>
+        String(item.movieId) === String(movie.id)
+    );
 
-  const handleFavorite = (e) => {
+  const cardRef = useRef();
+
+
+  useEffect(() => {
+
+    fadeUp(cardRef.current);
+
+  }, []);
+
+  const handleFavorite = async (e) => {
+
     e.stopPropagation();
 
+
+    console.log(
+      "Favorite status:",
+      isFavorite
+    );
+
+
     if (isFavorite) {
-      removeFromFavorites(movie.id);
+
+      await removeFromFavorites(movie.id);
+
     } else {
-      addToFavorites(movie);
+
+      await addToFavorites(movie);
+
     }
+
   };
 
   return (
-    <div className="movie-card" onClick={() => navigate(`/movie/${movie.id}`)}>
+    <div
+      ref={cardRef}
+      className="movie-card"
+      onClick={() => navigate(`/movie/${movie.id}`)}
+    >
       <div className="movie-image">
         <img src={movie.image} alt={movie.title} loading="lazy" />
 

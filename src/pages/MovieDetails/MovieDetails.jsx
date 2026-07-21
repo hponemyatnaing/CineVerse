@@ -52,10 +52,6 @@ function MovieDetails() {
 
       console.log("CURRENT MOVIE ID:", id);
 
-      // =================================
-      // TMDB MOVIE
-      // =================================
-
       if (!isNaN(id)) {
         const movieData = await getMovieDetails(id);
 
@@ -73,8 +69,6 @@ function MovieDetails() {
 
         setSimilarMovies(similarData || []);
 
-        // Continue Watching
-
         saveWatchHistory({
           id: movieData.id,
 
@@ -88,9 +82,6 @@ function MovieDetails() {
         });
       }
 
-      // =================================
-      // FIREBASE ADMIN MOVIE
-      // =================================
       else {
         const firebaseMovie = await getMovieById(id);
 
@@ -103,8 +94,6 @@ function MovieDetails() {
         }
 
         setMovie(firebaseMovie);
-
-        // Admin movie does not use TMDB videos
 
         setVideos([]);
 
@@ -125,7 +114,6 @@ function MovieDetails() {
 
   return (
     <section className="movie-details">
-      {/* BACK BUTTON */}
 
       <button className="back-btn" onClick={() => navigate(-1)}>
         <FaArrowLeft />
@@ -134,7 +122,6 @@ function MovieDetails() {
       </button>
 
       <div className="details-container">
-        {/* POSTER */}
 
         <img
           src={
@@ -148,22 +135,14 @@ function MovieDetails() {
         <div className="details-info">
           <h1>{movie.title}</h1>
 
-          {/* RATING */}
-
           <p>⭐{movie.vote_average || movie.rating || 0}</p>
-
-          {/* YEAR */}
 
           <p>
             📅
             {movie.release_date || movie.year}
           </p>
 
-          {/* RUNTIME */}
-
           {movie.runtime && <p>⏰ {movie.runtime} mins</p>}
-
-          {/* GENRE */}
 
           <div className="genres">
             {movie.genres ? (
@@ -179,19 +158,11 @@ function MovieDetails() {
 
           <p>{movie.overview || movie.description}</p>
 
-          {/* ======================
-              TRAILER
-          ====================== */}
-
           <Trailer
             videos={videos}
             trailerUrl={movie.trailerUrl}
             movieTitle={movie.title}
           />
-
-          {/* ======================
-              REVIEWS
-          ====================== */}
 
           <ReviewForm
             movieId={movie.id}
@@ -202,10 +173,6 @@ function MovieDetails() {
           <ReviewList movieId={movie.id} refresh={refreshReviews} />
         </div>
       </div>
-
-      {/* ======================
-          SIMILAR MOVIES
-      ====================== */}
 
       {similarMovies.length > 0 && (
         <>

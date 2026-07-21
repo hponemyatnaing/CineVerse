@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from "react"; // useCallback ကို ထည့်သွင်းပေးပါ
+import { useEffect, useState, useCallback } from "react"; 
 import { getTrendingMovies } from "../../services/tmdbService";
 import MovieCard from "../MovieCard/MovieCard";
 import MovieSkeleton from "../Skeleton/MovieSkeleton";
@@ -11,8 +11,6 @@ function MovieGrid() {
   const [search, setSearch] = useState("");
   const [error, setError] = useState("");
 
-  // fetchMovies ကို useCallback သုံးပြီး ဆောက်ပေးလိုက်ပါ
-  // ဒါမှ ErrorMessage component ထဲက onRetry မှာ ဒီ function ကို ပြန်သုံးလို့ရမှာပါ
   const fetchMovies = useCallback(async () => {
     setLoading(true);
     setError("");
@@ -27,15 +25,14 @@ function MovieGrid() {
     } finally {
       setLoading(false);
     }
-  }, []); // dependencies အလွတ်ထားပါ
+  }, []);
 
   useEffect(() => {
     fetchMovies();
-  }, [fetchMovies]); // fetchMovies ပြောင်းလဲတိုင်း useEffect ပြန်အလုပ်လုပ်ပါမယ်
+  }, [fetchMovies]);
 
-  // Search Filter
   const filteredMovies = movies.filter((movie) =>
-    (movie.title || "").toLowerCase().includes(search.toLowerCase())
+    (movie.title || "").toLowerCase().includes(search.toLowerCase()),
   );
 
   return (
@@ -52,12 +49,14 @@ function MovieGrid() {
 
       <div className="grid">
         {loading ? (
-          Array(6).fill().map((_, i) => <MovieSkeleton key={i} />)
+          Array(6)
+            .fill()
+            .map((_, i) => <MovieSkeleton key={i} />)
         ) : error ? (
           <ErrorMessage
             title="Movie Loading Failed"
             message={error}
-            onRetry={fetchMovies} // အခု အဆင်ပြေသွားပါပြီ
+            onRetry={fetchMovies} 
           />
         ) : filteredMovies.length > 0 ? (
           filteredMovies.map((movie) => (

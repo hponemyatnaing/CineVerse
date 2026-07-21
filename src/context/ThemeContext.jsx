@@ -5,7 +5,6 @@ export const ThemeContext = createContext();
 export function ThemeProvider({ children }) {
   const [theme, setTheme] = useState("dark");
 
-  // Load saved theme
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme");
     if (savedTheme) {
@@ -13,7 +12,6 @@ export function ThemeProvider({ children }) {
     }
   }, []);
 
-  // Apply theme
   useEffect(() => {
     document.body.className = theme;
     localStorage.setItem("theme", theme);

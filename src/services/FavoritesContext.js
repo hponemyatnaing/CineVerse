@@ -7,14 +7,14 @@ useEffect(() => {
     if (user) {
       // ဒီနေရာမှာ database ထဲက uid နဲ့ လက်ရှိ login ဝင်ထားတဲ့ user.uid ကို စစ်တာပါ
       const q = query(
-        collection(db, "favorites"), 
-        where("userId", "==", user.uid) 
+        collection(db, "favorites"),
+        where("userId", "==", user.uid),
       );
 
       return onSnapshot(q, (snapshot) => {
-        const favList = snapshot.docs.map(doc => ({ 
-           ...doc.data(), 
-           id: doc.id 
+        const favList = snapshot.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
         }));
         setFavorites(favList);
       });

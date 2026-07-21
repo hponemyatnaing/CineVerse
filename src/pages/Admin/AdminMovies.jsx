@@ -7,17 +7,13 @@ import AddMovieForm from "../../components/AddMovieForm/AddMovieForm";
 import { FaPlus, FaEdit, FaTrash } from "react-icons/fa";
 
 import { getMovies, deleteMovie } from "../../services/movieService";
-import LoadingSpinner
-  from "../../components/LoadingSpinner/LoadingSpinner";
+import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 
 function AdminMovies() {
   const [movies, setMovies] = useState([]);
   const [search, setSearch] = useState("");
-
   const [showModal, setShowModal] = useState(false);
-
   const [editingMovie, setEditingMovie] = useState(null);
-
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

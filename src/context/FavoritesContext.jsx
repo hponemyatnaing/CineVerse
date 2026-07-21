@@ -1,186 +1,126 @@
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useState
-} from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 
-import { saveFavorite } from "../services/favoriteService";
+import { collection, getDocs, query, where } from "firebase/firestore";
+
+import { db } from "../firebase/firebase";
+
+import { addFavorite, removeFavorite } from "../services/favoriteService";
 
 const FavoritesContext = createContext();
 
+export const FavoritesProvider = ({ children }) => {
+  const [favorites, setFavorites] = useState([]);
 
-
-export function FavoritesProvider({ children }) {
-
-
-  const getUserId = () => {
-
-    const user = JSON.parse(
-      localStorage.getItem("user")
-    );
-
-
-    return user?.uid;
-
-  };
-
-
-
-  const [favorites, setFavorites] = useState(() => {
-
-
-    const uid = getUserId();
-
-
-    if (!uid) {
-
-      return [];
-
-    }
-
-
-
-    const saved = localStorage.getItem(
-      `favorites_${uid}`
-    );
-
-
-
-    return saved
-      ? JSON.parse(saved)
-      : [];
-
-
-  });
-
-
-
+  const user = JSON.parse(localStorage.getItem("user"));
 
   useEffect(() => {
+    if (user) {
+      loadFavorites();
+    } else {
+      setFavorites([]);
+    }
+  }, []);
 
+  const loadFavorites = async () => {
+    try {
+      if (!user) return;
 
-    const uid = getUserId();
+      const q = query(
+        collection(db, "favorites"),
 
+        where("userId", "==", user.uid),
+      );
 
+      const snapshot = await getDocs(q);
 
-    if (uid) {
+      const data = snapshot.docs.map((doc) => ({
+        id: doc.id,
 
+        ...doc.data(),
+      }));
 
-      localStorage.setItem(
+      setFavorites(data);
+    } catch (error) {
+      console.log("Load favorite error:", error);
+    }
+  };
 
-        `favorites_${uid}`,
+  const addToFavorites = async (movie) => {
+    try {
+      if (!user) {
+        alert("Please login first");
 
-        JSON.stringify(favorites)
+        return;
+      }
 
+      const exists = favorites.some(
+        (item) => String(item.movieId) === String(movie.id),
+      );
+
+      if (exists) {
+        return;
+      }
+
+      await addFavorite(movie, user.uid);
+
+      await loadFavorites();
+    } catch (error) {
+      console.log("Add favorite error:", error);
+    }
+  };
+
+  const removeFromFavorites = async (movieId) => {
+
+    try {
+
+      const item = favorites.find(
+        (movie) =>
+          String(movie.movieId) === String(movieId)
       );
 
 
-    }
+      console.log("Delete item:", item);
 
 
-  }, [favorites]);
+      if (!item) {
+        console.log("Favorite not found");
+        return;
+      }
 
 
+      await removeFavorite(item.id);
 
 
-
-  const addToFavorites = async (movie) => {
-
-
-    const success =
-      await saveFavorite(movie);
+      // Firebase ပြန်ဖတ်
+      await loadFavorites();
 
 
+    } catch (error) {
 
-    if (success) {
-
-
-      setFavorites((prev) => {
-
-
-        const exists =
-          prev.find(
-            item =>
-              item.id === movie.id
-          );
-
-
-        if (exists)
-          return prev;
-
-
-
-        return [
-          ...prev,
-          movie
-        ];
-
-
-      });
-
+      console.log(
+        "Remove favorite error:",
+        error
+      );
 
     }
 
-
   };
-
-
-  const removeFromFavorites = (id) => {
-
-
-    setFavorites((prev) =>
-
-      prev.filter(
-        movie => movie.id !== id
-      )
-
-    );
-
-
-  };
-
-
-
-
 
   return (
-
     <FavoritesContext.Provider
-
       value={{
-
         favorites,
 
         addToFavorites,
 
         removeFromFavorites,
 
+        loadFavorites,
       }}
-
     >
-
       {children}
-
-
     </FavoritesContext.Provider>
-
-
   );
+};
 
-
-}
-
-
-
-
-
-export function useFavorites() {
-
-
-  return useContext(
-    FavoritesContext
-  );
-
-
-}
+export const useFavorites = () => useContext(FavoritesContext);

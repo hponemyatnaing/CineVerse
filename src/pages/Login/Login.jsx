@@ -39,8 +39,6 @@ function Login() {
 
       setError("");
 
-      // Firebase Login
-
       const userCredential = await loginUser(email, password);
 
       const firebaseUser = userCredential.user;
@@ -55,8 +53,6 @@ function Login() {
         return;
       }
 
-      // Save Current User
-
       localStorage.setItem(
         "user",
 
@@ -70,8 +66,6 @@ function Login() {
           role: profile.role,
         }),
       );
-
-      // Redirect
 
       if (profile.role === "admin") {
         navigate("/admin");
@@ -98,8 +92,6 @@ function Login() {
 
         <p>Login to continue your movie journey.</p>
 
-        {/* Email */}
-
         <div className="input-group">
           <FaEnvelope className="input-icon" />
 
@@ -110,8 +102,6 @@ function Login() {
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
-
-        {/* Password */}
 
         <div className="input-group">
           <FaLock className="input-icon" />

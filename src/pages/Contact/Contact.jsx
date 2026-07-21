@@ -11,9 +11,9 @@ import {
 import "./Contact.css";
 
 function Contact() {
-  // 1. Loading state ကို သတ်မှတ်ခြင်း
+
   const [loading, setLoading] = useState(false);
-  
+
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -28,7 +28,6 @@ function Contact() {
     });
   };
 
-  // 2. Submit လုပ်သည့် function (Loading logic ပါဝင်သည်)
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -37,16 +36,14 @@ function Contact() {
       return;
     }
 
-    setLoading(true); // Loading စတင်ခြင်း
+    setLoading(true); 
 
-    // ၁.၅ စက္ကန့် နှောင့်နှေးခြင်း (Demo အနေဖြင့်)
     await new Promise((resolve) => setTimeout(resolve, 1500));
 
     alert("Message Sent Successfully!");
 
-    setLoading(false); // Loading ပြီးဆုံးခြင်း
+    setLoading(false); 
 
-    // Form ကို အလွတ်ပြန်ဖြစ်စေခြင်း
     setForm({
       name: "",
       email: "",
@@ -59,14 +56,10 @@ function Contact() {
     <section className="contact-page">
       <div className="contact-header">
         <h1>Contact Us</h1>
-        <p>
-          We'd love to hear from you.
-          Feel free to contact us anytime.
-        </p>
+        <p>We'd love to hear from you. Feel free to contact us anytime.</p>
       </div>
 
       <div className="contact-container">
-        {/* Contact Form */}
         <form className="contact-form" onSubmit={handleSubmit}>
           <input
             type="text"
@@ -97,23 +90,32 @@ function Contact() {
             onChange={handleChange}
           />
 
-          {/* 3. Loading ပေါ်မူတည်၍ ခလုတ်ကို ထိန်းချုပ်ခြင်း */}
           <button type="submit" disabled={loading}>
             {loading ? "Sending..." : "Send Message"}
           </button>
         </form>
-
-        {/* Contact Info */}
         <div className="contact-info">
           <h2>Contact Information</h2>
-          <p><FaEnvelope /> your@email.com</p>
-          <p><FaPhoneAlt /> +95 9 123 456 789</p>
-          <p><FaMapMarkerAlt /> Yangon, Myanmar</p>
-          
+          <p>
+            <FaEnvelope /> your@email.com
+          </p>
+          <p>
+            <FaPhoneAlt /> +95 9 123 456 789
+          </p>
+          <p>
+            <FaMapMarkerAlt /> Yangon, Myanmar
+          </p>
+
           <div className="social-links">
-            <a href="#"><FaGithub /></a>
-            <a href="#"><FaFacebook /></a>
-            <a href="#"><FaLinkedin /></a>
+            <a href="#">
+              <FaGithub />
+            </a>
+            <a href="#">
+              <FaFacebook />
+            </a>
+            <a href="#">
+              <FaLinkedin />
+            </a>
           </div>
         </div>
       </div>

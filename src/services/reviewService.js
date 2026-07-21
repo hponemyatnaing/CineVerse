@@ -58,10 +58,7 @@ export const addReview = async (review) => {
 
 export const getMovieReviews = async (movieId) => {
   try {
-    const q = query(
-      collection(db, "reviews"),
-      where("movieId", "==", movieId)
-    );
+    const q = query(collection(db, "reviews"), where("movieId", "==", movieId));
 
     const snapshot = await getDocs(q);
 
@@ -82,15 +79,12 @@ export const getMovieReviews = async (movieId) => {
 
 export const updateReview = async (id, text) => {
   try {
-    await updateDoc(
-      doc(db, "reviews", id),
-      {
-        comment: text,
+    await updateDoc(doc(db, "reviews", id), {
+      comment: text,
 
-        // ✅ NEW
-        updatedAt: new Date().toISOString(),
-      }
-    );
+      // ✅ NEW
+      updatedAt: new Date().toISOString(),
+    });
 
     return true;
   } catch (error) {

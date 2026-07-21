@@ -1,7 +1,16 @@
-.movies-page {
-  min-height: 100vh;
-  padding: 40px 8%;
-  background: #0f172a;
+.movies-page{
+
+    min-height:100vh;
+
+    padding:40px;
+
+    background:
+    radial-gradient(
+        circle at top,
+        #1e293b,
+        #020617
+    );
+
 }
 
 .movies-header {

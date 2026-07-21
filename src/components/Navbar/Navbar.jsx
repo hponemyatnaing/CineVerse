@@ -2,7 +2,9 @@ import "./Navbar.css";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useState, useContext } from "react";
 import { FaFilm, FaHeart, FaBars, FaTimes, FaSearch } from "react-icons/fa";
-
+import {
+  useAuth
+} from "../../context/AuthContext";
 import { logoutUser } from "../../services/authService";
 import { ThemeContext } from "../../context/ThemeContext";
 import { useFavorites } from "../../context/FavoritesContext";
@@ -11,16 +13,19 @@ function Navbar() {
   const [open, setOpen] = useState(false);
   const [search, setSearch] = useState("");
 
+  const {
+    user: authUser
+  } = useAuth();
+
   const navigate = useNavigate();
 
   const { theme, toggleTheme } = useContext(ThemeContext);
   const { favorites } = useFavorites();
 
-  const user = JSON.parse(localStorage.getItem("user"));
+  const user = JSON.parse(localStorage.getItem("user")) || authUser;
 
   const closeMenu = () => setOpen(false);
 
-  // Search
   const handleSearch = (e) => {
     if (e.key === "Enter" && search.trim()) {
       navigate(`/search?query=${search}`);
@@ -29,7 +34,6 @@ function Navbar() {
     }
   };
 
-  // Logout
   const handleLogout = async () => {
     try {
       await logoutUser();
@@ -54,8 +58,6 @@ function Navbar() {
           <span>CineVerse</span>
         </NavLink>
 
-        {/* Search */}
-
         <div className="nav-search">
           <FaSearch />
 
@@ -67,8 +69,6 @@ function Navbar() {
             onKeyDown={handleSearch}
           />
         </div>
-
-        {/* Nav Links */}
 
         <nav className={open ? "nav-links active" : "nav-links"}>
           <NavLink to="/" onClick={closeMenu}>
@@ -88,7 +88,13 @@ function Navbar() {
             Favorites ({favorites.length})
           </NavLink>
 
-          {!user ? (
+          {user && (
+            <NavLink to="/profile" onClick={closeMenu}>
+              Profile
+            </NavLink>
+          )}
+
+          {!user && (
             <>
               <NavLink to="/login" onClick={closeMenu}>
                 Login
@@ -98,20 +104,15 @@ function Navbar() {
                 Register
               </NavLink>
             </>
-          ) : (
-            <>
-              <NavLink to="/profile" onClick={closeMenu}>
-                Profile
-              </NavLink>
-            </>
           )}
         </nav>
 
-        {/* Right Side */}
-
         <div className="nav-actions">
           {user && (
-            <button className="logout-btn" onClick={handleLogout}>
+            <button
+              onClick={handleLogout}
+              className="logout-btn"
+            >
               Logout
             </button>
           )}

@@ -1,31 +1,23 @@
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, deleteDoc, doc } from "firebase/firestore";
 
 import { db } from "../firebase/firebase";
 
-export const saveFavorite = async (movie) => {
-  const user = JSON.parse(localStorage.getItem("user"));
+export const addFavorite = async (movie, userId) => {
+  await addDoc(collection(db, "favorites"), {
+    userId: userId,
 
-  if (!user) return false;
+    movieId: String(movie.id),
 
-  try {
-    await addDoc(collection(db, "favorites"), {
-      id: movie.id,
+    title: movie.title,
 
-      title: movie.title,
+    image: movie.image,
 
-      image: movie.image,
+    rating: Number(movie.rating || 0),
 
-      rating: movie.rating,
+    createdAt: new Date(),
+  });
+};
 
-      userId: user.uid,
-
-      createdAt: new Date().toISOString(),
-    });
-
-    return true;
-  } catch (error) {
-    console.log("Favorite save error:", error);
-
-    return false;
-  }
+export const removeFavorite = async (id) => {
+  await deleteDoc(doc(db, "favorites", id));
 };

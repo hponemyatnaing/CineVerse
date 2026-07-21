@@ -7,17 +7,11 @@ function ErrorMessage({
 }) {
   return (
     <div className="error-box">
-
       <h2>{title}</h2>
 
       <p>{message}</p>
 
-      {onRetry && (
-        <button onClick={onRetry}>
-          Retry
-        </button>
-      )}
-
+      {onRetry && <button onClick={onRetry}>Retry</button>}
     </div>
   );
 }

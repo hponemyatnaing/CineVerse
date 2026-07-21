@@ -1,8 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+
 import { BrowserRouter } from "react-router-dom";
 
+import { AuthProvider } from "./context/AuthContext";
+
 import { FavoritesProvider } from "./context/FavoritesContext";
+
 import { ThemeProvider } from "./context/ThemeContext";
 
 import App from "./App.jsx";
@@ -18,18 +22,19 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BrowserRouter>
       <ThemeProvider>
-        <FavoritesProvider>
-          <App />
+        <AuthProvider>
+          <FavoritesProvider>
+            <App />
 
-          {/* Global Toast Notification */}
-          <Toaster
-            position="top-right"
-            reverseOrder={false}
-            toastOptions={{
-              duration: 3000,
-            }}
-          />
-        </FavoritesProvider>
+            <Toaster
+              position="top-right"
+              reverseOrder={false}
+              toastOptions={{
+                duration: 3000,
+              }}
+            />
+          </FavoritesProvider>
+        </AuthProvider>
       </ThemeProvider>
     </BrowserRouter>
   </React.StrictMode>,

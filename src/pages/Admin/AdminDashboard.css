@@ -39,11 +39,9 @@
 }
 
 .dashboard-card {
-  background: linear-gradient(
-    135deg,
-    #1e293b,
-    #334155
-  );
+  background: linear-gradient(135deg,
+      #1e293b,
+      #334155);
 
   padding: 30px;
 
@@ -51,7 +49,7 @@
 
   transition: .3s;
 
-  box-shadow: 0 10px 25px rgba(0,0,0,.25);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, .25);
 }
 
 .dashboard-card:hover {
@@ -76,11 +74,11 @@
 ========================== */
 
 .card-icon {
+
+  display: flex;
   width: 65px;
   height: 65px;
   border-radius: 50%;
-
-  display: flex;
   justify-content: center;
   align-items: center;
 
@@ -102,6 +100,24 @@
 
 .favorites {
   background: #ef4444;
+}
+
+.admin-loading {
+
+  display: flex;
+
+  min-height: 100vh;
+
+  justify-content: center;
+
+  align-items: center;
+
+  color: white;
+
+  font-size: 30px;
+
+  background: #020617;
+
 }
 
 /* ==========================
@@ -149,20 +165,20 @@
   }
 }
 
-.dashboard-card{
+.dashboard-card {
 
-cursor:pointer;
+  cursor: pointer;
 
-transition:.3s;
+  transition: .3s;
 
 }
 
 
-.dashboard-card:hover{
+.dashboard-card:hover {
 
-transform:translateY(-8px);
+  transform: translateY(-8px);
 
-box-shadow:
-0 10px 25px rgba(0,0,0,.3);
+  box-shadow:
+    0 10px 25px rgba(0, 0, 0, .3);
 
 }

@@ -15,7 +15,7 @@ export const registerUser = async (name, email, password) => {
   const credential = await createUserWithEmailAndPassword(
     auth,
     email,
-    password
+    password,
   );
 
   await createUserProfile({
