@@ -314,7 +314,23 @@ function Profile() {
 
       {/* WATCH HISTORY */}
 
-      <UserWatchHistory />
+      <section className="profile-section-block">
+
+        <div className="section-title">
+
+          <h2>🎬 Recently Watched</h2>
+
+          <span>
+
+            {watchedCount} Movies
+
+          </span>
+
+        </div>
+
+        <UserWatchHistory />
+
+      </section>
     </section>
   );
 }

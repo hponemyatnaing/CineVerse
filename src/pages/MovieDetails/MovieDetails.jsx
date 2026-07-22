@@ -3,7 +3,7 @@ import "./MovieDetails.css";
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
-import { FaArrowLeft } from "react-icons/fa";
+import { FaArrowLeft, FaHeart, FaStar } from "react-icons/fa";
 
 import {
   getMovieDetails,
@@ -41,6 +41,9 @@ function MovieDetails() {
   const [similarMovies, setSimilarMovies] = useState([]);
 
   const [refreshReviews, setRefreshReviews] = useState(0);
+
+  // Favorite အတွက် State
+  const [favourite, setFavourite] = useState(false);
 
   useEffect(() => {
     loadMovie();
@@ -80,9 +83,7 @@ function MovieDetails() {
 
           rating: movieData.vote_average,
         });
-      }
-
-      else {
+      } else {
         const firebaseMovie = await getMovieById(id);
 
         console.log("FIREBASE MOVIE:", firebaseMovie);
@@ -106,7 +107,27 @@ function MovieDetails() {
     }
   }
 
-  <LoadingSpinner text="Loading Movie..." />;
+  // သင်ပေးထားသော Favorite Function ကို ဤနေရာတွင် ထည့်သွင်းထားပါသည်
+  const favFunc = async (item) => {
+    try {
+      setFavourite(!favourite);
+
+      // အကယ်၍ toggleFavourite API သုံးထားလျှင် ဤနေရာတွင် ချိတ်ဆက်နိုင်သည်
+      // const res = await toggleFavourite({ id: item.id, type, typename: typeName, isFavourite: favourite }).unwrap();
+
+      // setTimeout(() => {
+      //     Toast.show(res.message, ToastOption);
+      // }, 0);
+
+    } catch (err) {
+      setFavourite(!favourite);
+      // Toast.show(err?.data?.message || "An error occurred", ToastOption);
+    }
+  };
+
+  if (loading) {
+    return <div className="details-loading"><LoadingSpinner text="Loading Movie..." /></div>;
+  }
 
   if (!movie) {
     return <div className="details-loading">Movie Not Found</div>;
@@ -114,15 +135,22 @@ function MovieDetails() {
 
   return (
     <section className="movie-details">
-
       <button className="back-btn" onClick={() => navigate(-1)}>
         <FaArrowLeft />
 
         <span>Back</span>
       </button>
 
-      <div className="details-container">
+      {/* Favorite ခလုတ်ကို ဤနေရာတွင် ထည့်သွင်းအသုံးပြုနိုင်ပါသည် */}
+      <button
+        className={`details-fav-btn ${favourite ? "active" : ""}`}
+        onClick={() => favFunc(movie)}
+        style={{ float: "right", padding: "10px 15px", cursor: "pointer", background: "transparent", border: "1px solid #fff", color: "#fff", borderRadius: "5px" }}
+      >
+        <FaHeart style={{ color: favourite ? "red" : "#fff" }} /> {favourite ? "Favorited" : "Add to Favorite"}
+      </button>
 
+      <div className="details-container">
         <img
           src={
             movie.poster_path

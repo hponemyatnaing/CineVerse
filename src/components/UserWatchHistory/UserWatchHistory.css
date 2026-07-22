@@ -1,86 +1,61 @@
-.user-watch-history {
+.watch-history{
 
-    margin-top: 40px;
-
-}
-
-
-
-.history-header {
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    margin-bottom:20px;
+margin-top:25px;
 
 }
 
+.watch-grid{
 
-.history-header h2 {
+display:grid;
 
-    font-size:26px;
+grid-template-columns:
 
-}
+repeat(auto-fill,minmax(190px,1fr));
 
-
-
-.history-header span {
-
-    background:#e50914;
-
-    color:white;
-
-    padding:6px 14px;
-
-    border-radius:20px;
-
-    font-size:14px;
+gap:25px;
 
 }
 
+.empty-watch{
 
+background:#1e293b;
 
+padding:40px;
 
-.history-grid {
+border-radius:18px;
 
-    display:grid;
+text-align:center;
 
-    grid-template-columns:
-    repeat(auto-fill,minmax(180px,1fr));
-
-    gap:20px;
-
-}
-
-
-
-.empty-history {
-
-    text-align:center;
-
-    padding:40px;
-
-    background:#111;
-
-    border-radius:15px;
+color:#94a3b8;
 
 }
 
+.empty-watch h3{
 
+font-size:60px;
 
-.empty-history h3 {
-
-    font-size:22px;
+margin-bottom:10px;
 
 }
 
+@media(max-width:768px){
 
+.watch-grid{
 
-.empty-history p {
+grid-template-columns:
 
-    color:#aaa;
+repeat(2,1fr);
+
+}
+
+}
+
+@media(max-width:520px){
+
+.watch-grid{
+
+grid-template-columns:1fr;
+
+}
 
 }

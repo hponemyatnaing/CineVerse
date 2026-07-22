@@ -20,24 +20,28 @@ function UserWatchHistory() {
   }, []);
 
   useEffect(() => {
-    if (history.length > 0) {
+    if (history.length) {
       fadeUp(sectionRef.current);
     }
   }, [history]);
 
   return (
     <section ref={sectionRef} className="watch-history">
-      <h2>🎬 Recently Watched</h2>
-
       {history.length === 0 ? (
-        <p>No watched movies yet</p>
+        <div className="empty-watch">
+          <h3>🎬</h3>
+
+          <p>No watched movies yet</p>
+        </div>
       ) : (
         <div className="watch-grid">
-          {history.map((movie) => (
-            <div className="watch-card" key={movie.id}>
-              <MovieCard movie={movie} />
-            </div>
-          ))}
+          {history
+
+            .slice(0, 6)
+
+            .map((movie) => (
+              <MovieCard key={movie.id} movie={movie} />
+            ))}
         </div>
       )}
     </section>
