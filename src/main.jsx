@@ -24,15 +24,16 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       <ThemeProvider>
         <AuthProvider>
           <FavoritesProvider>
-            <App />
-
-            <Toaster
-              position="top-right"
-              reverseOrder={false}
-              toastOptions={{
-                duration: 3000,
-              }}
-            />
+            
+              <App />
+              <Toaster
+                position="top-right"
+                reverseOrder={false}
+                toastOptions={{
+                  duration: 3000,
+                }}
+              />
+            
           </FavoritesProvider>
         </AuthProvider>
       </ThemeProvider>

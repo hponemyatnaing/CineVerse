@@ -8,9 +8,9 @@ import Top10Movies from "../../components/Top10Movies/Top10Movies";
 
 import { getTrendingMovies, getHotMovies } from "../../services/tmdbService";
 
-import { getTop10Ranking } from "../../services/rankingService";
-
 import { getMovies, getWatchHistory } from "../../services/movieService";
+
+import { getTop10Ranking } from "../../services/rankingService";
 
 import "./Home.css";
 
@@ -31,41 +31,53 @@ function Home() {
     loadMovies();
   }, []);
 
-  const loadMovies = async () => {
+  async function loadMovies() {
     try {
       setLoading(true);
 
-      const top = await getTop10Ranking();
+      const [topData, trendingData, hotData, firebaseMovies] =
+        await Promise.all([
+          getTop10Ranking(),
 
-      const trendingData = await getTrendingMovies();
+          getTrendingMovies(),
 
-      const hotData = await getHotMovies();
+          getHotMovies(),
 
-      const adminMovies = await getMovies();
+          getMovies(),
+        ]);
 
-      const watchData = getWatchHistory();
-
-      setTop10(top || []);
+      setTop10(topData || []);
 
       setTrending(trendingData || []);
 
       setHot(hotData || []);
 
-      setHistory(watchData || []);
+      /*
+        Admin ထည့်ထားတဲ့ movie များ
+        Firestore movies collection ကနေယူ
+      */
 
-      const latestData = (adminMovies || [])
+      const latestMovies = (firebaseMovies || [])
 
         .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
 
         .slice(0, 10);
 
-      setLatest(latestData);
+      setLatest(latestMovies);
+
+      /*
+        User watched history
+      */
+
+      const watched = getWatchHistory();
+
+      setHistory(watched || []);
     } catch (error) {
       console.log("Home Error:", error);
     } finally {
       setLoading(false);
     }
-  };
+  }
 
   if (loading) {
     return <div className="home-loading">Loading Movies...</div>;
@@ -73,31 +85,39 @@ function Home() {
 
   return (
     <main className="home-page">
-      {/* Hero */}
+      {/* HERO */}
 
       <Hero />
 
-      {/* Netflix Top 10 */}
+      {/* TOP 10 */}
 
       <Top10Movies movies={top10} />
 
-      {/* Continue Watching */}
+      {/* CONTINUE WATCHING */}
 
       {history.length > 0 && (
         <MovieSection title="▶ Continue Watching" movies={history} />
       )}
 
-      {/* Trending */}
+      {/* TRENDING */}
 
-      <MovieSection title="🔥 Trending Movies" movies={trending} />
+      <MovieSection
+        title="🔥 Trending Movies"
+        movies={trending}
+        category="trending"
+      />
 
-      {/* Hot Today */}
+      {/* HOT */}
 
-      <MovieSection title="⚡ Hot Today" movies={hot} />
+      <MovieSection title="⚡ Hot Today" movies={hot} category="hot" />
 
-      {/* Latest */}
+      {/* ADMIN MOVIES */}
 
-      <MovieSection title="🆕 Latest Movies" movies={latest} />
+      <MovieSection
+        title="🆕 Latest Movies"
+        movies={latest}
+        category="latest"
+      />
     </main>
   );
 }

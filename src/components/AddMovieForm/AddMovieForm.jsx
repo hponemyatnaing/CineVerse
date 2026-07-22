@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { addMovie, updateMovie } from "../../services/movieService";
 
 function AddMovieForm({ movie, onClose, onSuccess }) {
-  const [formData, setFormData] = useState({
+  const defaultForm = {
     title: "",
     image: "",
     genre: "Action",
@@ -14,7 +14,9 @@ function AddMovieForm({ movie, onClose, onSuccess }) {
     description: "",
     trailerUrl: "",
     category: "latest",
-  });
+  };
+
+  const [formData, setFormData] = useState(defaultForm);
 
   const [loading, setLoading] = useState(false);
 
@@ -22,23 +24,23 @@ function AddMovieForm({ movie, onClose, onSuccess }) {
     if (movie) {
       setFormData({
         title: movie.title || "",
+
         image: movie.image || "",
+
         genre: movie.genre || "Action",
+
         year: movie.year || "",
+
         rating: movie.rating || "",
+
         description: movie.description || "",
+
+        trailerUrl: movie.trailerUrl || "",
+
         category: movie.category || "latest",
       });
     } else {
-      setFormData({
-        title: "",
-        image: "",
-        genre: "Action",
-        year: "",
-        rating: "",
-        description: "",
-        category: "latest",
-      });
+      setFormData(defaultForm);
     }
   }, [movie]);
 
@@ -47,6 +49,7 @@ function AddMovieForm({ movie, onClose, onSuccess }) {
 
     setFormData((prev) => ({
       ...prev,
+
       [name]: value,
     }));
   }
@@ -66,30 +69,20 @@ function AddMovieForm({ movie, onClose, onSuccess }) {
       }
 
       if (result.success) {
-        alert(movie ? "Movie Updated!" : "Movie Added!");
+        alert(movie ? "Movie Updated" : "Movie Added");
 
-        if (onSuccess) {
-          onSuccess();
-        }
+        if (onSuccess) onSuccess();
 
-        if (onClose) {
-          onClose();
-        }
+        if (onClose) onClose();
 
-        setFormData({
-          title: "",
-          image: "",
-          genre: "Action",
-          year: "",
-          rating: "",
-          description: "",
-        });
+        setFormData(defaultForm);
       } else {
         alert(result.message);
       }
     } catch (error) {
       console.log(error);
-      alert("Something went wrong.");
+
+      alert("Something went wrong");
     } finally {
       setLoading(false);
     }
@@ -99,126 +92,70 @@ function AddMovieForm({ movie, onClose, onSuccess }) {
     <form className="movie-form" onSubmit={handleSubmit}>
       <h2>{movie ? "Edit Movie" : "Add New Movie"}</h2>
 
-      <div className="form-group">
-        <label>Movie Category</label>
+      <label>Category</label>
 
-        <select
-          name="category"
-          value={formData.category}
-          onChange={handleChange}
-        >
-          <option value="trending">Trending Movies</option>
+      <select name="category" value={formData.category} onChange={handleChange}>
+        <option value="trending">Trending Movies</option>
 
-          <option value="latest">Latest Movies</option>
+        <option value="latest">Latest Movies</option>
 
-          <option value="hot">Hot Today Movies</option>
-        </select>
-      </div>
+        <option value="hot">Hot Today</option>
+      </select>
 
-      <div className="form-group">
-        <label>Movie Title</label>
+      <label>Title</label>
 
-        <input
-          type="text"
-          name="title"
-          value={formData.title}
-          onChange={handleChange}
-          required
-        />
-      </div>
+      <input name="title" value={formData.title} onChange={handleChange} />
 
-      <div className="form-group">
-        <label>Poster Image URL</label>
+      <label>Image URL</label>
 
-        <input
-          type="text"
-          name="image"
-          value={formData.image}
-          onChange={handleChange}
-          required
-        />
-      </div>
+      <input name="image" value={formData.image} onChange={handleChange} />
 
-      <div className="form-group">
-        <label>Genre</label>
+      <label>Genre</label>
 
-        <select name="genre" value={formData.genre} onChange={handleChange}>
-          <option>Action</option>
-          <option>Adventure</option>
-          <option>Animation</option>
-          <option>Comedy</option>
-          <option>Crime</option>
-          <option>Drama</option>
-          <option>Fantasy</option>
-          <option>Horror</option>
-          <option>Romance</option>
-          <option>Sci-Fi</option>
-          <option>Thriller</option>
-        </select>
-      </div>
+      <input name="genre" value={formData.genre} onChange={handleChange} />
 
-      <div className="form-group">
-        <label>Release Year</label>
+      <label>Year</label>
 
-        <input
-          type="number"
-          name="year"
-          value={formData.year}
-          onChange={handleChange}
-          required
-        />
-      </div>
+      <input
+        type="number"
+        name="year"
+        value={formData.year}
+        onChange={handleChange}
+      />
 
-      <div className="form-group">
-        <label>Rating</label>
+      <label>Rating</label>
 
-        <input
-          type="number"
-          step="0.1"
-          min="0"
-          max="10"
-          name="rating"
-          value={formData.rating}
-          onChange={handleChange}
-          required
-        />
-      </div>
+      <input
+        type="number"
+        step="0.1"
+        name="rating"
+        value={formData.rating}
+        onChange={handleChange}
+      />
 
-      <div className="form-group">
-        <label>Description</label>
+      <label>Description</label>
 
-        <textarea
-          rows="5"
-          name="description"
-          value={formData.description}
-          onChange={handleChange}
-          required
-        />
-      </div>
+      <textarea
+        name="description"
+        value={formData.description}
+        onChange={handleChange}
+      />
 
-      <div
-        style={{
-          display: "flex",
-          gap: "15px",
-          marginTop: "20px",
-        }}
-      >
-        <input
-          type="text"
-          placeholder="Trailer YouTube URL"
-          value={formData.trailerUrl}
-          onChange={(e) =>
-            setFormData({
-              ...formData,
-              trailerUrl: e.target.value,
-            })
-          }
-        />
-        <button type="button" className="cancel-btn" onClick={onClose}>
+      <label>Trailer URL</label>
+
+      <input
+        name="trailerUrl"
+        value={formData.trailerUrl}
+        onChange={handleChange}
+        placeholder="YouTube URL"
+      />
+
+      <div className="form-buttons">
+        <button type="button" onClick={onClose}>
           Cancel
         </button>
 
-        <button type="submit" className="save-btn" disabled={loading}>
+        <button disabled={loading}>
           {loading ? "Saving..." : movie ? "Update Movie" : "Add Movie"}
         </button>
       </div>

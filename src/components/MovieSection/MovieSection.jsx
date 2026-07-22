@@ -12,11 +12,19 @@ import {
   Mousewheel,
 } from "swiper/modules";
 
+import { useNavigate } from "react-router-dom";
+
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
-function MovieSection({ title, movies = [] }) {
+function MovieSection({
+  title,
+  movies = [],
+  category
+}) {
+  const navigate = useNavigate();
+
   if (!movies.length) return null;
 
   return (
@@ -24,7 +32,19 @@ function MovieSection({ title, movies = [] }) {
       <div className="section-header">
         <h2>{title}</h2>
 
-        <button className="view-all-btn">View All →</button>
+        <button
+
+          className="view-all-btn"
+
+          onClick={() =>
+            navigate(`/movies?category=${category}`)
+          }
+
+        >
+
+          View All →
+
+        </button>
       </div>
 
       <Swiper

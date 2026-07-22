@@ -4,7 +4,11 @@ import { useEffect, useState } from "react";
 
 import { useAuth } from "../../context/AuthContext";
 
-import { getUserProfile, updateUserProfile, logoutUser } from "../../services/userService";
+import {
+  getUserProfile,
+  updateUserProfile,
+  logoutUser,
+} from "../../services/userService";
 
 import { useFavorites } from "../../context/FavoritesContext";
 
@@ -14,18 +18,27 @@ import { db } from "../../firebase/firebase";
 
 import MovieCard from "../../components/MovieCard/MovieCard";
 
+import UserWatchHistory from "../../components/UserWatchHistory/UserWatchHistory";
+
+import { getWatchHistory } from "../../services/movieService";
+
 function Profile() {
   const { user } = useAuth();
+
   const { favorites } = useFavorites();
 
   const [profile, setProfile] = useState(null);
+
   const [reviews, setReviews] = useState([]);
+
   const [watchedCount, setWatchedCount] = useState(0);
 
-  // Edit Profile နှင့် Photo အတွက် State များ
   const [isEditing, setIsEditing] = useState(false);
+
   const [name, setName] = useState("");
+
   const [loading, setLoading] = useState(false);
+
   const [uploading, setUploading] = useState(false);
 
   useEffect(() => {
@@ -36,85 +49,153 @@ function Profile() {
 
   const loadProfileData = async () => {
     try {
+      // =========================
+      // PROFILE
+      // =========================
+
       const data = await getUserProfile(user.uid);
+
       setProfile(data);
-      if (data && data.name) {
+
+      if (data?.name) {
         setName(data.name);
       }
 
+      // =========================
+      // REVIEWS
+      // =========================
+
       const reviewQuery = query(
         collection(db, "reviews"),
-        or(where("userId", "==", user.uid), where("uid", "==", user.uid))
-      );
-      const reviewSnapshot = await getDocs(reviewQuery);
-      const reviewsData = reviewSnapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
-      setReviews(reviewsData);
 
-      try {
-        const watchQuery = query(
-          collection(db, "watchlist"),
-          or(where("userId", "==", user.uid), where("uid", "==", user.uid))
-        );
-        const watchSnapshot = await getDocs(watchQuery);
-        setWatchedCount(watchSnapshot.size);
-      } catch (err) {
-        setWatchedCount(0);
-      }
+        or(
+          where("userId", "==", user.uid),
+
+          where("uid", "==", user.uid),
+        ),
+      );
+
+      const reviewSnapshot = await getDocs(reviewQuery);
+
+      const reviewsData = reviewSnapshot.docs.map((item) => ({
+        id: item.id,
+
+        ...item.data(),
+      }));
+
+      // =========================
+      // GET MOVIE TITLE
+      // =========================
+
+      const movieSnapshot = await getDocs(collection(db, "movies"));
+
+      const moviesData = {};
+
+      movieSnapshot.docs.forEach((movie) => {
+        moviesData[movie.id] = movie.data().title;
+      });
+
+      const updatedReviews = reviewsData.map((review) => ({
+        ...review,
+
+        movieTitle:
+          review.movieTitle || moviesData[review.movieId] || "Unknown Movie",
+      }));
+
+      setReviews(updatedReviews);
+
+      // =========================
+      // WATCH HISTORY
+      // =========================
+
+      const history = getWatchHistory();
+
+      setWatchedCount(history.length);
     } catch (error) {
-      console.log("Error loading profile data:", error);
+      console.log("Profile Error:", error);
     }
   };
 
+  // =========================
+  // UPDATE PROFILE
+  // =========================
+
   const handleUpdateProfile = async (e) => {
     e.preventDefault();
+
     try {
       setLoading(true);
-      await updateUserProfile(user.uid, { name });
-      setProfile((prev) => ({ ...prev, name }));
+
+      await updateUserProfile(
+        user.uid,
+
+        {
+          name,
+        },
+      );
+
+      setProfile((prev) => ({
+        ...prev,
+
+        name,
+      }));
+
       setIsEditing(false);
-      alert("Profile updated successfully!");
     } catch (error) {
-      console.log("Error updating profile:", error);
-      alert("Failed to update profile.");
+      console.log(error);
     } finally {
       setLoading(false);
     }
   };
 
+  // =========================
+  // IMAGE UPLOAD
+  // =========================
+
   const handleImageChange = async (e) => {
     const file = e.target.files[0];
+
     if (!file) return;
 
-    if (file.size > 1024 * 1024) {
-      alert("Image size should be less than 1MB");
-      return;
-    }
-
     const reader = new FileReader();
+
     reader.readAsDataURL(file);
+
     reader.onload = async () => {
-      const base64Image = reader.result;
+      const image = reader.result;
+
       try {
         setUploading(true);
-        await updateUserProfile(user.uid, { photoURL: base64Image });
-        setProfile((prev) => ({ ...prev, photoURL: base64Image }));
-        alert("Profile picture updated successfully!");
+
+        await updateUserProfile(
+          user.uid,
+
+          {
+            photoURL: image,
+          },
+        );
+
+        setProfile((prev) => ({
+          ...prev,
+
+          photoURL: image,
+        }));
       } catch (error) {
-        console.log("Error uploading image:", error);
-        alert("Failed to upload image.");
+        console.log(error);
       } finally {
         setUploading(false);
       }
     };
   };
 
-  // Logout လုပ်ရန် function
+  // =========================
+  // LOGOUT
+  // =========================
+
   const handleLogout = () => {
     logoutUser();
-    window.location.href = "/login"; // Login စာမျက်နှာသို့ အလိုအလျောက် ပို့ပေးရန် (သို့မဟုတ် navigate သုံးနိုင်ပါသည်)
+
+    window.location.href = "/login";
   };
 
   if (!profile) {
@@ -123,19 +204,22 @@ function Profile() {
 
   return (
     <section className="profile-page">
+      {/* PROFILE HEADER */}
+
       <div className="profile-header">
         <div className="avatar-container">
           {profile.photoURL ? (
-            <img src={profile.photoURL} alt="Profile" className="avatar-img" />
+            <img src={profile.photoURL} alt="profile" className="avatar-img" />
           ) : (
             <div className="avatar">
               {profile.name ? profile.name.charAt(0).toUpperCase() : "U"}
             </div>
           )}
 
-          <label htmlFor="file-input" className="upload-icon-btn" title="Change Profile Picture">
+          <label htmlFor="file-input" className="upload-icon-btn">
             {uploading ? "..." : "📷"}
           </label>
+
           <input
             id="file-input"
             type="file"
@@ -146,84 +230,77 @@ function Profile() {
         </div>
 
         <div className="profile-details">
-          {isEditing ? (
-            <form onSubmit={handleUpdateProfile} className="edit-form">
-              <input
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder="Enter new name"
-                required
-              />
-              <div className="edit-buttons">
-                <button type="submit" disabled={loading}>
-                  {loading ? "Saving..." : "Save"}
-                </button>
-                <button type="button" onClick={() => setIsEditing(false)}>
-                  Cancel
-                </button>
-              </div>
-            </form>
-          ) : (
-            <div className="profile-name-section">
-              <h1>{profile.name}</h1>
-              <p>{profile.email}</p>
+          <h1>{profile.name}</h1>
 
-              <div className="profile-header-actions" style={{ display: "flex", gap: "10px", alignItems: "center" }}>
-                <button className="edit-profile-btn" onClick={() => setIsEditing(true)}>
-                  Edit Profile
-                </button>
+          <p>{profile.email}</p>
 
-                {/* Logout ခလုတ်အသစ် */}
-                <button className="logout-btn" onClick={handleLogout}>
-                  🚪 Logout
-                </button>
-              </div>
-            </div>
-          )}
+          <button
+            className="edit-profile-btn"
+            onClick={() => setIsEditing(true)}
+          >
+            Edit Profile
+          </button>
+
+          <button className="logout-btn" onClick={handleLogout}>
+            🚪 Logout
+          </button>
         </div>
       </div>
+
+      {/* STATS */}
 
       <div className="profile-stats">
         <div className="stat-card">
           <h2>{favorites.length}</h2>
+
           <p>❤️ Favorites</p>
         </div>
 
         <div className="stat-card">
           <h2>{reviews.length}</h2>
+
           <p>💬 Reviews</p>
         </div>
 
         <div className="stat-card">
           <h2>{watchedCount}</h2>
+
           <p>🎬 Watched</p>
         </div>
       </div>
 
-      {/* My Reviews Section */}
+      {/* REVIEWS */}
+
       <section className="profile-section-block">
         <h2>My Reviews</h2>
-        <div className="reviews-list">
-          {reviews.length > 0 ? (
-            reviews.map((rev) => (
-              <div key={rev.id} className="review-card">
-                <div className="review-header-info">
-                  <span className="review-movie-title">{rev.movieTitle || "Movie Review"}</span>
-                  <span className="review-rating">⭐ {rev.rating || "5"} / 5</span>
-                </div>
-                <p className="review-text">"{rev.comment || rev.reviewText}"</p>
-              </div>
-            ))
-          ) : (
-            <p className="empty-text">No reviews written yet.</p>
-          )}
-        </div>
+
+        {reviews.length > 0 ? (
+          reviews.map((rev) => (
+            <div className="review-card" key={rev.id}>
+              <h3>🎬 {rev.movieTitle}</h3>
+
+              <div className="review-rating">⭐ Rating: {rev.rating}/5</div>
+
+              <p>💬 {rev.comment}</p>
+
+              <small>
+                📅
+                {rev.createdAt
+                  ? new Date(rev.createdAt).toLocaleDateString()
+                  : "No Date"}
+              </small>
+            </div>
+          ))
+        ) : (
+          <p className="empty-text">No reviews yet</p>
+        )}
       </section>
 
-      {/* My Favorite Movies Section */}
+      {/* FAVORITES */}
+
       <section className="profile-section-block">
         <h2>My Favorite Movies</h2>
+
         <div className="favorite-grid">
           {favorites.length > 0 ? (
             favorites.map((movie, index) => (
@@ -234,6 +311,10 @@ function Profile() {
           )}
         </div>
       </section>
+
+      {/* WATCH HISTORY */}
+
+      <UserWatchHistory />
     </section>
   );
 }

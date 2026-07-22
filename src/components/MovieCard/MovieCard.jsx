@@ -1,8 +1,13 @@
 import { FaStar, FaHeart } from "react-icons/fa";
+
 import { useNavigate } from "react-router-dom";
+
 import { useFavorites } from "../../context/FavoritesContext";
+
 import { useEffect, useRef } from "react";
+
 import { fadeUp } from "../../utils/animations";
+
 import "./MovieCard.css";
 
 function MovieCard({ movie }) {
@@ -10,43 +15,43 @@ function MovieCard({ movie }) {
 
   const { favorites, addToFavorites, removeFromFavorites } = useFavorites();
 
-  const isFavorite =
-    favorites.some(
-      (item) =>
-        String(item.movieId) === String(movie.id)
-    );
-
   const cardRef = useRef();
 
-
   useEffect(() => {
-
-    fadeUp(cardRef.current);
-
+    if (cardRef.current) {
+      fadeUp(cardRef.current);
+    }
   }, []);
 
-  const handleFavorite = async (e) => {
+  const isFavorite = favorites.some(
+    (item) => String(item.movieId) === String(movie.id),
+  );
 
+  const handleFavorite = async (e) => {
     e.stopPropagation();
 
-
-    console.log(
-      "Favorite status:",
-      isFavorite
-    );
-
-
     if (isFavorite) {
-
       await removeFromFavorites(movie.id);
-
     } else {
-
       await addToFavorites(movie);
-
     }
-
   };
+
+  // ==========================
+  // IMAGE SUPPORT
+  // ==========================
+
+  const movieImage =
+    movie.image ||
+    (movie.poster_path
+      ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+      : "/default-placeholder.jpg");
+
+  // ==========================
+  // RATING SUPPORT
+  // ==========================
+
+  const movieRating = movie.rating || movie.vote_average || 0;
 
   return (
     <div
@@ -55,7 +60,7 @@ function MovieCard({ movie }) {
       onClick={() => navigate(`/movie/${movie.id}`)}
     >
       <div className="movie-image">
-        <img src={movie.image} alt={movie.title} loading="lazy" />
+        <img src={movieImage} alt={movie.title} loading="lazy" />
 
         <button
           className={`favorite-btn ${isFavorite ? "active" : ""}`}
@@ -66,7 +71,8 @@ function MovieCard({ movie }) {
 
         <div className="rating-badge">
           <FaStar />
-          <span>{Number(movie.rating || 0).toFixed(1)}</span>
+
+          <span>{Number(movieRating).toFixed(1)}</span>
         </div>
       </div>
 

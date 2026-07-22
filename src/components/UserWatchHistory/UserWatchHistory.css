@@ -1,0 +1,86 @@
+.user-watch-history {
+
+    margin-top: 40px;
+
+}
+
+
+
+.history-header {
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:20px;
+
+}
+
+
+.history-header h2 {
+
+    font-size:26px;
+
+}
+
+
+
+.history-header span {
+
+    background:#e50914;
+
+    color:white;
+
+    padding:6px 14px;
+
+    border-radius:20px;
+
+    font-size:14px;
+
+}
+
+
+
+
+.history-grid {
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fill,minmax(180px,1fr));
+
+    gap:20px;
+
+}
+
+
+
+.empty-history {
+
+    text-align:center;
+
+    padding:40px;
+
+    background:#111;
+
+    border-radius:15px;
+
+}
+
+
+
+.empty-history h3 {
+
+    font-size:22px;
+
+}
+
+
+
+.empty-history p {
+
+    color:#aaa;
+
+}

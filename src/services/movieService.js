@@ -64,13 +64,27 @@ export const getMovieById = async (id) => {
 };
 
 // ==============================
-// ADD MOVIE
+// ADD MOVIE (ADMIN)
 // ==============================
 
 export const addMovie = async (movie) => {
   try {
     const docRef = await addDoc(movieCollection, {
-      ...movie,
+      title: movie.title,
+
+      image: movie.image,
+
+      genre: movie.genre,
+
+      year: Number(movie.year),
+
+      rating: Number(movie.rating),
+
+      description: movie.description,
+
+      trailerUrl: movie.trailerUrl || "",
+
+      category: movie.category || "latest",
 
       views: 0,
 
@@ -101,7 +115,25 @@ export const updateMovie = async (id, movie) => {
   try {
     const movieRef = doc(db, "movies", id);
 
-    await updateDoc(movieRef, movie);
+    await updateDoc(movieRef, {
+      title: movie.title,
+
+      image: movie.image,
+
+      genre: movie.genre,
+
+      year: Number(movie.year),
+
+      rating: Number(movie.rating),
+
+      description: movie.description,
+
+      trailerUrl: movie.trailerUrl || "",
+
+      category: movie.category || "latest",
+
+      updatedAt: new Date().toISOString(),
+    });
 
     return {
       success: true,
@@ -129,8 +161,6 @@ export const deleteMovie = async (id) => {
       success: true,
     };
   } catch (error) {
-    console.error("Delete movie error:", error);
-
     return {
       success: false,
 
@@ -151,7 +181,7 @@ export const increaseMovieView = async (id) => {
       views: increment(1),
     });
   } catch (error) {
-    console.error("Increase view error:", error);
+    console.log("View Error:", error);
   }
 };
 
@@ -168,16 +198,20 @@ export const saveWatchHistory = (movie) => {
 
   const oldHistory = JSON.parse(localStorage.getItem(key)) || [];
 
-  const newHistory = oldHistory.filter((item) => item.id !== movie.id);
+  const filtered = oldHistory.filter((item) => item.id !== movie.id);
 
-  newHistory.unshift({
+  filtered.unshift({
     id: movie.id,
 
     title: movie.title,
 
-    image: movie.image || movie.poster_path || "/default-placeholder.jpg",
+    image:
+      movie.image ||
+      (movie.poster_path
+        ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+        : "/default-placeholder.jpg"),
 
-    rating: movie.rating || movie.vote_average || 0,
+    rating: Number(movie.rating || movie.vote_average || 0),
 
     watchedAt: new Date().toISOString(),
   });
@@ -185,7 +219,7 @@ export const saveWatchHistory = (movie) => {
   localStorage.setItem(
     key,
 
-    JSON.stringify(newHistory.slice(0, 15)),
+    JSON.stringify(filtered.slice(0, 15)),
   );
 };
 
@@ -209,12 +243,11 @@ export const getTop10Movies = async () => {
   try {
     const movies = await getMovies();
 
-    const rankedMovies = movies.map((movie) => {
+    const ranked = movies.map((movie) => {
       const views = Number(movie.views || 0);
 
       const rating = Number(movie.rating || 0);
 
-      // Ranking Algorithm
       const score = views * 0.7 + rating * 10 * 0.3;
 
       return {
@@ -224,13 +257,13 @@ export const getTop10Movies = async () => {
       };
     });
 
-    return rankedMovies
+    return ranked
 
       .sort((a, b) => b.score - a.score)
 
       .slice(0, 10);
   } catch (error) {
-    console.error("Top10 loading error:", error);
+    console.error("Top10 Error:", error);
 
     return [];
   }
