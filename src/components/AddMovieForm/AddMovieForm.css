@@ -1,116 +1,589 @@
+/* ================================
+   CINEVERSE ADMIN MOVIE FORM
+   PROFESSIONAL CINEMA STYLE
+================================ */
+
+
 .movie-form {
-  background: #1e293b;
-  padding: 30px;
-  border-radius: 18px;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, .35);
+
+  width: 100%;
+
+  background:
+  linear-gradient(
+    145deg,
+    #111827,
+    #020617
+  );
+
+  padding: 35px;
+
+  border-radius: 20px;
+
+  color: white;
+
+  box-shadow:
+  0 20px 50px rgba(0,0,0,0.5);
+
+  animation: formShow 0.5s ease;
+
 }
+
+
+
+/* FORM OPEN ANIMATION */
+
+@keyframes formShow {
+
+  from {
+
+    opacity:0;
+
+    transform:
+    translateY(30px)
+    scale(.95);
+
+  }
+
+
+  to {
+
+    opacity:1;
+
+    transform:
+    translateY(0)
+    scale(1);
+
+  }
+
+}
+
+
+
+
+/* TITLE */
 
 .movie-form h2 {
-  color: white;
-  text-align: center;
-  margin-bottom: 30px;
-  font-size: 28px;
+
+  text-align:center;
+
+  font-size:32px;
+
+  margin-bottom:30px;
+
+  font-weight:800;
+
+
+  background:
+  linear-gradient(
+    90deg,
+    #facc15,
+    #ef4444
+  );
+
+
+  -webkit-background-clip:text;
+
+  color:transparent;
+
+
+  letter-spacing:1px;
+
 }
 
-/* ========================= */
+
+
+
+
+/* ===============================
+ INPUT GROUP
+================================ */
+
 
 .form-group {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 20px;
+
+  margin-bottom:20px;
+
 }
+
+
 
 .form-group label {
-  color: #cbd5e1;
-  margin-bottom: 8px;
-  font-weight: 600;
+
+
+  display:block;
+
+  margin-bottom:8px;
+
+  color:#facc15;
+
+  font-weight:600;
+
+  font-size:15px;
+
+
 }
+
+
+
+
+/* ALL INPUT SAME HEIGHT */
+
 
 .form-group input,
-.form-group textarea,
-.form-group select {
-  padding: 14px;
-  border-radius: 10px;
-  border: 1px solid #334155;
-  background: #334155;
-  color: white;
-  outline: none;
-  transition: .3s;
+.form-group select,
+.form-group textarea {
+
+
+  width:100%;
+
+
+  background:#0f172a;
+
+
+  color:white;
+
+
+  border:1px solid #334155;
+
+
+  border-radius:12px;
+
+
+  padding:14px 16px;
+
+
+  font-size:15px;
+
+
+  height:52px;
+
+
+  outline:none;
+
+
+  transition:
+  .3s ease;
+
+
 }
 
-.form-group input::placeholder,
-.form-group textarea::placeholder {
-  color: #94a3b8;
-}
 
-.form-group input:focus,
-.form-group textarea:focus,
-.form-group select:focus {
-  border-color: #7c3aed;
-  box-shadow: 0 0 12px rgba(124, 58, 237, .3);
-}
+
+
+/* TEXTAREA */
 
 .form-group textarea {
-  resize: vertical;
-  min-height: 130px;
+
+
+  height:130px;
+
+  resize:none;
+
+
 }
 
-/* ========================= */
+
+
+
+
+/* INPUT FOCUS */
+
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+
+
+  border-color:#facc15;
+
+
+  box-shadow:
+
+  0 0 0 3px rgba(250,204,21,.2);
+
+
+  transform:translateY(-2px);
+
+
+}
+
+
+
+
+
+
+/* SELECT ARROW */
+
+.form-group select {
+
+
+ cursor:pointer;
+
+}
+
+
+
+
+/* ===============================
+ TRAILER BOX
+================================ */
+
+
+.trailer-box {
+
+
+ margin-top:20px;
+
+}
+
+
+.trailer-box input {
+
+
+ width:100%;
+
+
+ height:52px;
+
+
+ background:#0f172a;
+
+
+ border:1px solid #334155;
+
+
+ border-radius:12px;
+
+
+ padding:14px;
+
+
+ color:white;
+
+
+}
+
+
+
+
+
+
+/* ===============================
+ BUTTON AREA
+================================ */
+
 
 .form-actions {
-  display: flex;
-  gap: 15px;
-  margin-top: 25px;
+
+
+ display:flex;
+
+
+ gap:15px;
+
+
+ margin-top:30px;
+
+
 }
 
-.cancel-btn,
-.save-btn {
-  flex: 1;
-  padding: 14px;
-  border: none;
-  border-radius: 10px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: .3s;
-  font-weight: bold;
+
+
+
+button {
+
+
+ font-family:inherit;
+
 }
+
+
+
+
+.save-btn,
+.cancel-btn {
+
+
+ flex:1;
+
+
+ height:52px;
+
+
+ border:none;
+
+
+ border-radius:14px;
+
+
+ font-size:16px;
+
+
+ font-weight:700;
+
+
+ cursor:pointer;
+
+
+ transition:.25s;
+
+
+ position:relative;
+
+
+ overflow:hidden;
+
+
+}
+
+
+
+
+
+/* SAVE BUTTON */
+
+
+.save-btn {
+
+
+ background:
+
+ linear-gradient(
+ 135deg,
+ #dc2626,
+ #facc15
+ );
+
+
+ color:white;
+
+
+}
+
+
+
+
+
+.save-btn:hover {
+
+
+ transform:
+ translateY(-3px);
+
+
+ box-shadow:
+
+ 0 10px 25px rgba(250,204,21,.4);
+
+
+}
+
+
+
+
+.save-btn:active {
+
+
+ transform:
+ scale(.94);
+
+
+}
+
+
+
+
+
+
+/* CANCEL */
+
 
 .cancel-btn {
-  background: #475569;
-  color: white;
+
+
+ background:#334155;
+
+
+ color:white;
+
+
 }
+
+
+
 
 .cancel-btn:hover {
-  background: #334155;
+
+
+ background:#475569;
+
+
+ transform:
+ translateY(-3px);
+
+
 }
 
-.save-btn {
-  background: #7c3aed;
-  color: white;
+
+
+
+.cancel-btn:active {
+
+
+ transform:
+ scale(.94);
+
+
 }
 
-.save-btn:hover:not(:disabled) {
-  background: #6d28d9;
-  transform: translateY(-2px);
+
+
+
+
+/* ===============================
+ MOVIE CATEGORY SELECT
+================================ */
+
+
+.movie-form select {
+
+
+ appearance:none;
+
+
+ background-image:
+
+ linear-gradient(
+ 45deg,
+ transparent 50%,
+ #facc15 50%
+ ),
+
+ linear-gradient(
+ 135deg,
+ #facc15 50%,
+ transparent 50%
+ );
+
+
+ background-position:
+
+ calc(100% - 20px) 22px,
+
+ calc(100% - 15px) 22px;
+
+
+ background-size:
+
+ 5px 5px;
+
+
+ background-repeat:no-repeat;
+
+
 }
 
-.save-btn:disabled {
-  background: #64748b;
-  cursor: not-allowed;
+
+
+
+/* ===============================
+ MODAL CARD
+================================ */
+
+
+.modal {
+
+
+ background:
+
+ linear-gradient(
+ 145deg,
+ #111827,
+ #020617
+ );
+
+
+ border-radius:25px;
+
+
+ padding:10px;
+
+
+ animation:
+
+ modalPop .4s ease;
+
+
 }
 
-@media (max-width:768px) {
 
-  .movie-form {
-    padding: 20px;
-  }
 
-  .movie-form h2 {
-    font-size: 24px;
-  }
 
-  .form-actions {
-    flex-direction: column;
-  }
+@keyframes modalPop {
+
+
+ from {
+
+ opacity:0;
+
+ transform:
+ scale(.8);
+
+ }
+
+
+ to {
+
+ opacity:1;
+
+ transform:
+ scale(1);
+
+ }
+
+}
+
+
+
+
+
+/* ===============================
+ RESPONSIVE
+================================ */
+
+
+
+@media(max-width:768px){
+
+
+.movie-form{
+
+
+ padding:20px;
+
+
+}
+
+
+
+.movie-form h2{
+
+
+ font-size:24px;
+
+
+}
+
+
+
+.form-actions{
+
+
+ flex-direction:column;
+
+
+}
+
+
 
 }

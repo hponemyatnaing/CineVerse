@@ -22,6 +22,17 @@ import UserWatchHistory from "../../components/UserWatchHistory/UserWatchHistory
 
 import { getWatchHistory } from "../../services/movieService";
 
+import AchievementCard from "../../components/AchievementCard/AchievementCard";
+
+import ActivityTimeline from "../../components/ActivityTimeline/ActivityTimeline";
+
+import EditProfileModal from "../../components/EditProfileModal/EditProfileModal";
+
+import {
+  getUserActivities
+}
+  from "../../services/activityService";
+
 function Profile() {
   const { user } = useAuth();
 
@@ -33,13 +44,15 @@ function Profile() {
 
   const [watchedCount, setWatchedCount] = useState(0);
 
-  const [isEditing, setIsEditing] = useState(false);
-
   const [name, setName] = useState("");
 
   const [loading, setLoading] = useState(false);
 
   const [uploading, setUploading] = useState(false);
+
+  const [showEdit, setShowEdit] = useState(false);
+
+  const [activities, setActivities] = useState([]);
 
   useEffect(() => {
     if (user) {
@@ -49,11 +62,13 @@ function Profile() {
 
   const loadProfileData = async () => {
     try {
-      // =========================
-      // PROFILE
-      // =========================
-
       const data = await getUserProfile(user.uid);
+
+      const activityData =
+        await getUserActivities(user.uid);
+
+
+      setActivities(activityData);
 
       setProfile(data);
 
@@ -61,9 +76,9 @@ function Profile() {
         setName(data.name);
       }
 
-      // =========================
+      // =====================
       // REVIEWS
-      // =========================
+      // =====================
 
       const reviewQuery = query(
         collection(db, "reviews"),
@@ -75,38 +90,19 @@ function Profile() {
         ),
       );
 
-      const reviewSnapshot = await getDocs(reviewQuery);
+      const snapshot = await getDocs(reviewQuery);
 
-      const reviewsData = reviewSnapshot.docs.map((item) => ({
-        id: item.id,
+      const reviewData = snapshot.docs.map((doc) => ({
+        id: doc.id,
 
-        ...item.data(),
+        ...doc.data(),
       }));
 
-      // =========================
-      // GET MOVIE TITLE
-      // =========================
+      setReviews(reviewData);
 
-      const movieSnapshot = await getDocs(collection(db, "movies"));
-
-      const moviesData = {};
-
-      movieSnapshot.docs.forEach((movie) => {
-        moviesData[movie.id] = movie.data().title;
-      });
-
-      const updatedReviews = reviewsData.map((review) => ({
-        ...review,
-
-        movieTitle:
-          review.movieTitle || moviesData[review.movieId] || "Unknown Movie",
-      }));
-
-      setReviews(updatedReviews);
-
-      // =========================
+      // =====================
       // WATCH HISTORY
-      // =========================
+      // =====================
 
       const history = getWatchHistory();
 
@@ -116,13 +112,11 @@ function Profile() {
     }
   };
 
-  // =========================
+  // =====================
   // UPDATE PROFILE
-  // =========================
+  // =====================
 
-  const handleUpdateProfile = async (e) => {
-    e.preventDefault();
-
+  const handleUpdateProfile = async () => {
     try {
       setLoading(true);
 
@@ -140,7 +134,7 @@ function Profile() {
         name,
       }));
 
-      setIsEditing(false);
+      setShowEdit(false);
     } catch (error) {
       console.log(error);
     } finally {
@@ -148,18 +142,16 @@ function Profile() {
     }
   };
 
-  // =========================
-  // IMAGE UPLOAD
-  // =========================
+  // =====================
+  // IMAGE CHANGE
+  // =====================
 
-  const handleImageChange = async (e) => {
+  const handleImageChange = (e) => {
     const file = e.target.files[0];
 
     if (!file) return;
 
     const reader = new FileReader();
-
-    reader.readAsDataURL(file);
 
     reader.onload = async () => {
       const image = reader.result;
@@ -186,11 +178,9 @@ function Profile() {
         setUploading(false);
       }
     };
-  };
 
-  // =========================
-  // LOGOUT
-  // =========================
+    reader.readAsDataURL(file);
+  };
 
   const handleLogout = () => {
     logoutUser();
@@ -204,27 +194,36 @@ function Profile() {
 
   return (
     <section className="profile-page">
+      {showEdit && (
+        <EditProfileModal
+          close={() => setShowEdit(false)}
+          name={name}
+          setName={setName}
+          save={handleUpdateProfile}
+        />
+      )}
+
       {/* PROFILE HEADER */}
 
       <div className="profile-header">
         <div className="avatar-container">
           {profile.photoURL ? (
-            <img src={profile.photoURL} alt="profile" className="avatar-img" />
+            <img src={profile.photoURL} className="avatar-img" alt="profile" />
           ) : (
             <div className="avatar">
               {profile.name ? profile.name.charAt(0).toUpperCase() : "U"}
             </div>
           )}
 
-          <label htmlFor="file-input" className="upload-icon-btn">
+          <label htmlFor="upload" className="upload-icon-btn">
             {uploading ? "..." : "📷"}
           </label>
 
           <input
-            id="file-input"
+            id="upload"
             type="file"
             accept="image/*"
-            style={{ display: "none" }}
+            hidden
             onChange={handleImageChange}
           />
         </div>
@@ -236,9 +235,9 @@ function Profile() {
 
           <button
             className="edit-profile-btn"
-            onClick={() => setIsEditing(true)}
+            onClick={() => setShowEdit(true)}
           >
-            Edit Profile
+            ✏️ Edit Profile
           </button>
 
           <button className="logout-btn" onClick={handleLogout}>
@@ -269,26 +268,53 @@ function Profile() {
         </div>
       </div>
 
+      {/* ACHIEVEMENTS */}
+
+      <section className="profile-section-block">
+        <h2>🏆 Achievements</h2>
+
+        <div className="achievement-grid">
+          <AchievementCard
+            icon="🎬"
+            title="Movie Beginner"
+            description="Watched your first movie"
+          />
+
+          <AchievementCard
+            icon="❤️"
+            title="Collector"
+            description="Saved favorite movies"
+          />
+
+          <AchievementCard
+            icon="⭐"
+            title="Reviewer"
+            description="Write movie reviews"
+          />
+        </div>
+      </section>
+
+      {/* ACTIVITY */}
+
+      <section className="profile-section-block">
+        <h2>🕒 Recent Activity</h2>
+
+        <ActivityTimeline activities={activities} />
+      </section>
+
       {/* REVIEWS */}
 
       <section className="profile-section-block">
-        <h2>My Reviews</h2>
+        <h2>💬 My Reviews</h2>
 
-        {reviews.length > 0 ? (
-          reviews.map((rev) => (
-            <div className="review-card" key={rev.id}>
-              <h3>🎬 {rev.movieTitle}</h3>
+        {reviews.length ? (
+          reviews.map((review) => (
+            <div className="review-card" key={review.id}>
+              <h3>🎬 {review.movieTitle || "Movie"}</h3>
 
-              <div className="review-rating">⭐ Rating: {rev.rating}/5</div>
+              <div className="review-rating">⭐ {review.rating}/5</div>
 
-              <p>💬 {rev.comment}</p>
-
-              <small>
-                📅
-                {rev.createdAt
-                  ? new Date(rev.createdAt).toLocaleDateString()
-                  : "No Date"}
-              </small>
+              <p>{review.comment}</p>
             </div>
           ))
         ) : (
@@ -299,15 +325,13 @@ function Profile() {
       {/* FAVORITES */}
 
       <section className="profile-section-block">
-        <h2>My Favorite Movies</h2>
+        <h2>❤️ Favorite Movies</h2>
 
         <div className="favorite-grid">
-          {favorites.length > 0 ? (
-            favorites.map((movie, index) => (
-              <MovieCard key={`${movie.id}-${index}`} movie={movie} />
-            ))
+          {favorites.length ? (
+            favorites.map((movie) => <MovieCard key={movie.id} movie={movie} />)
           ) : (
-            <p className="empty-text">No favorite movies yet</p>
+            <p className="empty-text">No favorite movies</p>
           )}
         </div>
       </section>
@@ -315,21 +339,13 @@ function Profile() {
       {/* WATCH HISTORY */}
 
       <section className="profile-section-block">
-
         <div className="section-title">
-
           <h2>🎬 Recently Watched</h2>
 
-          <span>
-
-            {watchedCount} Movies
-
-          </span>
-
+          <span>{watchedCount} Movies</span>
         </div>
 
         <UserWatchHistory />
-
       </section>
     </section>
   );

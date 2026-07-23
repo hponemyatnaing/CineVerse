@@ -1,30 +1,179 @@
-.section-title {
-  font-size: 24px;
-  margin: 20px;
-  color: var(--accent);
+:root {
+
+  --bg-color:#020617;
+
+  --card-bg:#1e293b;
+
+  --text-color:#ffffff;
+
+  --text-secondary:#94a3b8;
+
+  --border-color:#334155;
+
+  --primary:#7c3aed;
+
 }
 
-/* DARK THEME (default) */
-body.dark {
-  background: #0f172a;
-  color: white;
-}
 
-/* LIGHT THEME */
+
+/* LIGHT MODE */
+
 body.light {
-  background: #f1f5f9;
-  color: #0f172a;
+
+
+  --bg-color:#f8fafc;
+
+  --card-bg:#ffffff;
+
+  --text-color:#0f172a;
+
+  --text-secondary:#475569;
+
+  --border-color:#cbd5e1;
+
+  --primary:#7c3aed;
+
+
 }
 
-button {
 
-  transition: .3s;
+
+/* GLOBAL */
+
+
+*{
+
+  box-sizing:border-box;
 
 }
 
 
-button:hover {
 
-  transform: translateY(-2px);
+body{
+
+
+  margin:0;
+
+  background:var(--bg-color);
+
+  color:var(--text-color);
+
+  transition:
+  background .3s,
+  color .3s;
+
+
+}
+
+
+
+button{
+
+
+  transition:.3s;
+
+
+}
+
+
+
+button:hover{
+
+
+  transform:translateY(-2px);
+
+
+}
+
+
+/* TEXT */
+
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6{
+
+
+color:var(--text-color);
+
+
+}
+
+
+
+p,
+span{
+
+
+color:var(--text-secondary);
+
+
+}
+
+
+
+/* CARD COMMON */
+
+
+.card,
+.movie-card,
+.profile-header,
+.review-card,
+.stat-card{
+
+
+background:var(--card-bg);
+
+color:var(--text-color);
+
+border:1px solid var(--border-color);
+
+
+}
+
+
+
+/* INPUT */
+
+
+input,
+textarea,
+select{
+
+
+background:var(--card-bg);
+
+color:var(--text-color);
+
+border:1px solid var(--border-color);
+
+
+}
+
+
+input::placeholder{
+
+
+color:var(--text-secondary);
+
+
+}
+
+
+/* SECTION TITLE */
+
+
+.section-title {
+
+
+font-size:24px;
+
+margin:20px;
+
+color:var(--text-color);
+
 
 }

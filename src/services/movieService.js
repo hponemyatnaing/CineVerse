@@ -10,6 +10,7 @@ import {
 } from "firebase/firestore";
 
 import { db } from "../firebase/firebase";
+import { addActivity } from "./activityService";
 
 // ==============================
 // COLLECTION
@@ -27,7 +28,6 @@ export const getMovies = async () => {
 
     return snapshot.docs.map((item) => ({
       id: item.id,
-
       ...item.data(),
     }));
   } catch (error) {
@@ -53,7 +53,6 @@ export const getMovieById = async (id) => {
 
     return {
       id: snapshot.id,
-
       ...snapshot.data(),
     };
   } catch (error) {
@@ -71,29 +70,19 @@ export const addMovie = async (movie) => {
   try {
     const docRef = await addDoc(movieCollection, {
       title: movie.title,
-
       image: movie.image,
-
       genre: movie.genre,
-
       year: Number(movie.year),
-
       rating: Number(movie.rating),
-
       description: movie.description,
-
       trailerUrl: movie.trailerUrl || "",
-
       category: movie.category || "latest",
-
       views: 0,
-
       createdAt: new Date().toISOString(),
     });
 
     return {
       success: true,
-
       id: docRef.id,
     };
   } catch (error) {
@@ -101,7 +90,6 @@ export const addMovie = async (movie) => {
 
     return {
       success: false,
-
       message: error.message,
     };
   }
@@ -117,21 +105,13 @@ export const updateMovie = async (id, movie) => {
 
     await updateDoc(movieRef, {
       title: movie.title,
-
       image: movie.image,
-
       genre: movie.genre,
-
       year: Number(movie.year),
-
       rating: Number(movie.rating),
-
       description: movie.description,
-
       trailerUrl: movie.trailerUrl || "",
-
       category: movie.category || "latest",
-
       updatedAt: new Date().toISOString(),
     });
 
@@ -143,7 +123,6 @@ export const updateMovie = async (id, movie) => {
 
     return {
       success: false,
-
       message: error.message,
     };
   }
@@ -163,7 +142,6 @@ export const deleteMovie = async (id) => {
   } catch (error) {
     return {
       success: false,
-
       message: error.message,
     };
   }
@@ -189,7 +167,7 @@ export const increaseMovieView = async (id) => {
 // SAVE WATCH HISTORY
 // ==============================
 
-export const saveWatchHistory = (movie) => {
+export const saveWatchHistory = async (movie) => {
   const user = JSON.parse(localStorage.getItem("user"));
 
   if (!user) return;
@@ -202,25 +180,30 @@ export const saveWatchHistory = (movie) => {
 
   filtered.unshift({
     id: movie.id,
-
     title: movie.title,
-
     image:
       movie.image ||
       (movie.poster_path
         ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
         : "/default-placeholder.jpg"),
-
     rating: Number(movie.rating || movie.vote_average || 0),
-
     watchedAt: new Date().toISOString(),
   });
 
   localStorage.setItem(
     key,
-
     JSON.stringify(filtered.slice(0, 15)),
   );
+
+  // Watched Activity ထည့်သွင်းခြင်း
+  try {
+    await addActivity(user.uid, {
+      title: `🎬 Watched ${movie.title}`,
+      type: "watch",
+    });
+  } catch (err) {
+    console.log("Activity Error:", err);
+  }
 };
 
 // ==============================
@@ -252,15 +235,12 @@ export const getTop10Movies = async () => {
 
       return {
         ...movie,
-
         score,
       };
     });
 
     return ranked
-
       .sort((a, b) => b.score - a.score)
-
       .slice(0, 10);
   } catch (error) {
     console.error("Top10 Error:", error);

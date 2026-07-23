@@ -1,297 +1,494 @@
 .navbar {
+
   position: sticky;
-  top: 0;
-  z-index: 999;
 
-  background: rgba(15, 23, 42, 0.9);
+  top:0;
 
-  backdrop-filter: blur(15px);
+  z-index:999;
 
-  border-bottom: 1px solid rgba(255, 255, 255, .08);
+  background:rgba(30,41,59,.9);
 
-  padding: 15px 0;
+  backdrop-filter:blur(15px);
+
+  border-bottom:1px solid var(--border-color);
+
+  padding:15px 0;
+
+  transition:.3s;
+
 }
+
+
+/* LIGHT MODE NAVBAR */
+
+body.light .navbar{
+
+background:rgba(255,255,255,.85);
+
+}
+
+
+
+/* CONTAINER */
 
 .navbar-container {
 
-  width: 90%;
+  width:90%;
 
-  margin: auto;
+  margin:auto;
 
-  display: flex;
+  display:flex;
 
-  align-items: center;
+  align-items:center;
 
-  justify-content: space-between;
+  justify-content:space-between;
 
-  gap: 20px;
+  gap:20px;
 
 }
+
+
 
 /* LOGO */
 
 .logo {
 
-  display: flex;
+  display:flex;
 
-  align-items: center;
+  align-items:center;
 
-  gap: 8px;
+  gap:8px;
 
-  text-decoration: none;
+  text-decoration:none;
 
-  color: #7c3aed;
+  color:var(--primary);
 
-  font-size: 22px;
+  font-size:22px;
 
-  font-weight: bold;
+  font-weight:bold;
 
-  transition: .3s;
+  transition:.3s;
 
 }
+
 
 .logo:hover {
 
-  transform: scale(1.05);
+ transform:scale(1.05);
 
 }
+
+
 
 /* SEARCH */
 
+
 .nav-search {
 
-  flex: 1;
 
-  max-width: 320px;
+flex:1;
 
-  display: flex;
+max-width:320px;
 
-  align-items: center;
+display:flex;
 
-  gap: 10px;
+align-items:center;
 
-  background: #1e293b;
+gap:10px;
 
-  border: 1px solid #334155;
+background:var(--bg-color);
 
-  border-radius: 10px;
+border:1px solid var(--border-color);
 
-  padding: 10px 15px;
+border-radius:10px;
 
-  color: white;
+padding:10px 15px;
 
-  transition: .3s;
+color:var(--text-color);
+
+transition:.3s;
+
+
+}
+
+
+
+.nav-search:focus-within{
+
+
+border-color:var(--primary);
+
 
 }
 
-.nav-search:focus-within {
 
-  border-color: #7c3aed;
-
-}
 
 .nav-search input {
 
-  width: 100%;
 
-  border: none;
+width:100%;
 
-  outline: none;
+border:none;
 
-  background: transparent;
+outline:none;
 
-  color: white;
+background:transparent;
 
-  font-size: 15px;
+color:var(--text-color);
 
-}
+font-size:15px;
 
-.nav-search input::placeholder {
-
-  color: #94a3b8;
 
 }
 
-/* NAV */
+
+
+.nav-search input::placeholder{
+
+
+color:var(--text-secondary);
+
+
+}
+
+
+
+/* NAV LINKS */
+
 
 .nav-links {
 
-  display: flex;
 
-  align-items: center;
+display:flex;
 
-  gap: 18px;
+align-items:center;
+
+gap:18px;
+
 
 }
+
+
 
 .nav-links a {
 
-  color: white;
 
-  text-decoration: none;
+color:var(--text-color);
 
-  padding: 8px 12px;
+text-decoration:none;
 
-  border-radius: 8px;
+padding:8px 12px;
 
-  transition: .3s;
+border-radius:8px;
 
-  display: flex;
+transition:.3s;
 
-  align-items: center;
+display:flex;
 
-  gap: 6px;
+align-items:center;
 
-}
+gap:6px;
 
-.nav-links a:hover {
-
-  background: rgba(124, 58, 237, .2);
 
 }
 
-.nav-links a.active {
 
-  background: #7c3aed;
 
-}
+.nav-links a:hover{
 
-/* RIGHT */
 
-.nav-actions {
+background:rgba(124,58,237,.2);
 
-  display: flex;
-
-  align-items: center;
-
-  gap: 10px;
 
 }
 
-.logout-btn {
 
-  padding: 10px 18px;
 
-  border: none;
+.nav-links a.active{
 
-  border-radius: 8px;
 
-  background: #ef4444;
+background:var(--primary);
 
-  color: white;
+color:white;
 
-  cursor: pointer;
-
-  transition: .3s;
 
 }
 
-.logout-btn:hover {
 
-  background: #dc2626;
+
+/* ACTION */
+
+
+.nav-actions{
+
+
+display:flex;
+
+align-items:center;
+
+gap:10px;
+
 
 }
+
+
+
+/* LOGOUT */
+
+
+.logout-btn{
+
+
+padding:10px 18px;
+
+border:none;
+
+border-radius:8px;
+
+background:#ef4444;
+
+color:white;
+
+cursor:pointer;
+
+transition:.3s;
+
+
+}
+
+
+.logout-btn:hover{
+
+
+background:#dc2626;
+
+transform:translateY(-2px);
+
+
+}
+
+
+
+/* =========================
+THEME BUTTON
+========================= */
+
 
 .theme-btn {
 
-  padding: 10px;
 
-  border: none;
+width:45px;
 
-  border-radius: 8px;
+height:45px;
 
-  background: #1e293b;
+border:none;
 
-  color: white;
+border-radius:50%;
 
-  cursor: pointer;
 
-  transition: .3s;
+background:
+
+linear-gradient(
+135deg,
+#1e293b,
+#334155
+);
+
+
+color:white;
+
+
+cursor:pointer;
+
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+
+font-size:18px;
+
+
+transition:.35s;
+
+
+box-shadow:
+
+0 6px 18px rgba(0,0,0,.35);
+
 
 }
 
-.theme-btn:hover {
 
-  background: #7c3aed;
+
+.theme-btn:hover{
+
+
+transform:
+
+translateY(-3px)
+rotate(10deg);
+
+
+background:
+
+linear-gradient(
+135deg,
+#7c3aed,
+#06b6d4
+);
+
+
+box-shadow:
+
+0 10px 25px rgba(124,58,237,.45);
+
 
 }
 
-.menu-btn {
 
-  display: none;
 
-  border: none;
+.theme-btn:active{
 
-  background: transparent;
 
-  color: white;
+transform:scale(.85);
 
-  font-size: 22px;
-
-  cursor: pointer;
 
 }
+
+
+
+/* LIGHT MODE BUTTON */
+
+
+body.light .theme-btn{
+
+
+background:
+
+linear-gradient(
+135deg,
+#facc15,
+#f97316
+);
+
+
+color:#111827;
+
+
+}
+
+
+
+/* MENU */
+
+
+.menu-btn{
+
+
+display:none;
+
+border:none;
+
+background:transparent;
+
+color:var(--text-color);
+
+font-size:22px;
+
+cursor:pointer;
+
+
+}
+
+
 
 /* MOBILE */
 
-@media (max-width:768px) {
 
-  .navbar-container {
+@media(max-width:768px){
 
-    width: 95%;
 
-    flex-wrap: wrap;
+.navbar-container{
 
-  }
 
-  .nav-search {
+width:95%;
 
-    order: 3;
+flex-wrap:wrap;
 
-    width: 100%;
 
-    max-width: 100%;
+}
 
-  }
 
-  .menu-btn {
+.nav-search{
 
-    display: block;
 
-  }
+order:3;
 
-  .nav-links {
+width:100%;
 
-    position: absolute;
+max-width:100%;
 
-    top: 72px;
 
-    left: 0;
+}
 
-    width: 100%;
 
-    background: #0f172a;
 
-    flex-direction: column;
+.menu-btn{
 
-    align-items: flex-start;
 
-    padding: 20px;
+display:block;
 
-    display: none;
 
-  }
+}
 
-  .nav-links.active {
 
-    display: flex;
 
-  }
+.nav-links{
 
-  .logout-btn {
 
-    display: none;
+position:absolute;
 
-  }
+top:72px;
+
+left:0;
+
+width:100%;
+
+background:var(--card-bg);
+
+flex-direction:column;
+
+align-items:flex-start;
+
+padding:20px;
+
+display:none;
+
+
+}
+
+
+
+.nav-links.active{
+
+
+display:flex;
+
+
+}
+
+
+
+.logout-btn{
+
+
+display:none;
+
+
+}
+
 
 }

@@ -121,14 +121,18 @@
   z-index: 9999;
 }
 
-.modal {
-  width: 720px;
-  max-width: 95%;
-  max-height: 90vh;
-  overflow-y: auto;
-  background: #0f172a;
-  border-radius: 18px;
-  padding: 28px;
+.modal{
+
+background:#0f172a;
+
+width:700px;
+
+max-height:90vh;
+
+overflow-y:auto;
+
+border-radius:20px;
+
 }
 
 .modal-header {

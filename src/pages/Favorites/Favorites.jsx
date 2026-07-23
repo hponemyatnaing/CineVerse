@@ -29,7 +29,7 @@ function Favorites() {
 
             return (
               <MovieCard
-                key={uniqueKey}
+              key={uniqueKey}
                 movie={movie}
               />
             );

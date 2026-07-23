@@ -3,7 +3,7 @@ import "./MovieDetails.css";
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
-import { FaArrowLeft, FaHeart, FaStar } from "react-icons/fa";
+import { FaArrowLeft, FaHeart } from "react-icons/fa";
 
 import {
   getMovieDetails,
@@ -27,6 +27,8 @@ import ReviewList from "../../components/ReviewList/ReviewList";
 
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 
+import { useFavorites } from "../../context/FavoritesContext";
+
 function MovieDetails() {
   const { id } = useParams();
 
@@ -42,18 +44,31 @@ function MovieDetails() {
 
   const [refreshReviews, setRefreshReviews] = useState(0);
 
-  // Favorite အတွက် State
-  const [favourite, setFavourite] = useState(false);
+  const { favorites, addToFavorites, removeFromFavorites } = useFavorites();
+
+  // ==========================
+  // FAVORITE CHECK
+  // ==========================
+
+  const movieId = String(movie?.id || id);
+
+  const favoriteItem = favorites.find(
+    (item) => String(item.movieId) === movieId,
+  );
+
+  const isFavorite = Boolean(favoriteItem);
 
   useEffect(() => {
     loadMovie();
   }, [id]);
 
-  async function loadMovie() {
+  // ==========================
+  // LOAD MOVIE
+  // ==========================
+
+  const loadMovie = async () => {
     try {
       setLoading(true);
-
-      console.log("CURRENT MOVIE ID:", id);
 
       if (!isNaN(id)) {
         const movieData = await getMovieDetails(id);
@@ -61,10 +76,6 @@ function MovieDetails() {
         const videoData = await getMovieVideos(id);
 
         const similarData = await getSimilarMovies(id);
-
-        console.log("VIDEOS:", videoData);
-
-        console.log("SIMILAR:", similarData);
 
         setMovie(movieData);
 
@@ -86,8 +97,6 @@ function MovieDetails() {
       } else {
         const firebaseMovie = await getMovieById(id);
 
-        console.log("FIREBASE MOVIE:", firebaseMovie);
-
         if (firebaseMovie) {
           await increaseMovieView(firebaseMovie.id);
 
@@ -105,28 +114,42 @@ function MovieDetails() {
     } finally {
       setLoading(false);
     }
-  }
+  };
 
-  // သင်ပေးထားသော Favorite Function ကို ဤနေရာတွင် ထည့်သွင်းထားပါသည်
-  const favFunc = async (item) => {
-    try {
-      setFavourite(!favourite);
+  // ==========================
+  // FAVORITE BUTTON
+  // ==========================
 
-      // အကယ်၍ toggleFavourite API သုံးထားလျှင် ဤနေရာတွင် ချိတ်ဆက်နိုင်သည်
-      // const res = await toggleFavourite({ id: item.id, type, typename: typeName, isFavourite: favourite }).unwrap();
+  const handleFavorite = async () => {
+    if (!movie) return;
 
-      // setTimeout(() => {
-      //     Toast.show(res.message, ToastOption);
-      // }, 0);
+    const currentId = String(movie.id);
 
-    } catch (err) {
-      setFavourite(!favourite);
-      // Toast.show(err?.data?.message || "An error occurred", ToastOption);
+    if (isFavorite) {
+      await removeFromFavorites(currentId);
+    } else {
+      await addToFavorites({
+        id: movie.id,
+
+        movieId: currentId,
+
+        title: movie.title,
+
+        image: movie.poster_path
+          ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+          : movie.image || "",
+
+        rating: movie.vote_average || movie.rating || 0,
+      });
     }
   };
 
   if (loading) {
-    return <div className="details-loading"><LoadingSpinner text="Loading Movie..." /></div>;
+    return (
+      <div className="details-loading">
+        <LoadingSpinner text="Loading Movie..." />
+      </div>
+    );
   }
 
   if (!movie) {
@@ -135,20 +158,23 @@ function MovieDetails() {
 
   return (
     <section className="movie-details">
-      <button className="back-btn" onClick={() => navigate(-1)}>
-        <FaArrowLeft />
+      <div className="details-top-bar">
+        <button className="back-btn" onClick={() => navigate(-1)}>
+          <FaArrowLeft />
+          Back
+        </button>
 
-        <span>Back</span>
-      </button>
+        <button
+          className={`details-fav-btn
 
-      {/* Favorite ခလုတ်ကို ဤနေရာတွင် ထည့်သွင်းအသုံးပြုနိုင်ပါသည် */}
-      <button
-        className={`details-fav-btn ${favourite ? "active" : ""}`}
-        onClick={() => favFunc(movie)}
-        style={{ float: "right", padding: "10px 15px", cursor: "pointer", background: "transparent", border: "1px solid #fff", color: "#fff", borderRadius: "5px" }}
-      >
-        <FaHeart style={{ color: favourite ? "red" : "#fff" }} /> {favourite ? "Favorited" : "Add to Favorite"}
-      </button>
+            ${isFavorite ? "active" : ""}`}
+          onClick={handleFavorite}
+        >
+          <FaHeart />
+
+          <span>{isFavorite ? "Remove Favorite" : "Add Favorite"}</span>
+        </button>
+      </div>
 
       <div className="details-container">
         <img
@@ -213,19 +239,21 @@ function MovieDetails() {
 
               .slice(0, 8)
 
-              .map((movie) => (
+              .map((item) => (
                 <MovieCard
-                  key={movie.id}
+                  key={item.id}
                   movie={{
-                    id: movie.id,
+                    id: item.id,
 
-                    title: movie.title,
+                    movieId: item.id,
 
-                    image: movie.poster_path
-                      ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+                    title: item.title,
+
+                    image: item.poster_path
+                      ? `https://image.tmdb.org/t/p/w500${item.poster_path}`
                       : "/default-placeholder.jpg",
 
-                    rating: movie.vote_average,
+                    rating: item.vote_average,
                   }}
                 />
               ))}

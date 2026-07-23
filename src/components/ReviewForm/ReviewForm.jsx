@@ -6,11 +6,11 @@ import { FaStar } from "react-icons/fa";
 
 import { addReview } from "../../services/reviewService";
 
+import { addActivity } from "../../services/activityService";
+
 function ReviewForm({
   movieId,
-
   movieTitle,
-
   onReviewAdded,
 }) {
   const [rating, setRating] = useState(0);
@@ -42,35 +42,41 @@ function ReviewForm({
       return;
     }
 
-    setLoading(true);
+    try {
+      setLoading(true);
 
-    const result = await addReview({
-      movieId,
+      const result = await addReview({
+        movieId,
+        movieTitle,
+        uid: user.uid,
+        userName: user.displayName || user.name || user.email || "User",
+        rating,
+        comment,
+      });
 
-      movieTitle,
+      if (result.success) {
+        // Activity မှတ်တမ်းထည့်ခြင်း
+        await addActivity(user.uid, {
+          title: `💬 Posted review on ${movieTitle}`,
+          type: "review",
+        });
 
-      uid: user.uid,
+        setRating(0);
 
-      userName: user.displayName || user.name || user.email || "User",
+        setComment("");
 
-      rating,
-
-      comment,
-    });
-
-    if (result.success) {
-      setRating(0);
-
-      setComment("");
-
-      if (onReviewAdded) {
-        onReviewAdded();
+        if (onReviewAdded) {
+          onReviewAdded();
+        }
+      } else {
+        alert(result.message || "Failed to post review");
       }
-    } else {
-      alert(result.message || "Failed to post review");
+    } catch (error) {
+      console.log("Review Error:", error);
+      alert("An error occurred while posting review");
+    } finally {
+      setLoading(false);
     }
-
-    setLoading(false);
   };
 
   return (

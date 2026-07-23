@@ -1,11 +1,11 @@
 import "./AddMovieForm.css";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import { addMovie, updateMovie } from "../../services/movieService";
 
 function AddMovieForm({ movie, onClose, onSuccess }) {
-  const defaultForm = {
+  const initialState = {
     title: "",
     image: "",
     genre: "Action",
@@ -16,7 +16,7 @@ function AddMovieForm({ movie, onClose, onSuccess }) {
     category: "latest",
   };
 
-  const [formData, setFormData] = useState(defaultForm);
+  const [formData, setFormData] = useState(initialState);
 
   const [loading, setLoading] = useState(false);
 
@@ -40,11 +40,11 @@ function AddMovieForm({ movie, onClose, onSuccess }) {
         category: movie.category || "latest",
       });
     } else {
-      setFormData(defaultForm);
+      setFormData(initialState);
     }
   }, [movie]);
 
-  function handleChange(e) {
+  const handleChange = (e) => {
     const { name, value } = e.target;
 
     setFormData((prev) => ({
@@ -52,9 +52,9 @@ function AddMovieForm({ movie, onClose, onSuccess }) {
 
       [name]: value,
     }));
-  }
+  };
 
-  async function handleSubmit(e) {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
@@ -63,19 +63,29 @@ function AddMovieForm({ movie, onClose, onSuccess }) {
       let result;
 
       if (movie) {
-        result = await updateMovie(movie.id, formData);
+        result = await updateMovie(
+          movie.id,
+
+          formData,
+        );
       } else {
         result = await addMovie(formData);
       }
 
       if (result.success) {
-        alert(movie ? "Movie Updated" : "Movie Added");
+        alert(
+          movie ? "Movie Updated Successfully" : "Movie Added Successfully",
+        );
 
-        if (onSuccess) onSuccess();
+        if (onSuccess) {
+          onSuccess();
+        }
 
-        if (onClose) onClose();
+        if (onClose) {
+          onClose();
+        }
 
-        setFormData(defaultForm);
+        setFormData(initialState);
       } else {
         alert(result.message);
       }
@@ -86,76 +96,148 @@ function AddMovieForm({ movie, onClose, onSuccess }) {
     } finally {
       setLoading(false);
     }
-  }
+  };
 
   return (
     <form className="movie-form" onSubmit={handleSubmit}>
-      <h2>{movie ? "Edit Movie" : "Add New Movie"}</h2>
+      <div className="form-title">
+        <h2>{movie ? "Edit Movie" : "Add New Movie"}</h2>
 
-      <label>Category</label>
+        <p>Manage movie information</p>
+      </div>
 
-      <select name="category" value={formData.category} onChange={handleChange}>
-        <option value="trending">Trending Movies</option>
+      <div className="form-grid">
+        <div className="form-group">
+          <label>Movie Title</label>
 
-        <option value="latest">Latest Movies</option>
+          <input
+            type="text"
+            name="title"
+            value={formData.title}
+            onChange={handleChange}
+            placeholder="Enter movie title"
+            required
+          />
+        </div>
 
-        <option value="hot">Hot Today</option>
-      </select>
+        <div className="form-group">
+          <label>Category</label>
 
-      <label>Title</label>
+          <select
+            name="category"
+            value={formData.category}
+            onChange={handleChange}
+          >
+            <option value="latest">Latest Movies</option>
 
-      <input name="title" value={formData.title} onChange={handleChange} />
+            <option value="trending">Trending Movies</option>
 
-      <label>Image URL</label>
+            <option value="hot">Hot Movies</option>
+          </select>
+        </div>
 
-      <input name="image" value={formData.image} onChange={handleChange} />
+        <div className="form-group">
+          <label>Poster Image URL</label>
 
-      <label>Genre</label>
+          <input
+            type="text"
+            name="image"
+            value={formData.image}
+            onChange={handleChange}
+            placeholder="Image URL"
+            required
+          />
+        </div>
 
-      <input name="genre" value={formData.genre} onChange={handleChange} />
+        <div className="form-group">
+          <label>Genre</label>
 
-      <label>Year</label>
+          <select name="genre" value={formData.genre} onChange={handleChange}>
+            <option>Action</option>
 
-      <input
-        type="number"
-        name="year"
-        value={formData.year}
-        onChange={handleChange}
-      />
+            <option>Adventure</option>
 
-      <label>Rating</label>
+            <option>Animation</option>
 
-      <input
-        type="number"
-        step="0.1"
-        name="rating"
-        value={formData.rating}
-        onChange={handleChange}
-      />
+            <option>Comedy</option>
 
-      <label>Description</label>
+            <option>Crime</option>
 
-      <textarea
-        name="description"
-        value={formData.description}
-        onChange={handleChange}
-      />
+            <option>Drama</option>
 
-      <label>Trailer URL</label>
+            <option>Fantasy</option>
 
-      <input
-        name="trailerUrl"
-        value={formData.trailerUrl}
-        onChange={handleChange}
-        placeholder="YouTube URL"
-      />
+            <option>Horror</option>
 
-      <div className="form-buttons">
-        <button type="button" onClick={onClose}>
+            <option>Romance</option>
+
+            <option>Sci-Fi</option>
+
+            <option>Thriller</option>
+          </select>
+        </div>
+
+        <div className="form-group">
+          <label>Release Year</label>
+
+          <input
+            type="number"
+            name="year"
+            value={formData.year}
+            onChange={handleChange}
+            placeholder="2026"
+            required
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Rating</label>
+
+          <input
+            type="number"
+            step="0.1"
+            min="0"
+            max="10"
+            name="rating"
+            value={formData.rating}
+            onChange={handleChange}
+            placeholder="8.5"
+            required
+          />
+        </div>
+      </div>
+
+      <div className="form-group full">
+        <label>Trailer URL</label>
+
+        <input
+          type="text"
+          name="trailerUrl"
+          value={formData.trailerUrl}
+          onChange={handleChange}
+          placeholder="YouTube Trailer URL"
+        />
+      </div>
+
+      <div className="form-group full">
+        <label>Description</label>
+
+        <textarea
+          rows="6"
+          name="description"
+          value={formData.description}
+          onChange={handleChange}
+          placeholder="Movie description..."
+          required
+        />
+      </div>
+
+      <div className="form-actions">
+        <button type="button" className="cancel-btn" onClick={onClose}>
           Cancel
         </button>
 
-        <button disabled={loading}>
+        <button className="save-btn" disabled={loading}>
           {loading ? "Saving..." : movie ? "Update Movie" : "Add Movie"}
         </button>
       </div>

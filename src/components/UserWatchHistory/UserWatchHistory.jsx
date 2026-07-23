@@ -35,13 +35,15 @@ function UserWatchHistory() {
         </div>
       ) : (
         <div className="watch-grid">
-          {history
-
-            .slice(0, 6)
-
-            .map((movie) => (
-              <MovieCard key={movie.id} movie={movie} />
-            ))}
+          {history.map((movie) => (
+            <MovieCard
+              key={movie.id || movie.movieId}
+              movie={{
+                ...movie,
+                id: movie.id || movie.movieId,
+              }}
+            />
+          ))}
         </div>
       )}
     </section>
