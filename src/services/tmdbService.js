@@ -1,12 +1,7 @@
-// .env API Key
 const API_KEY =
   import.meta.env.VITE_TMDB_API_KEY || "fa2d3cdfc326919f9f6a7823d0bbc80f";
 
 const BASE_URL = "https://api.themoviedb.org/3";
-
-// ===============================
-// TRENDING MOVIES
-// ===============================
 
 export const getTrendingMovies = async () => {
   try {
@@ -31,11 +26,6 @@ export const getTrendingMovies = async () => {
     return [];
   }
 };
-
-// ===============================
-// HOT TODAY MOVIES
-// Auto calculate by popularity + rating
-// ===============================
 
 export const getHotMovies = async () => {
   try {
@@ -74,10 +64,6 @@ export const getHotMovies = async () => {
   }
 };
 
-// ===============================
-// SEARCH MOVIES
-// ===============================
-
 export const searchMovies = async (query) => {
   try {
     const response = await fetch(
@@ -94,19 +80,11 @@ export const searchMovies = async (query) => {
   }
 };
 
-// ===============================
-// MOVIE DETAILS
-// ===============================
-
 export const getMovieDetails = async (id) => {
   const response = await fetch(`${BASE_URL}/movie/${id}?api_key=${API_KEY}`);
 
   return await response.json();
 };
-
-// ===============================
-// MOVIE VIDEOS
-// ===============================
 
 export const getMovieVideos = async (id) => {
   try {
@@ -123,10 +101,6 @@ export const getMovieVideos = async (id) => {
     return [];
   }
 };
-
-// ===============================
-// SIMILAR MOVIES
-// ===============================
 
 export const getSimilarMovies = async (id) => {
   try {

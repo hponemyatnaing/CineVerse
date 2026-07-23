@@ -15,7 +15,6 @@ function ReviewList({ movieId, refresh }) {
   const [editingId, setEditingId] = useState(null);
   const [editText, setEditText] = useState("");
 
-  // LocalStorage မှ User ကို လုံခြုံစွာ ယူရန် (uid သို့မဟုတ် id ကိုပါ ရှာပေးသည်)
   const rawUser = localStorage.getItem("user");
   const currentUser = rawUser ? JSON.parse(rawUser) : null;
   const currentUserId = currentUser?.uid || currentUser?.id;
@@ -63,7 +62,7 @@ function ReviewList({ movieId, refresh }) {
     if (result && result.success !== false) {
       loadReviews();
     } else {
-      loadReviews(); // Result format မတူရင်တောင် list ကို refresh လုပ်ပေးမည်
+      loadReviews();
     }
   };
 
@@ -80,9 +79,11 @@ function ReviewList({ movieId, refresh }) {
       <h2>User Reviews</h2>
 
       {reviews.map((review, index) => {
-        // Review ထဲက User ID (uid သို့မဟုတ် userId နှစ်ခုစလုံးကို စစ်ပေးသည်)
         const reviewUserId = review.uid || review.userId;
-        const isOwner = currentUserId && reviewUserId && String(currentUserId) === String(reviewUserId);
+        const isOwner =
+          currentUserId &&
+          reviewUserId &&
+          String(currentUserId) === String(reviewUserId);
 
         return (
           <div className="review-card" key={`${review.id}-${index}`}>
@@ -114,7 +115,6 @@ function ReviewList({ movieId, refresh }) {
               <p>{review.comment || review.reviewText}</p>
             )}
 
-            {/* ကိုယ့် Review ဖြစ်မှသာ Edit / Delete ခလုတ်ပေါ်မည် */}
             {isOwner && (
               <div className="review-actions">
                 {editingId === review.id ? (

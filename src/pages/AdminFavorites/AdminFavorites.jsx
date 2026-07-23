@@ -21,10 +21,6 @@ function AdminFavorites() {
     loadUsers();
   }, []);
 
-  // =========================
-  // LOAD FAVORITES
-  // =========================
-
   async function loadFavorites() {
     try {
       setLoading(true);
@@ -45,10 +41,6 @@ function AdminFavorites() {
     }
   }
 
-  // =========================
-  // LOAD USERS
-  // =========================
-
   async function loadUsers() {
     try {
       const snapshot = await getDocs(collection(db, "users"));
@@ -64,10 +56,6 @@ function AdminFavorites() {
       console.log("Load users error:", error);
     }
   }
-
-  // =========================
-  // DELETE FAVORITE
-  // =========================
 
   async function deleteFavorite(id) {
     const confirmDelete = window.confirm("Remove this favorite?");

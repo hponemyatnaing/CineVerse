@@ -30,18 +30,15 @@ main{
     min-height:100vh;
 }
 
-/* အခြား Global CSS များပြီးနောက်တွင် ထည့်ပါ */
-
-/* Theme: Light Mode */
 body.light {
-  background-color: #f8fafc; /* Page တစ်ခုလုံး၏ နောက်ခံအရောင်ကိုပါ ပြောင်းလဲပေးခြင်း */
+  background-color: #f8fafc; 
   transition: background-color 0.3s, color 0.3s;
 }
 
 body.light .movie-card {
   background: white;
   color: black;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* Light mode မှာ ပိုပေါ်လွင်စေရန် */
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1); 
 }
 
 body.light .navbar {

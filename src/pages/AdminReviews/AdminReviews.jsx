@@ -17,10 +17,6 @@ function AdminReviews() {
     loadReviews();
   }, []);
 
-  // ==============================
-  // LOAD REVIEWS
-  // ==============================
-
   async function loadReviews() {
     try {
       setLoading(true);
@@ -40,10 +36,6 @@ function AdminReviews() {
       setLoading(false);
     }
   }
-
-  // ==============================
-  // DELETE REVIEW
-  // ==============================
 
   async function deleteReview(id) {
     const confirmDelete = window.confirm("Delete this review?");

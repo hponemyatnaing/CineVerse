@@ -1,92 +1,92 @@
 :root {
 
-  --bg-color:#020617;
+  --bg-color: #020617;
 
-  --card-bg:#1e293b;
+  --card-bg: #1e293b;
 
-  --text-color:#ffffff;
+  --text-color: #ffffff;
 
-  --text-secondary:#94a3b8;
+  --text-secondary: #94a3b8;
 
-  --border-color:#334155;
+  --border-color: #334155;
 
-  --primary:#7c3aed;
+  --primary: #7c3aed;
 
 }
 
 
 
-/* LIGHT MODE */
+
 
 body.light {
 
 
-  --bg-color:#f8fafc;
+  --bg-color: #f8fafc;
 
-  --card-bg:#ffffff;
+  --card-bg: #ffffff;
 
-  --text-color:#0f172a;
+  --text-color: #0f172a;
 
-  --text-secondary:#475569;
+  --text-secondary: #475569;
 
-  --border-color:#cbd5e1;
+  --border-color: #cbd5e1;
 
-  --primary:#7c3aed;
+  --primary: #7c3aed;
 
 
 }
 
 
 
-/* GLOBAL */
 
 
-*{
 
-  box-sizing:border-box;
+* {
+
+  box-sizing: border-box;
 
 }
 
 
 
-body{
+body {
 
 
-  margin:0;
+  margin: 0;
 
-  background:var(--bg-color);
+  background: var(--bg-color);
 
-  color:var(--text-color);
+  color: var(--text-color);
 
   transition:
-  background .3s,
-  color .3s;
+    background .3s,
+    color .3s;
 
 
 }
 
 
 
-button{
+button {
 
 
-  transition:.3s;
+  transition: .3s;
+
+
+}
+
+
+
+button:hover {
+
+
+  transform: translateY(-2px);
 
 
 }
 
 
 
-button:hover{
-
-
-  transform:translateY(-2px);
-
-
-}
-
-
-/* TEXT */
 
 
 h1,
@@ -94,10 +94,10 @@ h2,
 h3,
 h4,
 h5,
-h6{
+h6 {
 
 
-color:var(--text-color);
+  color: var(--text-color);
 
 
 }
@@ -105,75 +105,75 @@ color:var(--text-color);
 
 
 p,
-span{
+span {
 
 
-color:var(--text-secondary);
+  color: var(--text-secondary);
 
 
 }
 
 
 
-/* CARD COMMON */
+
 
 
 .card,
 .movie-card,
 .profile-header,
 .review-card,
-.stat-card{
+.stat-card {
 
 
-background:var(--card-bg);
+  background: var(--card-bg);
 
-color:var(--text-color);
+  color: var(--text-color);
 
-border:1px solid var(--border-color);
+  border: 1px solid var(--border-color);
 
 
 }
 
 
 
-/* INPUT */
+
 
 
 input,
 textarea,
-select{
+select {
 
 
-background:var(--card-bg);
+  background: var(--card-bg);
 
-color:var(--text-color);
+  color: var(--text-color);
 
-border:1px solid var(--border-color);
-
-
-}
-
-
-input::placeholder{
-
-
-color:var(--text-secondary);
+  border: 1px solid var(--border-color);
 
 
 }
 
 
-/* SECTION TITLE */
+input::placeholder {
+
+
+  color: var(--text-secondary);
+
+
+}
+
+
+
 
 
 .section-title {
 
 
-font-size:24px;
+  font-size: 24px;
 
-margin:20px;
+  margin: 20px;
 
-color:var(--text-color);
+  color: var(--text-color);
 
 
 }

@@ -4,10 +4,10 @@ function About() {
   return (
     <section className="about-page">
       <div className="about-container">
-        <h1>🎬 About CineVerse</h1>
+        <h1>🎬 About MoraView</h1>
 
         <p className="about-description">
-          CineVerse is a Movie Review and Rating Website built using React.js.
+          MoraView is a Movie Review and Rating Website built using React.js.
           Users can browse trending movies, search movies, save favorites, and
           explore detailed movie information.
         </p>

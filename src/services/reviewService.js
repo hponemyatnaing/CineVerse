@@ -11,10 +11,6 @@ import {
 
 import { db } from "../firebase/firebase";
 
-// ==============================
-// ADD REVIEW
-// ==============================
-
 export const addReview = async (review) => {
   try {
     const ref = collection(db, "reviews");
@@ -22,7 +18,6 @@ export const addReview = async (review) => {
     await addDoc(ref, {
       movieId: review.movieId,
 
-      // ✅ NEW
       movieTitle: review.movieTitle || "",
 
       uid: review.uid,
@@ -35,7 +30,6 @@ export const addReview = async (review) => {
 
       createdAt: new Date().toISOString(),
 
-      // ✅ NEW
       updatedAt: new Date().toISOString(),
     });
 
@@ -51,10 +45,6 @@ export const addReview = async (review) => {
     };
   }
 };
-
-// ==============================
-// GET MOVIE REVIEWS
-// ==============================
 
 export const getMovieReviews = async (movieId) => {
   try {
@@ -73,16 +63,11 @@ export const getMovieReviews = async (movieId) => {
   }
 };
 
-// ==============================
-// UPDATE REVIEW
-// ==============================
-
 export const updateReview = async (id, text) => {
   try {
     await updateDoc(doc(db, "reviews", id), {
       comment: text,
 
-      // ✅ NEW
       updatedAt: new Date().toISOString(),
     });
 
@@ -93,10 +78,6 @@ export const updateReview = async (id, text) => {
     return false;
   }
 };
-
-// ==============================
-// DELETE REVIEW
-// ==============================
 
 export const deleteReview = async (id) => {
   try {

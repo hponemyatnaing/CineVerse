@@ -1,19 +1,15 @@
 import gsap from "gsap";
 
-
 export const fadeUp = (element) => {
-
   if (!element) return;
 
-
   gsap.fromTo(
-
     element,
 
     {
       opacity: 0,
 
-      y: 40
+      y: 40,
     },
 
     {
@@ -25,9 +21,7 @@ export const fadeUp = (element) => {
 
       stagger: 0.15,
 
-      ease: "power3.out"
-    }
-
+      ease: "power3.out",
+    },
   );
-
 };

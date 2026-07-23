@@ -11,10 +11,6 @@ import {
 
 import { db } from "../firebase/firebase";
 
-// ===============================
-// CREATE USER PROFILE
-// ===============================
-
 export const createUserProfile = async (user) => {
   await setDoc(doc(db, "users", user.uid), {
     uid: user.uid,
@@ -24,10 +20,6 @@ export const createUserProfile = async (user) => {
     createdAt: new Date().toISOString(),
   });
 };
-
-// ===============================
-// GET USER PROFILE
-// ===============================
 
 export const getUserProfile = async (uid) => {
   const docRef = doc(db, "users", uid);
@@ -39,10 +31,6 @@ export const getUserProfile = async (uid) => {
 
   return null;
 };
-
-// =====================================
-// UPDATE USER PROFILE
-// =====================================
 
 export const updateUserProfile = async (uid, data) => {
   try {
@@ -58,10 +46,6 @@ export const updateUserProfile = async (uid, data) => {
   }
 };
 
-// =====================================
-// GET USER REVIEWS
-// =====================================
-
 export const getUserReviews = async (uid) => {
   const reviewRef = collection(db, "reviews");
   const q = query(reviewRef, where("uid", "==", uid));
@@ -72,10 +56,6 @@ export const getUserReviews = async (uid) => {
     ...doc.data(),
   }));
 };
-
-// =====================================
-// GET USER FAVORITES
-// =====================================
 
 export const getUserFavorites = async (uid) => {
   const favRef = collection(db, "favorites");
@@ -90,10 +70,6 @@ export const getUserFavorites = async (uid) => {
   return favorites;
 };
 
-// =====================================
-// GET USER STATISTICS
-// =====================================
-
 export const getUserStats = async (uid) => {
   const reviews = await getUserReviews(uid);
   const favorites = await getUserFavorites(uid);
@@ -103,10 +79,6 @@ export const getUserStats = async (uid) => {
     favoritesCount: favorites.length,
   };
 };
-
-// ==============================
-// LOGOUT USER
-// ==============================
 
 export const logoutUser = () => {
   localStorage.removeItem("user");

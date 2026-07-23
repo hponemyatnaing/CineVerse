@@ -46,10 +46,6 @@ function MovieDetails() {
 
   const { favorites, addToFavorites, removeFromFavorites } = useFavorites();
 
-  // ==========================
-  // FAVORITE CHECK
-  // ==========================
-
   const movieId = String(movie?.id || id);
 
   const favoriteItem = favorites.find(
@@ -61,10 +57,6 @@ function MovieDetails() {
   useEffect(() => {
     loadMovie();
   }, [id]);
-
-  // ==========================
-  // LOAD MOVIE
-  // ==========================
 
   const loadMovie = async () => {
     try {
@@ -115,10 +107,6 @@ function MovieDetails() {
       setLoading(false);
     }
   };
-
-  // ==========================
-  // FAVORITE BUTTON
-  // ==========================
 
   const handleFavorite = async () => {
     if (!movie) return;

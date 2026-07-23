@@ -24,15 +24,9 @@ function Favorites() {
       ) : (
         <div className="favorites-grid">
           {favorites.map((movie, index) => {
-            // Document ID (id) သို့မဟုတ် movieId နဲ့ index ကို ပေါင်းစပ်ပြီး 100% Unique ဖြစ်မယ့် key ဖန်တီးခြင်း
-            const uniqueKey = `${movie.id || movie.docId || 'fav'}-${movie.movieId || index}-${index}`;
+            const uniqueKey = `${movie.id || movie.docId || "fav"}-${movie.movieId || index}-${index}`;
 
-            return (
-              <MovieCard
-              key={uniqueKey}
-                movie={movie}
-              />
-            );
+            return <MovieCard key={uniqueKey} movie={movie} />;
           })}
         </div>
       )}

@@ -8,11 +8,7 @@ import { addReview } from "../../services/reviewService";
 
 import { addActivity } from "../../services/activityService";
 
-function ReviewForm({
-  movieId,
-  movieTitle,
-  onReviewAdded,
-}) {
+function ReviewForm({ movieId, movieTitle, onReviewAdded }) {
   const [rating, setRating] = useState(0);
 
   const [comment, setComment] = useState("");
@@ -55,7 +51,6 @@ function ReviewForm({
       });
 
       if (result.success) {
-        // Activity မှတ်တမ်းထည့်ခြင်း
         await addActivity(user.uid, {
           title: `💬 Posted review on ${movieTitle}`,
           type: "review",

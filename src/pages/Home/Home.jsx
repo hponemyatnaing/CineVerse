@@ -52,11 +52,6 @@ function Home() {
 
       setHot(hotData || []);
 
-      /*
-        Admin ထည့်ထားတဲ့ movie များ
-        Firestore movies collection ကနေယူ
-      */
-
       const latestMovies = (firebaseMovies || [])
 
         .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
@@ -64,10 +59,6 @@ function Home() {
         .slice(0, 10);
 
       setLatest(latestMovies);
-
-      /*
-        User watched history
-      */
 
       const watched = getWatchHistory();
 
@@ -85,33 +76,20 @@ function Home() {
 
   return (
     <main className="home-page">
-      {/* HERO */}
-
       <Hero />
 
-      {/* TOP 10 */}
-
       <Top10Movies movies={top10} />
-
-      {/* CONTINUE WATCHING */}
 
       {history.length > 0 && (
         <MovieSection title="▶ Continue Watching" movies={history} />
       )}
-
-      {/* TRENDING */}
 
       <MovieSection
         title="🔥 Trending Movies"
         movies={trending}
         category="trending"
       />
-
-      {/* HOT */}
-
       <MovieSection title="⚡ Hot Today" movies={hot} category="hot" />
-
-      {/* ADMIN MOVIES */}
 
       <MovieSection
         title="🆕 Latest Movies"

@@ -58,11 +58,10 @@ function Register() {
   return (
     <div className="login-page">
       <div className="login-card">
-        <h1 className="login-logo">🎬 CineVerse</h1>
+        <h1 className="login-logo">🎬 MoraView</h1>
         <h2>Create Account</h2>
-        <p>Join CineVerse today.</p>
+        <p>Join MoraView today.</p>
 
-        {/* Error Message Display */}
         {error && (
           <p
             className="register-error"

@@ -21,19 +21,11 @@ export const FavoritesProvider = ({ children }) => {
 
   const { user } = useAuth();
 
-  // ==========================
-  // CURRENT USER
-  // ==========================
-
   const rawUser = localStorage.getItem("user");
 
   const localUser = rawUser ? JSON.parse(rawUser) : null;
 
   const currentUserId = user?.uid || localUser?.uid || localUser?.id;
-
-  // ==========================
-  // LOAD FAVORITES
-  // ==========================
 
   useEffect(() => {
     if (currentUserId) {
@@ -70,10 +62,6 @@ export const FavoritesProvider = ({ children }) => {
       console.log("Load favorite error:", error);
     }
   };
-
-  // ==========================
-  // ADD FAVORITE
-  // ==========================
 
   const addToFavorites = async (movie) => {
     if (!currentUserId) {
@@ -128,10 +116,6 @@ export const FavoritesProvider = ({ children }) => {
       console.log("Add favorite error:", error);
     }
   };
-
-  // ==========================
-  // REMOVE FAVORITE
-  // ==========================
 
   const removeFromFavorites = async (movieId) => {
     try {

@@ -8,7 +8,7 @@ function Recommendations({ movieId }) {
   useEffect(() => {
     const fetchData = async () => {
       const data = await getSimilarMovies(movieId);
-      setMovies(data.slice(0, 6)); // top 6 only
+      setMovies(data.slice(0, 6));
     };
 
     fetchData();

@@ -11,7 +11,6 @@ import {
 import "./Contact.css";
 
 function Contact() {
-
   const [loading, setLoading] = useState(false);
 
   const [form, setForm] = useState({
@@ -36,13 +35,13 @@ function Contact() {
       return;
     }
 
-    setLoading(true); 
+    setLoading(true);
 
     await new Promise((resolve) => setTimeout(resolve, 1500));
 
     alert("Message Sent Successfully!");
 
-    setLoading(false); 
+    setLoading(false);
 
     setForm({
       name: "",

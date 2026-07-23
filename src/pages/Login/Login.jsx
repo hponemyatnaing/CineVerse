@@ -43,8 +43,6 @@ function Login() {
 
       const firebaseUser = userCredential.user;
 
-      // Get Firestore User Profile
-
       const profile = await getUserProfile(firebaseUser.uid);
 
       if (!profile) {

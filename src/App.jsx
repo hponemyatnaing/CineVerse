@@ -18,16 +18,13 @@ import AdminRoute from "./routes/AdminRoute";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import PublicRoute from "./routes/PublicRoute";
 import AdminUsers from "./pages/AdminUsers/AdminUsers";
-import AdminReviews
-  from "./pages/AdminReviews/AdminReviews";
-import AdminFavorites
-  from "./pages/AdminFavorites/AdminFavorites";
+import AdminReviews from "./pages/AdminReviews/AdminReviews";
+import AdminFavorites from "./pages/AdminFavorites/AdminFavorites";
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<MainLayout />}>
-        {/* Public Routes */}
         <Route index element={<Home />} />
         <Route path="movies" element={<Movies />} />
         <Route path="about" element={<About />} />
@@ -53,7 +50,6 @@ function App() {
           }
         />
 
-        {/* Protected User Routes */}
         <Route
           path="favorites"
           element={
@@ -71,7 +67,6 @@ function App() {
           }
         />
 
-        {/* Admin Routes */}
         <Route
           path="admin"
           element={
@@ -98,35 +93,12 @@ function App() {
         />
       </Route>
 
-      <Route
+      <Route path="/admin/users" element={<AdminUsers />} />
 
-        path="/admin/users"
+      <Route path="/admin/reviews" element={<AdminReviews />} />
 
-        element={
-          <AdminUsers />
-        }
+      <Route path="/admin/favorites" element={<AdminFavorites />} />
 
-      />
-
-      <Route
-
-        path="/admin/reviews"
-
-        element={
-          <AdminReviews />
-        }
-
-      />
-
-      <Route
-
-        path="/admin/favorites"
-
-        element={<AdminFavorites />}
-
-      />
-
-      {/* 404 Page */}
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

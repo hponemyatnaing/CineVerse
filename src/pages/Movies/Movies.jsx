@@ -31,19 +31,11 @@ function Movies() {
 
   const gridRef = useRef();
 
-  // ==========================
-  // Animation
-  // ==========================
-
   useEffect(() => {
     if (!loading && gridRef.current) {
       fadeUp(gridRef.current);
     }
   }, [loading]);
-
-  // ==========================
-  // LOAD MOVIES
-  // ==========================
 
   useEffect(() => {
     loadMovies();
@@ -58,10 +50,6 @@ function Movies() {
       const firebaseMovies = await getMovies();
 
       let results = [];
-
-      // =====================
-      // CATEGORY
-      // =====================
 
       if (category === "latest") {
         results = firebaseMovies
@@ -108,10 +96,6 @@ function Movies() {
       setLoading(false);
     }
   }
-
-  // ==========================
-  // SEARCH + SORT
-  // ==========================
 
   const filteredMovies = useMemo(() => {
     let data = [...movies];

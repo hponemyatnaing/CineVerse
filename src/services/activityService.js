@@ -9,8 +9,6 @@ import {
 
 import { db } from "../firebase/firebase";
 
-// ADD ACTIVITY
-
 export const addActivity = async (userId, data) => {
   await addDoc(
     collection(db, "activities"),

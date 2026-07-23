@@ -12,15 +12,7 @@ import {
 import { db } from "../firebase/firebase";
 import { addActivity } from "./activityService";
 
-// ==============================
-// COLLECTION
-// ==============================
-
 const movieCollection = collection(db, "movies");
-
-// ==============================
-// GET ALL MOVIES
-// ==============================
 
 export const getMovies = async () => {
   try {
@@ -36,10 +28,6 @@ export const getMovies = async () => {
     return [];
   }
 };
-
-// ==============================
-// GET SINGLE MOVIE
-// ==============================
 
 export const getMovieById = async (id) => {
   try {
@@ -61,10 +49,6 @@ export const getMovieById = async (id) => {
     return null;
   }
 };
-
-// ==============================
-// ADD MOVIE (ADMIN)
-// ==============================
 
 export const addMovie = async (movie) => {
   try {
@@ -95,10 +79,6 @@ export const addMovie = async (movie) => {
   }
 };
 
-// ==============================
-// UPDATE MOVIE
-// ==============================
-
 export const updateMovie = async (id, movie) => {
   try {
     const movieRef = doc(db, "movies", id);
@@ -128,10 +108,6 @@ export const updateMovie = async (id, movie) => {
   }
 };
 
-// ==============================
-// DELETE MOVIE
-// ==============================
-
 export const deleteMovie = async (id) => {
   try {
     await deleteDoc(doc(db, "movies", id));
@@ -147,10 +123,6 @@ export const deleteMovie = async (id) => {
   }
 };
 
-// ==============================
-// INCREASE VIEW COUNT
-// ==============================
-
 export const increaseMovieView = async (id) => {
   try {
     const movieRef = doc(db, "movies", id);
@@ -162,10 +134,6 @@ export const increaseMovieView = async (id) => {
     console.log("View Error:", error);
   }
 };
-
-// ==============================
-// SAVE WATCH HISTORY
-// ==============================
 
 export const saveWatchHistory = async (movie) => {
   const user = JSON.parse(localStorage.getItem("user"));
@@ -190,12 +158,8 @@ export const saveWatchHistory = async (movie) => {
     watchedAt: new Date().toISOString(),
   });
 
-  localStorage.setItem(
-    key,
-    JSON.stringify(filtered.slice(0, 15)),
-  );
+  localStorage.setItem(key, JSON.stringify(filtered.slice(0, 15)));
 
-  // Watched Activity ထည့်သွင်းခြင်း
   try {
     await addActivity(user.uid, {
       title: `🎬 Watched ${movie.title}`,
@@ -206,10 +170,6 @@ export const saveWatchHistory = async (movie) => {
   }
 };
 
-// ==============================
-// GET WATCH HISTORY
-// ==============================
-
 export const getWatchHistory = () => {
   const user = JSON.parse(localStorage.getItem("user"));
 
@@ -217,10 +177,6 @@ export const getWatchHistory = () => {
 
   return JSON.parse(localStorage.getItem(`history_${user.uid}`)) || [];
 };
-
-// ==============================
-// NETFLIX STYLE TOP 10
-// ==============================
 
 export const getTop10Movies = async () => {
   try {
@@ -239,9 +195,7 @@ export const getTop10Movies = async () => {
       };
     });
 
-    return ranked
-      .sort((a, b) => b.score - a.score)
-      .slice(0, 10);
+    return ranked.sort((a, b) => b.score - a.score).slice(0, 10);
   } catch (error) {
     console.error("Top10 Error:", error);
 

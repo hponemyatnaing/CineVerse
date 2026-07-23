@@ -47,7 +47,6 @@ function AdminDashboard() {
         </div>
 
         <div className="dashboard-cards">
-          {/* Total Movies Card */}
           <div
             className="dashboard-card"
             onClick={() => navigate("/admin/movies")}
@@ -62,7 +61,6 @@ function AdminDashboard() {
             </div>
           </div>
 
-          {/* Total Users Card */}
           <div
             className="dashboard-card"
             onClick={() => navigate("/admin/users")}
@@ -77,7 +75,6 @@ function AdminDashboard() {
             </div>
           </div>
 
-          {/* Total Reviews Card */}
           <div
             className="dashboard-card"
             onClick={() => navigate("/admin/reviews")}
@@ -92,7 +89,6 @@ function AdminDashboard() {
             </div>
           </div>
 
-          {/* Favorites Card */}
           <div
             className="dashboard-card"
             onClick={() => navigate("/admin/favorites")}

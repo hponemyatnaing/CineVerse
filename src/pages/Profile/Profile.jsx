@@ -28,10 +28,7 @@ import ActivityTimeline from "../../components/ActivityTimeline/ActivityTimeline
 
 import EditProfileModal from "../../components/EditProfileModal/EditProfileModal";
 
-import {
-  getUserActivities
-}
-  from "../../services/activityService";
+import { getUserActivities } from "../../services/activityService";
 
 function Profile() {
   const { user } = useAuth();
@@ -64,9 +61,7 @@ function Profile() {
     try {
       const data = await getUserProfile(user.uid);
 
-      const activityData =
-        await getUserActivities(user.uid);
-
+      const activityData = await getUserActivities(user.uid);
 
       setActivities(activityData);
 
@@ -75,10 +70,6 @@ function Profile() {
       if (data?.name) {
         setName(data.name);
       }
-
-      // =====================
-      // REVIEWS
-      // =====================
 
       const reviewQuery = query(
         collection(db, "reviews"),
@@ -100,10 +91,6 @@ function Profile() {
 
       setReviews(reviewData);
 
-      // =====================
-      // WATCH HISTORY
-      // =====================
-
       const history = getWatchHistory();
 
       setWatchedCount(history.length);
@@ -111,10 +98,6 @@ function Profile() {
       console.log("Profile Error:", error);
     }
   };
-
-  // =====================
-  // UPDATE PROFILE
-  // =====================
 
   const handleUpdateProfile = async () => {
     try {
@@ -141,10 +124,6 @@ function Profile() {
       setLoading(false);
     }
   };
-
-  // =====================
-  // IMAGE CHANGE
-  // =====================
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -203,8 +182,6 @@ function Profile() {
         />
       )}
 
-      {/* PROFILE HEADER */}
-
       <div className="profile-header">
         <div className="avatar-container">
           {profile.photoURL ? (
@@ -246,8 +223,6 @@ function Profile() {
         </div>
       </div>
 
-      {/* STATS */}
-
       <div className="profile-stats">
         <div className="stat-card">
           <h2>{favorites.length}</h2>
@@ -267,8 +242,6 @@ function Profile() {
           <p>🎬 Watched</p>
         </div>
       </div>
-
-      {/* ACHIEVEMENTS */}
 
       <section className="profile-section-block">
         <h2>🏆 Achievements</h2>
@@ -294,15 +267,11 @@ function Profile() {
         </div>
       </section>
 
-      {/* ACTIVITY */}
-
       <section className="profile-section-block">
         <h2>🕒 Recent Activity</h2>
 
         <ActivityTimeline activities={activities} />
       </section>
-
-      {/* REVIEWS */}
 
       <section className="profile-section-block">
         <h2>💬 My Reviews</h2>
@@ -322,8 +291,6 @@ function Profile() {
         )}
       </section>
 
-      {/* FAVORITES */}
-
       <section className="profile-section-block">
         <h2>❤️ Favorite Movies</h2>
 
@@ -335,8 +302,6 @@ function Profile() {
           )}
         </div>
       </section>
-
-      {/* WATCH HISTORY */}
 
       <section className="profile-section-block">
         <div className="section-title">
