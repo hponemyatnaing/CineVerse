@@ -20,87 +20,89 @@ import PublicRoute from "./routes/PublicRoute";
 import AdminUsers from "./pages/AdminUsers/AdminUsers";
 import AdminReviews from "./pages/AdminReviews/AdminReviews";
 import AdminFavorites from "./pages/AdminFavorites/AdminFavorites";
+import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<MainLayout />}>
-        <Route index element={<Home />} />
-        <Route path="movies" element={<Movies />} />
-        <Route path="about" element={<About />} />
-        <Route path="search" element={<Search />} />
-        <Route path="contact" element={<Contact />} />
-        <Route path="movie/:id" element={<MovieDetails />} />
+    <>
+      <ScrollToTop />
+      <Routes>
+        <Route path="/" element={<MainLayout />}>
+          <Route index element={<Home />} />
+          <Route path="movies" element={<Movies />} />
+          <Route path="about" element={<About />} />
+          <Route path="search" element={<Search />} />
+          <Route path="contact" element={<Contact />} />
+          <Route path="movie/:id" element={<MovieDetails />} />
 
-        {/* Auth Routes */}
-        <Route
-          path="login"
-          element={
-            <PublicRoute>
-              <Login />
-            </PublicRoute>
-          }
-        />
-        <Route
-          path="register"
-          element={
-            <PublicRoute>
-              <Register />
-            </PublicRoute>
-          }
-        />
+          {/* Auth Routes */}
+          <Route
+            path="login"
+            element={
+              <PublicRoute>
+                <Login />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path="register"
+            element={
+              <PublicRoute>
+                <Register />
+              </PublicRoute>
+            }
+          />
 
-        <Route
-          path="favorites"
-          element={
-            <ProtectedRoute>
-              <Favorites />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="profile"
-          element={
-            <ProtectedRoute>
-              <Profile />
-            </ProtectedRoute>
-          }
-        />
+          <Route
+            path="favorites"
+            element={
+              <ProtectedRoute>
+                <Favorites />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="profile"
+            element={
+              <ProtectedRoute>
+                <Profile />
+              </ProtectedRoute>
+            }
+          />
 
-        <Route
-          path="admin"
-          element={
-            <AdminRoute>
-              <AdminDashboard />
-            </AdminRoute>
-          }
-        />
-        <Route
-          path="admin/movies"
-          element={
-            <AdminRoute>
-              <AdminMovies />
-            </AdminRoute>
-          }
-        />
-        <Route
-          path="admin/add-movie"
-          element={
-            <AdminRoute>
-              <AddMovieForm />
-            </AdminRoute>
-          }
-        />
-      </Route>
+          <Route
+            path="admin"
+            element={
+              <AdminRoute>
+                <AdminDashboard />
+              </AdminRoute>
+            }
+          />
+          <Route
+            path="admin/movies"
+            element={
+              <AdminRoute>
+                <AdminMovies />
+              </AdminRoute>
+            }
+          />
+          <Route
+            path="admin/add-movie"
+            element={
+              <AdminRoute>
+                <AddMovieForm />
+              </AdminRoute>
+            }
+          />
+        </Route>
 
-      <Route path="/admin/users" element={<AdminUsers />} />
+        <Route path="/admin/users" element={<AdminUsers />} />
+        <Route path="/admin/reviews" element={<AdminReviews />} />
+        <Route path="/admin/favorites" element={<AdminFavorites />} />
 
-      <Route path="/admin/reviews" element={<AdminReviews />} />
-
-      <Route path="/admin/favorites" element={<AdminFavorites />} />
-
-      <Route path="*" element={<NotFound />} />
-    </Routes>
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </>
   );
 }
 
