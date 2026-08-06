@@ -23,21 +23,14 @@ function MovieCard({ movie }) {
     }
   }, []);
 
-  // ==========================
-  // FAVORITE CHECK
-  // ==========================
-
-  const movieId = String(movie.movieId || movie.id);
+  // Use movie id for both Firebase and API movies
+  const movieId = String(movie.id);
 
   const favoriteItem = favorites.find(
     (item) => String(item.movieId) === movieId,
   );
 
   const isFavorite = Boolean(favoriteItem);
-
-  // ==========================
-  // FAVORITE CLICK
-  // ==========================
 
   const handleFavorite = async (e) => {
     e.stopPropagation();
@@ -53,9 +46,9 @@ function MovieCard({ movie }) {
     }
   };
 
-  // ==========================
-  // IMAGE
-  // ==========================
+  const handleMovieClick = () => {
+    navigate(`/movie/${movie.id}`);
+  };
 
   const movieImage =
     movie.image ||
@@ -63,18 +56,10 @@ function MovieCard({ movie }) {
       ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
       : "/default-placeholder.jpg");
 
-  // ==========================
-  // RATING
-  // ==========================
-
   const movieRating = movie.rating || movie.vote_average || 0;
 
   return (
-    <div
-      ref={cardRef}
-      className="movie-card"
-      onClick={() => navigate(`/movie/${movie.movieId || movie.id}`)}
-    >
+    <div ref={cardRef} className="movie-card" onClick={handleMovieClick}>
       <div className="movie-image">
         <img src={movieImage} alt={movie.title} loading="lazy" />
 

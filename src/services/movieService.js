@@ -202,3 +202,25 @@ export const getTop10Movies = async () => {
     return [];
   }
 };
+
+export const getSimilarFirebaseMovies = async (currentMovie) => {
+  try {
+    const movies = await getMovies();
+
+    const similar = movies
+      .filter(
+        (movie) =>
+          movie.id !== currentMovie.id &&
+          movie.genre &&
+          currentMovie.genre &&
+          movie.genre.toLowerCase() === currentMovie.genre.toLowerCase()
+      )
+      .sort((a, b) => Number(b.rating) - Number(a.rating))
+      .slice(0, 8);
+
+    return similar;
+  } catch (error) {
+    console.error("Similar Movies Error:", error);
+    return [];
+  }
+};

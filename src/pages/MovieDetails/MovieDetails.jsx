@@ -6,16 +6,17 @@ import { useParams, useNavigate } from "react-router-dom";
 import { FaArrowLeft, FaHeart } from "react-icons/fa";
 
 import {
+  saveWatchHistory,
+  getMovieById,
+  increaseMovieView,
+  getSimilarFirebaseMovies,
+} from "../../services/movieService";
+
+import {
   getMovieDetails,
   getMovieVideos,
   getSimilarMovies,
 } from "../../services/tmdbService";
-
-import {
-  saveWatchHistory,
-  getMovieById,
-  increaseMovieView,
-} from "../../services/movieService";
 
 import MovieCard from "../../components/MovieCard/MovieCard";
 
@@ -62,45 +63,60 @@ function MovieDetails() {
     try {
       setLoading(true);
 
-      if (!isNaN(id)) {
-        const movieData = await getMovieDetails(id);
+      /*
+        First:
+        Check Firebase Movie
 
-        const videoData = await getMovieVideos(id);
+        If found:
+        Load Firebase
 
-        const similarData = await getSimilarMovies(id);
+        If not:
+        Load TMDB API
+      */
 
-        setMovie(movieData);
+      const firebaseMovie = await getMovieById(id);
 
-        setVideos(videoData || []);
+      if (firebaseMovie) {
+        await increaseMovieView(firebaseMovie.id);
 
-        setSimilarMovies(similarData || []);
+        saveWatchHistory(firebaseMovie);
 
-        saveWatchHistory({
-          id: movieData.id,
-
-          title: movieData.title,
-
-          image: movieData.poster_path
-            ? `https://image.tmdb.org/t/p/w500${movieData.poster_path}`
-            : "/default-placeholder.jpg",
-
-          rating: movieData.vote_average,
-        });
-      } else {
-        const firebaseMovie = await getMovieById(id);
-
-        if (firebaseMovie) {
-          await increaseMovieView(firebaseMovie.id);
-
-          saveWatchHistory(firebaseMovie);
-        }
+        const similar = await getSimilarFirebaseMovies(firebaseMovie);
 
         setMovie(firebaseMovie);
 
+        setSimilarMovies(similar || []);
+
         setVideos([]);
 
-        setSimilarMovies([]);
+        return;
       }
+
+      // TMDB API MOVIE
+
+      const movieData = await getMovieDetails(id);
+
+      const videoData = await getMovieVideos(id);
+
+      const similarData = await getSimilarMovies(id);
+
+      setMovie(movieData);
+
+      setVideos(videoData || []);
+
+      setSimilarMovies(similarData || []);
+
+      saveWatchHistory({
+        id: movieData.id,
+
+        title: movieData.title,
+
+        image: movieData.poster_path
+          ? `https://image.tmdb.org/t/p/w500${movieData.poster_path}`
+          : "/default-placeholder.jpg",
+
+        rating: movieData.vote_average || 0,
+      });
     } catch (error) {
       console.log("Movie Details Error:", error);
     } finally {
@@ -153,9 +169,7 @@ function MovieDetails() {
         </button>
 
         <button
-          className={`details-fav-btn
-
-            ${isFavorite ? "active" : ""}`}
+          className={`details-fav-btn ${isFavorite ? "active" : ""}`}
           onClick={handleFavorite}
         >
           <FaHeart />
@@ -231,17 +245,19 @@ function MovieDetails() {
                 <MovieCard
                   key={item.id}
                   movie={{
+                    ...item,
+
                     id: item.id,
 
                     movieId: item.id,
 
-                    title: item.title,
+                    image:
+                      item.image ||
+                      (item.poster_path
+                        ? `https://image.tmdb.org/t/p/w500${item.poster_path}`
+                        : "/default-placeholder.jpg"),
 
-                    image: item.poster_path
-                      ? `https://image.tmdb.org/t/p/w500${item.poster_path}`
-                      : "/default-placeholder.jpg",
-
-                    rating: item.vote_average,
+                    rating: item.rating || item.vote_average || 0,
                   }}
                 />
               ))}
