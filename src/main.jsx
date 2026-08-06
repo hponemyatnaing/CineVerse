@@ -7,6 +7,8 @@ import { AuthProvider } from "./context/AuthContext";
 
 import { FavoritesProvider } from "./context/FavoritesContext";
 
+import { RatingsProvider } from "./context/RatingsContext";
+
 import { ThemeProvider } from "./context/ThemeContext";
 
 import App from "./App.jsx";
@@ -24,7 +26,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       <ThemeProvider>
         <AuthProvider>
           <FavoritesProvider>
-            
+            <RatingsProvider>
               <App />
               <Toaster
                 position="top-right"
@@ -33,7 +35,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
                   duration: 3000,
                 }}
               />
-            
+            </RatingsProvider>
           </FavoritesProvider>
         </AuthProvider>
       </ThemeProvider>

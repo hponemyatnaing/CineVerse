@@ -30,6 +30,8 @@ import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 
 import { useFavorites } from "../../context/FavoritesContext";
 
+import { useRatings } from "../../context/RatingsContext";
+
 function MovieDetails() {
   const { id } = useParams();
 
@@ -47,7 +49,18 @@ function MovieDetails() {
 
   const { favorites, addToFavorites, removeFromFavorites } = useFavorites();
 
+  const { getRating, getRatingCount } = useRatings();
+
   const movieId = String(movie?.id || id);
+
+  const userRating = getRating(movieId);
+
+  const ratingCount = getRatingCount(movieId);
+
+  const displayRating =
+    userRating !== null
+      ? userRating
+      : movie?.vote_average || movie?.rating || 0;
 
   const favoriteItem = favorites.find(
     (item) => String(item.movieId) === movieId,
@@ -191,7 +204,10 @@ function MovieDetails() {
         <div className="details-info">
           <h1>{movie.title}</h1>
 
-          <p>⭐{movie.vote_average || movie.rating || 0}</p>
+          <p>
+            ⭐{Number(displayRating).toFixed(1)}
+            {ratingCount > 0 && <span> ({ratingCount} ratings)</span>}
+          </p>
 
           <p>
             📅

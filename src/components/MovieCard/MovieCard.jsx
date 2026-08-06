@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 
 import { useFavorites } from "../../context/FavoritesContext";
 
+import { useRatings } from "../../context/RatingsContext";
+
 import { useEffect, useRef } from "react";
 
 import { fadeUp } from "../../utils/animations";
@@ -14,6 +16,8 @@ function MovieCard({ movie }) {
   const navigate = useNavigate();
 
   const { favorites, addToFavorites, removeFromFavorites } = useFavorites();
+
+  const { getRating } = useRatings();
 
   const cardRef = useRef();
 
@@ -56,7 +60,12 @@ function MovieCard({ movie }) {
       ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
       : "/default-placeholder.jpg");
 
-  const movieRating = movie.rating || movie.vote_average || 0;
+  const userRating = getRating(movieId);
+
+  const movieRating =
+    userRating !== null
+      ? userRating
+      : movie.rating || movie.vote_average || 0;
 
   return (
     <div ref={cardRef} className="movie-card" onClick={handleMovieClick}>

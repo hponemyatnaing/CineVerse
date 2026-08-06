@@ -9,7 +9,11 @@ import {
   deleteReview,
 } from "../../services/reviewService";
 
+import { useRatings } from "../../context/RatingsContext";
+
 function ReviewList({ movieId, refresh }) {
+  const { refresh: refreshRatings } = useRatings();
+
   const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(true);
   const [editingId, setEditingId] = useState(null);
@@ -58,7 +62,10 @@ function ReviewList({ movieId, refresh }) {
     const confirmDelete = window.confirm("Delete this review?");
     if (!confirmDelete) return;
 
-    const result = await deleteReview(id);
+    const result = await deleteReview(id, movieId);
+
+    await refreshRatings();
+
     if (result && result.success !== false) {
       loadReviews();
     } else {

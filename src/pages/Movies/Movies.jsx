@@ -12,9 +12,13 @@ import { getTrendingMovies, getHotMovies } from "../../services/tmdbService";
 
 import { getMovies } from "../../services/movieService";
 
+import { useRatings } from "../../context/RatingsContext";
+
 import { fadeUp } from "../../utils/animations";
 
 function Movies() {
+  const { getRating } = useRatings();
+
   const [movies, setMovies] = useState([]);
 
   const [loading, setLoading] = useState(true);
@@ -110,11 +114,13 @@ function Movies() {
 
     switch (sort) {
       case "rating":
-        data.sort(
-          (a, b) =>
-            (b.rating || b.vote_average || 0) -
-            (a.rating || a.vote_average || 0),
-        );
+        data.sort((a, b) => {
+          const ratingA = getRating(a.id) ?? (a.rating || a.vote_average || 0);
+
+          const ratingB = getRating(b.id) ?? (b.rating || b.vote_average || 0);
+
+          return ratingB - ratingA;
+        });
 
         break;
 
@@ -128,7 +134,7 @@ function Movies() {
     }
 
     return data;
-  }, [movies, search, sort]);
+  }, [movies, search, sort, getRating]);
 
   if (loading) {
     return <LoadingSpinner text="Loading Movies..." />;

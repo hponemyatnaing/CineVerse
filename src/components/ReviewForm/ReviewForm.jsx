@@ -8,7 +8,11 @@ import { addReview } from "../../services/reviewService";
 
 import { addActivity } from "../../services/activityService";
 
+import { useRatings } from "../../context/RatingsContext";
+
 function ReviewForm({ movieId, movieTitle, onReviewAdded }) {
+  const { refresh: refreshRatings } = useRatings();
+
   const [rating, setRating] = useState(0);
 
   const [comment, setComment] = useState("");
@@ -59,6 +63,8 @@ function ReviewForm({ movieId, movieTitle, onReviewAdded }) {
         setRating(0);
 
         setComment("");
+
+        await refreshRatings();
 
         if (onReviewAdded) {
           onReviewAdded();
