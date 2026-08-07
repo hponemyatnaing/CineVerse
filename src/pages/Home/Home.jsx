@@ -71,12 +71,13 @@ function Home() {
   }
 
   if (loading) {
-    return <div className="home-loading">Loading Movies...</div>;
+    return <div className="loading">Loading Movies...</div>;
   }
 
   return (
-    <main className="home-page">
-      <Hero />
+    <main>
+
+      <Hero movies={trending} />
 
       <Top10Movies movies={top10} />
 
@@ -89,6 +90,7 @@ function Home() {
         movies={trending}
         category="trending"
       />
+
       <MovieSection title="⚡ Hot Today" movies={hot} category="hot" />
 
       <MovieSection

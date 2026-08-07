@@ -1,91 +1,387 @@
 .hero {
-  height: 80vh;
-  background-image: url("https://images.unsplash.com/photo-1524985069026-dd778a71c7b4");
-  background-size: cover;
-  background-position: center;
-  position: relative;
+
   display: flex;
+  min-height: 85vh;
+
+  background: linear-gradient(90deg, #020617, #111827);
+
   align-items: center;
+
+  padding: 80px 8%;
+
+  overflow: hidden;
 }
 
-.hero-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to right,
-    rgba(15, 23, 42, 0.95),
-    rgba(15, 23, 42, 0.4)
-  );
+.hero-wrapper {
+
+  display: flex;
+  width: 100%;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 80px;
 }
 
-.hero-content {
-  position: relative;
-  color: white;
+.hero-info {
   max-width: 600px;
 }
 
-.hero-content h1 {
-  font-size: 48px;
+.hero-info h1 {
+  font-size: 65px;
+
+  font-weight: 900;
+
+  background: linear-gradient(90deg, #fff, #c084fc, #9333ea);
+
+  -webkit-background-clip: text;
+
+  color: transparent;
+
   margin-bottom: 20px;
 }
 
-.hero-content p {
-  color: #cbd5e1;
+.movie-meta {
+  display: flex;
+
+  gap: 15px;
+
   margin-bottom: 25px;
-  line-height: 1.6;
+}
+
+.movie-meta span {
+  background: rgba(255, 255, 255, 0.15);
+
+  padding: 8px 15px;
+
+  border-radius: 20px;
+
+  color: white;
+
+  font-size: 14px;
+}
+
+.hero-info p {
+  color: #cbd5e1;
+
+  font-size: 18px;
+
+  line-height: 1.7;
+
+  margin-bottom: 35px;
 }
 
 .hero-buttons {
   display: flex;
-  gap: 15px;
+
+  gap: 20px;
 }
 
-.btn {
-  padding: 10px 18px;
-  border-radius: 8px;
-  font-size: 14px;
+.watch-btn {
+
   display: flex;
+  background: linear-gradient(135deg, #8b5cf6, #ec4899);
+
+  color: white;
+
+  padding: 15px 35px;
+
+  border: none;
+
+  border-radius: 40px;
+
   align-items: center;
-  gap: 8px;
+
+  gap: 10px;
+
+  font-size: 16px;
+
+  box-shadow: 0 0 30px rgba(236, 72, 153, 0.6);
+
   cursor: pointer;
 }
 
-.primary {
-  background: #7c3aed;
+.info-btn {
+
+  display: flex;
+  background: rgba(255, 255, 255, 0.15);
+
   color: white;
+
+  border: 1px solid rgba(255, 255, 255, 0.3);
+
+  padding: 15px 35px;
+
+  border-radius: 40px;
+
+  gap: 10px;
+
+  align-items: center;
+
+  cursor: pointer;
+
+  @media (max-width: 900px) {
+    .hero-wrapper {
+      flex-direction: column-reverse;
+
+      text-align: center;
+    }
+
+    .hero-info h1 {
+      font-size: 40px;
+    }
+
+    .poster-card {
+      width: 260px;
+
+      height: 380px;
+    }
+
+    .hero-buttons {
+      justify-content: center;
+    }
+  }
+
+  .hero {
+
+    display: flex;
+    min-height: 85vh;
+
+    background: linear-gradient(90deg, #020617, #111827);
+
+    align-items: center;
+
+    padding: 70px 8%;
+
+    overflow: hidden;
+  }
+
+  .hero-wrapper {
+
+    display: flex;
+    width: 100%;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 80px;
+  }
+
+  .hero-info {
+    max-width: 600px;
+  }
+
+  .hero-info h1 {
+    font-size: 65px;
+
+    font-weight: 900;
+
+    background: linear-gradient(90deg, #ffffff, #c084fc, #ec4899);
+
+    -webkit-background-clip: text;
+
+    color: transparent;
+
+    margin-bottom: 25px;
+  }
+
+  .movie-meta {
+    display: flex;
+
+    gap: 15px;
+
+    margin-bottom: 25px;
+  }
+
+  .movie-meta span {
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    padding: 8px 16px;
+
+    background: rgba(255, 255, 255, 0.15);
+
+    border-radius: 20px;
+
+    color: white;
+  }
+
+  .hero-info p {
+    color: #cbd5e1;
+
+    font-size: 18px;
+
+    line-height: 1.7;
+
+    margin-bottom: 35px;
+  }
+
+  .hero-buttons {
+    display: flex;
+
+    gap: 20px;
+  }
+
+  .watch-btn {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 15px 35px;
+
+    border: none;
+
+    border-radius: 40px;
+
+    cursor: pointer;
+
+    color: white;
+
+    font-size: 16px;
+
+    font-weight: 700;
+
+    background: linear-gradient(135deg, #8b5cf6, #ec4899);
+
+    box-shadow: 0 0 30px rgba(236, 72, 153, 0.6);
+  }
+
+  .info-btn {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 15px 35px;
+
+    border-radius: 40px;
+
+    cursor: pointer;
+
+    color: white;
+
+    font-size: 16px;
+
+    background: rgba(255, 255, 255, 0.15);
+
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+
+  /* POSTER */
+
+  .poster-card {
+
+    position: relative;
+    width: 330px;
+
+    height: 480px;
+  }
+
+  .poster-card img {
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+    border-radius: 25px;
+
+    box-shadow:
+      0 30px 60px rgba(0, 0, 0, 0.8),
+      0 0 40px rgba(168, 85, 247, 0.5);
+
+    transition: 0.5s;
+  }
+
+  .poster-card:hover img {
+    transform: translateY(15px) scale(1.04);
+  }
+
+  .poster-glow {
+    position: absolute;
+
+    inset: -20px;
+
+    background: linear-gradient(135deg, #9333ea, #ec4899);
+
+    filter: blur(60px);
+
+    opacity: 0.35;
+
+    z-index: -1;
+  }
 }
 
-.secondary {
-  background: rgba(255,255,255,0.1);
-  color: white;
+/* POSTER */
+
+.poster-card {
+
+  position: relative;
+  width: 330px;
+
+  height: 480px;
 }
 
-.primary:hover {
-  background: #6d28d9;
+.poster-card img {
+  width: 100%;
+
+  height: 100%;
+
+  object-fit: cover;
+
+  border-radius: 25px;
+
+  box-shadow:
+    0 30px 60px rgba(0, 0, 0, 0.8),
+    0 0 50px rgba(168, 85, 247, 0.5);
+
+  transition: 0.5s;
 }
 
-.secondary:hover {
-  background: rgba(255,255,255,0.2);
+.poster-card:hover img {
+  transform: translateY(-15px) scale(1.03);
 }
 
-@media (max-width:768px){
+.poster-glow {
+  position: absolute;
 
-.hero{
-    padding:80px 20px;
-    text-align:center;
+  inset: -20px;
+
+  background: linear-gradient(135deg, #9333ea, #ec4899);
+
+  filter: blur(50px);
+
+  opacity: 0.35;
+
+  z-index: -1;
 }
 
-.hero h1{
-    font-size:32px;
-}
+@media (max-width: 900px) {
+  .hero-wrapper {
+    flex-direction: column-reverse;
 
-.hero p{
-    font-size:16px;
-}
+    text-align: center;
+  }
 
-.hero-buttons{
-    flex-direction:column;
-    gap:15px;
-}
+  .hero-info h1 {
+    font-size: 40px;
+  }
 
+  .poster-card {
+    width: 260px;
+
+    height: 380px;
+  }
+
+  .hero-buttons {
+    justify-content: center;
+  }
 }

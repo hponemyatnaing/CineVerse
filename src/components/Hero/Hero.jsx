@@ -1,27 +1,80 @@
-import "./Hero.css";
-import { FaPlay, FaInfoCircle } from "react-icons/fa";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-function Hero() {
+import { FaPlay, FaInfoCircle, FaStar } from "react-icons/fa";
+
+import "./Hero.css";
+
+function Hero({ movies = [] }) {
+  const navigate = useNavigate();
+
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    if (!movies.length) return;
+
+    const timer = setInterval(() => {
+      setIndex((prev) => (prev + 1) % movies.length);
+    }, 5000);
+
+    return () => clearInterval(timer);
+  }, [movies]);
+
+  if (!movies.length) {
+    return null;
+  }
+
+  const movie = movies[index];
+
   return (
     <section className="hero">
-      <div className="hero-overlay"></div>
+      <div className="hero-wrapper">
+        {/* LEFT CONTENT */}
 
-      <div className="hero-content container">
-        <h1>Avengers: Endgame</h1>
+        <div className="hero-info">
+          <h1>{movie.title}</h1>
 
-        <p>
-          After the devastating events of Infinity War, the Avengers assemble
-          once more to reverse Thanos' actions and restore balance.
-        </p>
+          <div className="movie-meta">
+            <span>
+              <FaStar />
+              {Number(movie.rating || 0).toFixed(1)}
+            </span>
 
-        <div className="hero-buttons">
-          <button className="btn primary">
-            <FaPlay /> Watch
-          </button>
+            <span>HD</span>
 
-          <button className="btn secondary">
-            <FaInfoCircle /> More Info
-          </button>
+            <span>Movie</span>
+          </div>
+
+          <p>
+            {movie.overview ||
+              "Enjoy the latest trending movies and discover amazing stories."}
+          </p>
+
+          <div className="hero-buttons">
+            <button
+              className="watch-btn"
+              onClick={() => navigate(`/movie/${movie.id}`)}
+            >
+              <FaPlay />
+              Watch Now
+            </button>
+
+            <button
+              className="info-btn"
+              onClick={() => navigate(`/movie/${movie.id}`)}
+            >
+              <FaInfoCircle />
+              More Info
+            </button>
+          </div>
+        </div>
+
+        {/* POSTER */}
+
+        <div className="poster-card">
+          <img src={movie.image} alt={movie.title} />
+
+          <div className="poster-glow"></div>
         </div>
       </div>
     </section>

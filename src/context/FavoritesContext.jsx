@@ -19,6 +19,8 @@ const FavoritesContext = createContext();
 export const FavoritesProvider = ({ children }) => {
   const [favorites, setFavorites] = useState([]);
 
+  const [favoriteLoading, setFavoriteLoading] = useState(false);
+
   const { user } = useAuth();
 
   const rawUser = localStorage.getItem("user");
@@ -35,6 +37,10 @@ export const FavoritesProvider = ({ children }) => {
     }
   }, [currentUserId]);
 
+  // =========================
+  // LOAD FAVORITES
+  // =========================
+
   const loadFavorites = async () => {
     try {
       const q = query(
@@ -49,11 +55,23 @@ export const FavoritesProvider = ({ children }) => {
         const movie = item.data();
 
         return {
+          // Firestore document id
+
           id: item.id,
+
+          // movie id
 
           movieId: String(movie.movieId || movie.id),
 
-          ...movie,
+          title: movie.title,
+
+          image: movie.image,
+
+          rating: movie.rating,
+
+          userId: movie.userId,
+
+          createdAt: movie.createdAt,
         };
       });
 
@@ -63,6 +81,10 @@ export const FavoritesProvider = ({ children }) => {
     }
   };
 
+  // =========================
+  // ADD FAVORITE
+  // =========================
+
   const addToFavorites = async (movie) => {
     if (!currentUserId) {
       alert("Please login first!");
@@ -70,21 +92,23 @@ export const FavoritesProvider = ({ children }) => {
       return;
     }
 
+    if (favoriteLoading) return;
+
     try {
+      setFavoriteLoading(true);
+
       const movieId = String(movie.movieId || movie.id);
 
       const exists = favorites.some((item) => String(item.movieId) === movieId);
 
       if (exists) {
-        console.log("Already favorite");
+        console.log("Already Favorite");
 
         return;
       }
 
       const newFavorite = {
         userId: currentUserId,
-
-        uid: currentUserId,
 
         movieId: movieId,
 
@@ -114,8 +138,14 @@ export const FavoritesProvider = ({ children }) => {
       ]);
     } catch (error) {
       console.log("Add favorite error:", error);
+    } finally {
+      setFavoriteLoading(false);
     }
   };
+
+  // =========================
+  // REMOVE FAVORITE
+  // =========================
 
   const removeFromFavorites = async (movieId) => {
     try {

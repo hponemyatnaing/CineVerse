@@ -214,7 +214,7 @@ function Profile() {
             className="edit-profile-btn"
             onClick={() => setShowEdit(true)}
           >
-            ✏️ Edit Profile
+            ✏️ Edit Name
           </button>
 
           <button className="logout-btn" onClick={handleLogout}>

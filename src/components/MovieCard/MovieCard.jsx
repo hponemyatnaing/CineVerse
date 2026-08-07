@@ -6,7 +6,7 @@ import { useFavorites } from "../../context/FavoritesContext";
 
 import { useRatings } from "../../context/RatingsContext";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { fadeUp } from "../../utils/animations";
 
@@ -19,6 +19,8 @@ function MovieCard({ movie }) {
 
   const { getRating } = useRatings();
 
+  const [loading, setLoading] = useState(false);
+
   const cardRef = useRef();
 
   useEffect(() => {
@@ -27,8 +29,9 @@ function MovieCard({ movie }) {
     }
   }, []);
 
-  // Use movie id for both Firebase and API movies
-  const movieId = String(movie.id);
+  // Firebase + API support
+
+  const movieId = String(movie.movieId || movie.id);
 
   const favoriteItem = favorites.find(
     (item) => String(item.movieId) === movieId,
@@ -39,19 +42,27 @@ function MovieCard({ movie }) {
   const handleFavorite = async (e) => {
     e.stopPropagation();
 
-    if (isFavorite) {
-      await removeFromFavorites(movieId);
-    } else {
-      await addToFavorites({
-        ...movie,
+    if (loading) return;
 
-        movieId: movieId,
-      });
+    try {
+      setLoading(true);
+
+      if (isFavorite) {
+        await removeFromFavorites(movieId);
+      } else {
+        await addToFavorites({
+          ...movie,
+
+          movieId: movieId,
+        });
+      }
+    } finally {
+      setLoading(false);
     }
   };
 
   const handleMovieClick = () => {
-    navigate(`/movie/${movie.id}`);
+    navigate(`/movie/${movieId}`);
   };
 
   const movieImage =
@@ -63,9 +74,7 @@ function MovieCard({ movie }) {
   const userRating = getRating(movieId);
 
   const movieRating =
-    userRating !== null
-      ? userRating
-      : movie.rating || movie.vote_average || 0;
+    userRating !== null ? userRating : movie.rating || movie.vote_average || 0;
 
   return (
     <div ref={cardRef} className="movie-card" onClick={handleMovieClick}>
@@ -75,6 +84,7 @@ function MovieCard({ movie }) {
         <button
           className={`favorite-btn ${isFavorite ? "active" : ""}`}
           onClick={handleFavorite}
+          disabled={loading}
         >
           <FaHeart />
         </button>

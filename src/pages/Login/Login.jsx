@@ -136,14 +136,14 @@ function Login() {
           {loading ? "Logging in..." : "Login"}
         </button>
 
-        <div className="divider">
+        {/* <div className="divider">
           <span>OR</span>
-        </div>
+        </div> */}
 
-        <button className="google-btn">
+        {/* <button className="google-btn">
           <FaGoogle />
           Continue with Google
-        </button>
+        </button> */}
 
         <p className="register-link">
           Don't have an account?

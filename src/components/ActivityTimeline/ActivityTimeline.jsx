@@ -1,27 +1,41 @@
 import "./ActivityTimeline.css";
 
+import { FaFilm, FaStar, FaHeart } from "react-icons/fa";
+
 function ActivityTimeline({ activities = [] }) {
   return (
-    <div className="timeline">
-      {activities.length === 0 ? (
-        <p className="empty-text">No activity yet</p>
-      ) : (
-        activities.map((item, index) => (
-          <div className="timeline-item" key={index}>
-            <div className="dot"></div>
+    <div className="activity-timeline">
+      {/* <h2>Recent Activity</h2> */}
 
-            <div>
-              <h4>{item.title}</h4>
+      <div className="activity-list">
+        {activities.length === 0 ? (
+          <p className="empty-activity">No activity yet</p>
+        ) : (
+          activities.slice(0, 10).map((item, index) => (
+            <div className="activity-item" key={index}>
+              <div className="activity-icon">
+                {item.type === "favorite" ? (
+                  <FaHeart />
+                ) : item.type === "review" ? (
+                  <FaStar />
+                ) : (
+                  <FaFilm />
+                )}
+              </div>
 
-              <p>
-                {item.createdAt?.toDate
-                  ? item.createdAt.toDate().toLocaleString()
-                  : item.date || "Just now"}
-              </p>
+              <div className="activity-content">
+                <h4>{item.title}</h4>
+
+                <p>
+                  {item.createdAt?.toDate
+                    ? item.createdAt.toDate().toLocaleString()
+                    : item.date || "Just now"}
+                </p>
+              </div>
             </div>
-          </div>
-        ))
-      )}
+          ))
+        )}
+      </div>
     </div>
   );
 }

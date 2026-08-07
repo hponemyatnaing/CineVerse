@@ -143,7 +143,7 @@ function Movies() {
   return (
     <section className="movies-page">
       <div className="movies-header">
-        <h1>{category ? category.toUpperCase() : "Browse Movies"}</h1>
+        <h1>{category ? category.toUpperCase() : "Latest Movies"}</h1>
 
         <p>Discover movies from around the world.</p>
       </div>
@@ -158,7 +158,7 @@ function Movies() {
 
         <div className="movie-result">
           Showing <strong>{filteredMovies.length}</strong>
-          Movies
+           Movies
         </div>
 
         <select value={sort} onChange={(e) => setSort(e.target.value)}>
