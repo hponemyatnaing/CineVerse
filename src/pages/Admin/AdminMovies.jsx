@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import "./AdminMovies.css";
 
-import AdminSidebar from "../../components/AdminSidebar/AdminSidebar";
 import AddMovieForm from "../../components/AddMovieForm/AddMovieForm";
 
 import { FaPlus, FaEdit, FaTrash } from "react-icons/fa";
@@ -57,9 +56,7 @@ function AdminMovies() {
   );
 
   return (
-    <div className="admin-layout">
-      <AdminSidebar />
-
+    <>
       {showModal && (
         <div className="modal-overlay">
           <div className="modal">
@@ -89,8 +86,7 @@ function AdminMovies() {
         </div>
       )}
 
-      <main className="admin-content">
-        <div className="admin-header">
+      <div className="admin-header">
           <h1>Manage Movies</h1>
 
           <button
@@ -183,8 +179,7 @@ function AdminMovies() {
             </tbody>
           </table>
         )}
-      </main>
-    </div>
+    </>
   );
 }
 

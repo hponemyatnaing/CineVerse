@@ -24,6 +24,12 @@ function Navbar() {
 
   const user = JSON.parse(localStorage.getItem("user")) || authUser;
 
+  const isAdmin = user?.role === "admin";
+
+  if (isAdmin) {
+    return null;
+  }
+
   const closeMenu = () => setOpen(false);
 
   const handleSearch = (e) => {

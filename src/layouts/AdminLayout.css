@@ -1,0 +1,17 @@
+.admin-layout {
+  display: flex;
+  min-height: 100vh;
+  background: #020617;
+}
+
+.admin-content {
+  flex: 1;
+  padding: 40px;
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .admin-content {
+    padding: 20px;
+  }
+}

@@ -3,8 +3,6 @@ import { useNavigate } from "react-router-dom";
 
 import "./AdminDashboard.css";
 
-import AdminSidebar from "../../components/AdminSidebar/AdminSidebar";
-
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 
 import { FaFilm, FaUsers, FaStar, FaHeart } from "react-icons/fa";
@@ -64,11 +62,8 @@ function AdminDashboard() {
   }
 
   return (
-    <div className="admin-layout">
-      <AdminSidebar />
-
-      <main className="admin-content">
-        <div className="dashboard-header">
+    <>
+      <div className="dashboard-header">
           <h1>Admin Dashboard</h1>
 
           <p>Welcome back, Admin 👋</p>
@@ -185,8 +180,7 @@ function AdminDashboard() {
             <p>✅ Admin Movie Management Completed</p>
           </div>
         </div>
-      </main>
-    </div>
+    </>
   );
 }
 

@@ -1,5 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import MainLayout from "./layouts/MainLayout";
+import AdminLayout from "./layouts/AdminLayout";
 import Home from "./pages/Home/Home";
 import Movies from "./pages/Movies/Movies";
 import About from "./pages/About/About";
@@ -69,36 +70,23 @@ function App() {
               </ProtectedRoute>
             }
           />
-
-          <Route
-            path="admin"
-            element={
-              <AdminRoute>
-                <AdminDashboard />
-              </AdminRoute>
-            }
-          />
-          <Route
-            path="admin/movies"
-            element={
-              <AdminRoute>
-                <AdminMovies />
-              </AdminRoute>
-            }
-          />
-          <Route
-            path="admin/add-movie"
-            element={
-              <AdminRoute>
-                <AddMovieForm />
-              </AdminRoute>
-            }
-          />
         </Route>
 
-        <Route path="/admin/users" element={<AdminUsers />} />
-        <Route path="/admin/reviews" element={<AdminReviews />} />
-        <Route path="/admin/favorites" element={<AdminFavorites />} />
+        <Route
+          path="admin"
+          element={
+            <AdminRoute>
+              <AdminLayout />
+            </AdminRoute>
+          }
+        >
+          <Route index element={<AdminDashboard />} />
+          <Route path="movies" element={<AdminMovies />} />
+          <Route path="add-movie" element={<AddMovieForm />} />
+          <Route path="users" element={<AdminUsers />} />
+          <Route path="reviews" element={<AdminReviews />} />
+          <Route path="favorites" element={<AdminFavorites />} />
+        </Route>
 
         <Route path="*" element={<NotFound />} />
       </Routes>

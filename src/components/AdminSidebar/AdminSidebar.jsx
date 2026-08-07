@@ -1,33 +1,85 @@
 import "./AdminSidebar.css";
 
-import { FaHome, FaFilm, FaUsers, FaStar } from "react-icons/fa";
+import { NavLink, useNavigate } from "react-router-dom";
+
+import {
+  FaHome,
+  FaFilm,
+  FaUsers,
+  FaStar,
+  FaHeart,
+  FaPlus,
+  FaSignOutAlt,
+  FaUser,
+} from "react-icons/fa";
+
+import { logoutUser } from "../../services/authService";
 
 function AdminSidebar() {
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    try {
+      await logoutUser();
+
+      localStorage.removeItem("user");
+
+      navigate("/login");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <aside className="admin-sidebar">
-      <h2>🎬 Admin</h2>
+      <NavLink to="/" className="admin-logo">
+        <FaFilm />
+        <span>MoraView</span>
+      </NavLink>
 
       <nav>
-        <a href="/admin">
+        <NavLink to="/admin" end>
           <FaHome />
-          Dashboard
-        </a>
+          <span>Dashboard</span>
+        </NavLink>
 
-        <a href="/admin/movies">
+        <NavLink to="/admin/movies">
           <FaFilm />
-          Movies
-        </a>
+          <span>Movies</span>
+        </NavLink>
 
-        <a href="/admin/users">
+        <NavLink to="/admin/add-movie">
+          <FaPlus />
+          <span>Add Movie</span>
+        </NavLink>
+
+        <NavLink to="/admin/users">
           <FaUsers />
-          Users
-        </a>
+          <span>Users</span>
+        </NavLink>
 
-        <a href="/admin/reviews">
+        <NavLink to="/admin/reviews">
           <FaStar />
-          Reviews
-        </a>
+          <span>Reviews</span>
+        </NavLink>
+
+        <NavLink to="/admin/favorites">
+          <FaHeart />
+          <span>Favorites</span>
+        </NavLink>
       </nav>
+
+      <div className="admin-sidebar-footer">
+        <NavLink to="/profile">
+          <FaUser />
+          <span>Profile</span>
+        </NavLink>
+
+        <button onClick={handleLogout} className="admin-logout-btn">
+          <FaSignOutAlt />
+          <span>Logout</span>
+        </button>
+      </div>
     </aside>
   );
 }
