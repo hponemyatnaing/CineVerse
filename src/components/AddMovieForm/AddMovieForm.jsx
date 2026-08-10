@@ -9,7 +9,7 @@ function AddMovieForm({ movie, onClose, onSuccess }) {
   const initialState = {
     title: "",
     image: "",
-    genre: "Action",
+    genre: [],
     releaseDate: "",
     rating: "",
     description: "",
@@ -21,10 +21,26 @@ function AddMovieForm({ movie, onClose, onSuccess }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
+  const availableGenres = [
+    "Action",
+    "Adventure",
+    "Animation",
+    "Comedy",
+    "Crime",
+    "Drama",
+    "Fantasy",
+    "Horror",
+    "Romance",
+    "Sci-Fi",
+    "Thriller",
+  ];
+
   const movieSchema = Yup.object({
     title: Yup.string().trim().required("Movie title is required"),
     image: Yup.string().trim().required("Poster image URL is required"),
-    genre: Yup.string().required("Genre is required"),
+    genre: Yup.array()
+      .min(1, "Please select at least one genre")
+      .required("Genre is required"),
     releaseDate: Yup.string().required("Release date is required"),
     rating: Yup.number()
       .typeError("Rating must be a number")
@@ -41,7 +57,11 @@ function AddMovieForm({ movie, onClose, onSuccess }) {
       setFormData({
         title: movie.title || "",
         image: movie.image || "",
-        genre: movie.genre || "Action",
+        genre: Array.isArray(movie.genre)
+          ? movie.genre
+          : movie.genre
+            ? [movie.genre]
+            : [],
         releaseDate: movie.releaseDate || movie.year || "",
         rating: movie.rating || "",
         description: movie.description || "",
@@ -60,6 +80,20 @@ function AddMovieForm({ movie, onClose, onSuccess }) {
       ...prev,
       [name]: value,
     }));
+
+    if (error) {
+      setError("");
+    }
+  };
+
+  const handleGenreChange = (e) => {
+    const { value, checked } = e.target;
+    setFormData((prev) => {
+      const updatedGenres = checked
+        ? [...prev.genre, value]
+        : prev.genre.filter((item) => item !== value);
+      return { ...prev, genre: updatedGenres };
+    });
 
     if (error) {
       setError("");
@@ -161,23 +195,6 @@ function AddMovieForm({ movie, onClose, onSuccess }) {
         </div>
 
         <div className="form-group">
-          <label>Genre</label>
-          <select name="genre" value={formData.genre} onChange={handleChange}>
-            <option>Action</option>
-            <option>Adventure</option>
-            <option>Animation</option>
-            <option>Comedy</option>
-            <option>Crime</option>
-            <option>Drama</option>
-            <option>Fantasy</option>
-            <option>Horror</option>
-            <option>Romance</option>
-            <option>Sci-Fi</option>
-            <option>Thriller</option>
-          </select>
-        </div>
-
-        <div className="form-group">
           <label>Release Date</label>
           <input
             type="date"
@@ -200,6 +217,41 @@ function AddMovieForm({ movie, onClose, onSuccess }) {
             placeholder="8.5"
             required
           />
+        </div>
+      </div>
+
+      <div className="form-group full">
+        <label>Genres (Select multiple)</label>
+        <div
+          className="genre-checkbox-grid"
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fill, minmax(120px, 1fr))",
+            gap: "10px",
+            marginTop: "8px",
+          }}
+        >
+          {availableGenres.map((g) => (
+            <label
+              key={g}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "6px",
+                cursor: "pointer",
+                color: "inherit",
+              }}
+            >
+              <input
+                type="checkbox"
+                name="genre"
+                value={g}
+                checked={formData.genre.includes(g)}
+                onChange={handleGenreChange}
+              />
+              {g}
+            </label>
+          ))}
         </div>
       </div>
 

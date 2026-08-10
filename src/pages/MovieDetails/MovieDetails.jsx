@@ -200,13 +200,13 @@ function MovieDetails() {
             📅{" "}
             {movie.releaseDate
               ? new Date(`${movie.releaseDate}T00:00:00`).toLocaleDateString(
-                "en-US",
-                {
-                  month: "long",
-                  day: "numeric",
-                  year: "numeric",
-                }
-              )
+                  "en-US",
+                  {
+                    month: "long",
+                    day: "numeric",
+                    year: "numeric",
+                  },
+                )
               : movie.release_date || movie.year || "Unknown"}
           </p>
 
@@ -215,11 +215,23 @@ function MovieDetails() {
           <div className="genres">
             {movie.genres ? (
               movie.genres.map((genre) => (
-                <span key={genre.id}>{genre.name}</span>
+                <span key={genre.id || genre.name}>{genre.name}</span>
               ))
-            ) : (
-              <span>{movie.genre}</span>
-            )}
+            ) : Array.isArray(movie.genre) ? (
+              movie.genre.map((g, index) => <span key={index}>{g}</span>)
+            ) : typeof movie.genre === "string" && movie.genre.includes(",") ? (
+              movie.genre
+                .split(",")
+                .map((g, index) => <span key={index}>{g.trim()}</span>)
+            ) : typeof movie.genre === "string" ? (
+              movie.genre.match(/[A-Z][a-z]+/g) ? (
+                movie.genre
+                  .match(/[A-Z][a-z]+/g)
+                  .map((g, index) => <span key={index}>{g}</span>)
+              ) : (
+                <span>{movie.genre}</span>
+              )
+            ) : null}
           </div>
 
           <h3>Overview</h3>
