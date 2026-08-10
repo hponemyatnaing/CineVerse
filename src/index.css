@@ -1,5 +1,4 @@
 :root {
-
   --bg-color: #020617;
 
   --card-bg: #1e293b;
@@ -11,16 +10,9 @@
   --border-color: #334155;
 
   --primary: #7c3aed;
-
 }
 
-
-
-
-
 body.light {
-
-
   --bg-color: #f8fafc;
 
   --card-bg: #ffffff;
@@ -32,26 +24,13 @@ body.light {
   --border-color: #cbd5e1;
 
   --primary: #7c3aed;
-
-
 }
-
-
-
-
-
 
 * {
-
   box-sizing: border-box;
-
 }
 
-
-
 body {
-
-
   margin: 0;
 
   background: var(--bg-color);
@@ -59,35 +38,17 @@ body {
   color: var(--text-color);
 
   transition:
-    background .3s,
-    color .3s;
-
-
+    background 0.3s,
+    color 0.3s;
 }
-
-
 
 button {
-
-
-  transition: .3s;
-
-
+  transition: 0.3s;
 }
-
-
 
 button:hover {
-
-
   transform: translateY(-2px);
-
-
 }
-
-
-
-
 
 h1,
 h2,
@@ -95,85 +56,44 @@ h3,
 h4,
 h5,
 h6 {
-
-
   color: var(--text-color);
-
-
 }
-
-
 
 p,
 span {
-
-
   color: var(--text-secondary);
-
-
 }
-
-
-
-
-
 
 .card,
 .movie-card,
 .profile-header,
 .review-card,
 .stat-card {
-
-
   background: var(--card-bg);
 
   color: var(--text-color);
 
   border: 1px solid var(--border-color);
-
-
 }
-
-
-
-
-
 
 input,
 textarea,
 select {
-
-
   background: var(--card-bg);
 
   color: var(--text-color);
 
   border: 1px solid var(--border-color);
-
-
 }
-
 
 input::placeholder {
-
-
   color: var(--text-secondary);
-
-
 }
 
-
-
-
-
 .section-title {
-
-
   font-size: 24px;
 
   margin: 20px;
 
   color: var(--text-color);
-
-
 }

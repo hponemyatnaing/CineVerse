@@ -1,23 +1,26 @@
 import "./ReviewForm.css";
 
 import { useState } from "react";
-
 import { FaStar } from "react-icons/fa";
+import * as Yup from "yup";
 
 import { addReview } from "../../services/reviewService";
-
 import { addActivity } from "../../services/activityService";
-
 import { useRatings } from "../../context/RatingsContext";
 
 function ReviewForm({ movieId, movieTitle, onReviewAdded }) {
   const { refresh: refreshRatings } = useRatings();
 
   const [rating, setRating] = useState(0);
-
   const [comment, setComment] = useState("");
-
   const [loading, setLoading] = useState(false);
+
+  const reviewSchema = Yup.object({
+    rating: Yup.number()
+      .min(1, "Please select rating")
+      .required("Please select rating"),
+    comment: Yup.string().trim().required("Write your comment"),
+  });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -26,23 +29,12 @@ function ReviewForm({ movieId, movieTitle, onReviewAdded }) {
 
     if (!user) {
       alert("Please login first");
-
-      return;
-    }
-
-    if (rating === 0) {
-      alert("Please select rating");
-
-      return;
-    }
-
-    if (!comment.trim()) {
-      alert("Write your comment");
-
       return;
     }
 
     try {
+      await reviewSchema.validate({ rating, comment }, { abortEarly: true });
+
       setLoading(true);
 
       const result = await addReview({
@@ -61,7 +53,6 @@ function ReviewForm({ movieId, movieTitle, onReviewAdded }) {
         });
 
         setRating(0);
-
         setComment("");
 
         await refreshRatings();
@@ -74,6 +65,12 @@ function ReviewForm({ movieId, movieTitle, onReviewAdded }) {
       }
     } catch (error) {
       console.log("Review Error:", error);
+
+      if (error.name === "ValidationError") {
+        alert(error.message);
+        return;
+      }
+
       alert("An error occurred while posting review");
     } finally {
       setLoading(false);

@@ -53,11 +53,10 @@ function Navbar() {
   return (
     <header className="navbar">
       <div className="navbar-container">
-        {/* Logo */}
 
         <NavLink to="/" className="logo" onClick={closeMenu}>
           <FaFilm />
-          <span>CineVerse</span>
+          <span>MoraView</span>
         </NavLink>
 
         <div className="nav-search">

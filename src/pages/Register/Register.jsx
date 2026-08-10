@@ -2,6 +2,7 @@ import "./Register.css";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaEnvelope, FaLock, FaEye, FaEyeSlash, FaUser } from "react-icons/fa";
+import * as Yup from "yup";
 import { registerUser } from "../../services/authService";
 
 function Register() {
@@ -16,32 +17,48 @@ function Register() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const validateForm = () => {
-    if (!name.trim()) return "Full name is required.";
-    if (!email.trim()) return "Email is required.";
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) return "Invalid email format.";
-    if (password.length < 6) return "Password must be at least 6 characters.";
-    if (password !== confirmPassword) return "Passwords do not match.";
-    return null;
-  };
+  const registerSchema = Yup.object({
+    name: Yup.string().trim().required("Full name is required."),
+    email: Yup.string()
+      .trim()
+      .email("Invalid email format.")
+      .required("Email is required."),
+    password: Yup.string()
+      .min(6, "Password must be at least 6 characters.")
+      .required("Password is required."),
+    confirmPassword: Yup.string()
+      .oneOf([Yup.ref("password"), null], "Passwords do not match.")
+      .required("Confirm password is required."),
+  });
 
   const handleRegister = async () => {
-    const validationError = validateForm();
-    if (validationError) {
-      setError(validationError);
-      return;
-    }
+    setError("");
 
     try {
+      await registerSchema.validate(
+        {
+          name,
+          email,
+          password,
+          confirmPassword,
+        },
+        {
+          abortEarly: true,
+        },
+      );
+
       setLoading(true);
-      setError("");
 
       await registerUser(name, email, password);
 
       alert("Registration Successful!");
       navigate("/login");
     } catch (err) {
+      if (err.name === "ValidationError") {
+        setError(err.message);
+        return;
+      }
+
       if (err.code === "auth/email-already-in-use") {
         setError("This email is already registered.");
       } else {
@@ -49,9 +66,6 @@ function Register() {
       }
     } finally {
       setLoading(false);
-    }
-    {
-      loading ? "Creating Account..." : "Register";
     }
   };
 

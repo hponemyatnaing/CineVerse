@@ -36,7 +36,6 @@ function App() {
           <Route path="contact" element={<Contact />} />
           <Route path="movie/:id" element={<MovieDetails />} />
 
-          {/* Auth Routes */}
           <Route
             path="login"
             element={

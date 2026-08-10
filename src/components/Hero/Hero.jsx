@@ -29,7 +29,6 @@ function Hero({ movies = [] }) {
   return (
     <section className="hero">
       <div className="hero-wrapper">
-        {/* LEFT CONTENT */}
 
         <div className="hero-info">
           <h1>{movie.title}</h1>
@@ -69,7 +68,6 @@ function Hero({ movies = [] }) {
           </div>
         </div>
 
-        {/* POSTER */}
 
         <div className="poster-card">
           <img src={movie.image} alt={movie.title} />
