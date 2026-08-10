@@ -18,11 +18,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
-function MovieSection({
-  title,
-  movies = [],
-  category
-}) {
+function MovieSection({ title, movies = [], category }) {
   const navigate = useNavigate();
 
   if (!movies.length) return null;
@@ -33,17 +29,10 @@ function MovieSection({
         <h2>{title}</h2>
 
         <button
-
           className="view-all-btn"
-
-          onClick={() =>
-            navigate(`/movies?category=${category}`)
-          }
-
+          onClick={() => navigate(`/movies?category=${category}`)}
         >
-
           View All →
-
         </button>
       </div>
 

@@ -37,10 +37,6 @@ export const FavoritesProvider = ({ children }) => {
     }
   }, [currentUserId]);
 
-  // =========================
-  // LOAD FAVORITES
-  // =========================
-
   const loadFavorites = async () => {
     try {
       const q = query(
@@ -55,11 +51,7 @@ export const FavoritesProvider = ({ children }) => {
         const movie = item.data();
 
         return {
-          // Firestore document id
-
           id: item.id,
-
-          // movie id
 
           movieId: String(movie.movieId || movie.id),
 
@@ -80,10 +72,6 @@ export const FavoritesProvider = ({ children }) => {
       console.log("Load favorite error:", error);
     }
   };
-
-  // =========================
-  // ADD FAVORITE
-  // =========================
 
   const addToFavorites = async (movie) => {
     if (!currentUserId) {
@@ -142,10 +130,6 @@ export const FavoritesProvider = ({ children }) => {
       setFavoriteLoading(false);
     }
   };
-
-  // =========================
-  // REMOVE FAVORITE
-  // =========================
 
   const removeFromFavorites = async (movieId) => {
     try {

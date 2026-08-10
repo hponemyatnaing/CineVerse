@@ -9,7 +9,7 @@ function AddMovieForm({ movie, onClose, onSuccess }) {
     title: "",
     image: "",
     genre: "Action",
-    year: "",
+    releaseDate: "",
     rating: "",
     description: "",
     trailerUrl: "",
@@ -180,13 +180,13 @@ function AddMovieForm({ movie, onClose, onSuccess }) {
         <div className="form-group">
           <label>Release Year</label>
 
+          <label>Release Date</label>
+
           <input
-            type="number"
-            name="year"
-            value={formData.year}
+            type="date"
+            name="releaseDate"
+            value={formData.releaseDate}
             onChange={handleChange}
-            placeholder="2026"
-            required
           />
         </div>
 

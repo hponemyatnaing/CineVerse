@@ -1,7 +1,5 @@
 .achievement-card {
-
   display: flex;
-
 
   background: #1e293b;
 
@@ -13,51 +11,25 @@
 
   gap: 15px;
 
-  transition: .3s;
-
-
+  transition: 0.3s;
 }
-
-
 
 .achievement-card:hover {
-
-
   transform: translateY(-5px);
-
-
 }
-
-
 
 .achievement-icon {
-
-
   font-size: 35px;
-
-
 }
 
-
-
 .achievement-card h3 {
-
-
   margin: 0;
 
   color: white;
-
-
 }
 
-
-
 .achievement-card p {
-
-
   color: #94a3b8;
 
   font-size: 14px;
-
-
 }

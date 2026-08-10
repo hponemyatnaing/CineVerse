@@ -7,6 +7,7 @@ export const categories = [
 "Horror",
 "Sci-Fi",
 "Romance",
-"Drama"
+"Drama",
+"Thriller"
 
 ];

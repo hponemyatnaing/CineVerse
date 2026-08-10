@@ -76,17 +76,6 @@ function MovieDetails() {
     try {
       setLoading(true);
 
-      /*
-        First:
-        Check Firebase Movie
-
-        If found:
-        Load Firebase
-
-        If not:
-        Load TMDB API
-      */
-
       const firebaseMovie = await getMovieById(id);
 
       if (firebaseMovie) {
@@ -104,8 +93,6 @@ function MovieDetails() {
 
         return;
       }
-
-      // TMDB API MOVIE
 
       const movieData = await getMovieDetails(id);
 
@@ -210,8 +197,17 @@ function MovieDetails() {
           </p>
 
           <p>
-            📅
-            {movie.release_date || movie.year}
+            📅{" "}
+            {movie.releaseDate
+              ? new Date(`${movie.releaseDate}T00:00:00`).toLocaleDateString(
+                "en-US",
+                {
+                  month: "long",
+                  day: "numeric",
+                  year: "numeric",
+                }
+              )
+              : movie.release_date || movie.year || "Unknown"}
           </p>
 
           {movie.runtime && <p>⏰ {movie.runtime} mins</p>}

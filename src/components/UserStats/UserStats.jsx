@@ -20,11 +20,7 @@ function UserStats({ user }) {
   }, [user]);
 
   async function loadStats() {
-    // Reviews Count
-
     const reviews = await getUserReviews(user.uid);
-
-    // Favorites Count from localStorage
 
     const savedFavorites = localStorage.getItem(`favorites_${user.uid}`);
 

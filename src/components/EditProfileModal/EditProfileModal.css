@@ -1,431 +1,187 @@
-/* =========================
-   EDIT PROFILE MODAL
-   SAME CINEMA STYLE AS ADD MOVIE FORM
-========================= */
-
-
 .modal-bg {
-
   position: fixed;
 
   inset: 0;
 
-  background: rgba(0,0,0,0.65);
+  background: rgba(0, 0, 0, 0.65);
 
   backdrop-filter: blur(6px);
 
-  display:flex;
+  display: flex;
 
-  justify-content:center;
+  justify-content: center;
 
-  align-items:center;
+  align-items: center;
 
-  z-index:999;
+  z-index: 999;
 
-  animation: fadeIn .3s ease;
-
+  animation: fadeIn 0.3s ease;
 }
-
-
 
 @keyframes fadeIn {
-
-  from{
-    opacity:0;
+  from {
+    opacity: 0;
   }
 
-  to{
-    opacity:1;
+  to {
+    opacity: 1;
   }
-
 }
-
-
-
-
-
-/* =========================
-   MODAL BOX
-========================= */
-
 
 .modal {
+  width: 360px;
 
+  background: linear-gradient(145deg, #0f172a, #1e293b);
 
-width:360px;
+  padding: 25px;
 
+  border-radius: 18px;
 
-background:
+  border: 1px solid rgba(236, 72, 153, 0.25);
 
-linear-gradient(
-145deg,
-#0f172a,
-#1e293b
-);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.5);
 
-
-
-padding:25px;
-
-
-border-radius:18px;
-
-
-border:1px solid rgba(236,72,153,.25);
-
-
-
-box-shadow:
-
-0 20px 45px rgba(0,0,0,.5);
-
-
-
-animation:
-
-modalShow .35s ease;
-
-
+  animation: modalShow 0.35s ease;
 }
-
-
-
-
 
 @keyframes modalShow {
+  from {
+    opacity: 0;
 
+    transform: translateY(-20px) scale(0.95);
+  }
 
-from{
+  to {
+    opacity: 1;
 
-opacity:0;
-
-transform:translateY(-20px) scale(.95);
-
+    transform: translateY(0) scale(1);
+  }
 }
-
-
-to{
-
-opacity:1;
-
-transform:translateY(0) scale(1);
-
-}
-
-
-}
-
-
-
-
-
-/* TITLE */
-
 
 .modal h2 {
+  text-align: center;
 
+  font-size: 22px;
 
-text-align:center;
+  margin-bottom: 22px;
 
+  color: #ec4899;
 
-font-size:22px;
-
-
-margin-bottom:22px;
-
-
-color:#ec4899;
-
-
-text-shadow:
-
-0 0 12px rgba(236,72,153,.5);
-
-
+  text-shadow: 0 0 12px rgba(236, 72, 153, 0.5);
 }
-
-
-
-
-
-
-
-/* LABEL */
-
 
 .modal label {
+  display: block;
 
+  color: #c084fc;
 
-display:block;
+  font-size: 14px;
 
+  font-weight: 600;
 
-color:#c084fc;
+  margin-bottom: 7px;
 
-
-font-size:14px;
-
-
-font-weight:600;
-
-
-margin-bottom:7px;
-
-
-letter-spacing:.3px;
-
-
+  letter-spacing: 0.3px;
 }
-
-
-
-
-
-
-/* INPUT */
-
 
 .modal .form-control {
+  width: 100%;
 
+  height: 42px;
 
-width:100%;
+  box-sizing: border-box;
 
+  padding: 0 14px;
 
-height:42px;
+  background: #020617;
 
+  border: 1px solid #334155;
 
-box-sizing:border-box;
+  border-radius: 10px;
 
+  color: white;
 
-padding:0 14px;
+  font-size: 14px;
 
+  margin-bottom: 15px;
 
+  outline: none;
 
-background:#020617;
-
-
-border:1px solid #334155;
-
-
-border-radius:10px;
-
-
-
-color:white;
-
-
-font-size:14px;
-
-
-margin-bottom:15px;
-
-
-outline:none;
-
-
-transition:.3s;
-
-
+  transition: 0.3s;
 }
-
-
-
-
 
 .modal .form-control:focus {
+  border-color: #ec4899;
 
-
-border-color:#ec4899;
-
-
-box-shadow:
-
-0 0 12px rgba(236,72,153,.35);
-
-
+  box-shadow: 0 0 12px rgba(236, 72, 153, 0.35);
 }
-
-
-
-
-
-/* BUTTON AREA */
-
 
 .modal-buttons {
+  display: flex;
 
+  justify-content: center;
 
-display:flex;
+  gap: 12px;
 
-
-justify-content:center;
-
-
-gap:12px;
-
-
-margin-top:20px;
-
-
+  margin-top: 20px;
 }
-
-
-
-
-
-/* BUTTON */
-
 
 .modal button {
+  height: 38px;
 
+  padding: 0 22px;
 
-height:38px;
+  border: none;
 
+  border-radius: 20px;
 
-padding:0 22px;
+  font-size: 14px;
 
+  font-weight: 600;
 
-border:none;
+  cursor: pointer;
 
-
-border-radius:20px;
-
-
-font-size:14px;
-
-
-font-weight:600;
-
-
-cursor:pointer;
-
-
-transition:.25s;
-
-
+  transition: 0.25s;
 }
-
-
-
-
-
-
-/* SAVE */
-
 
 .save-btn {
+  background: linear-gradient(135deg, #ec4899, #8b5cf6);
 
+  color: white;
 
-background:
-
-linear-gradient(
-135deg,
-#ec4899,
-#8b5cf6
-);
-
-
-
-color:white;
-
-
-box-shadow:
-
-0 8px 20px rgba(236,72,153,.35);
-
-
+  box-shadow: 0 8px 20px rgba(236, 72, 153, 0.35);
 }
-
-
-
 
 .save-btn:hover {
+  transform: translateY(-2px);
 
-
-transform:translateY(-2px);
-
-
-box-shadow:
-
-0 12px 25px rgba(236,72,153,.55);
-
-
+  box-shadow: 0 12px 25px rgba(236, 72, 153, 0.55);
 }
-
-
 
 .save-btn:active {
-
-
-transform:scale(.94);
-
-
+  transform: scale(0.94);
 }
-
-
-
-
-
-
-/* CANCEL */
-
 
 .cancel-btn {
+  background: #334155;
 
-
-background:#334155;
-
-
-color:#e2e8f0;
-
-
+  color: #e2e8f0;
 }
-
-
 
 .cancel-btn:hover {
+  background: #475569;
 
-
-background:#475569;
-
-
-transform:translateY(-2px);
-
-
+  transform: translateY(-2px);
 }
-
-
-
 
 .cancel-btn:active {
-
-
-transform:scale(.94);
-
-
+  transform: scale(0.94);
 }
 
+@media (max-width: 500px) {
+  .modal {
+    width: 90%;
 
-
-
-
-
-
-/* MOBILE */
-
-
-@media(max-width:500px){
-
-
-.modal{
-
-
-width:90%;
-
-
-padding:20px;
-
-
-}
-
-
+    padding: 20px;
+  }
 }

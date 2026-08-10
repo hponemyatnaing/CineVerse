@@ -87,7 +87,7 @@ export const updateMovie = async (id, movie) => {
       title: movie.title,
       image: movie.image,
       genre: movie.genre,
-      year: Number(movie.year),
+      releaseDate: movie.releaseDate || "",
       rating: Number(movie.rating),
       description: movie.description,
       trailerUrl: movie.trailerUrl || "",
@@ -213,7 +213,7 @@ export const getSimilarFirebaseMovies = async (currentMovie) => {
           movie.id !== currentMovie.id &&
           movie.genre &&
           currentMovie.genre &&
-          movie.genre.toLowerCase() === currentMovie.genre.toLowerCase()
+          movie.genre.toLowerCase() === currentMovie.genre.toLowerCase(),
       )
       .sort((a, b) => Number(b.rating) - Number(a.rating))
       .slice(0, 8);

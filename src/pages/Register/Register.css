@@ -1,21 +1,17 @@
 @import "../Login/Login.css";
 
-.register-error{
+.register-error {
+  margin-top: 12px;
 
-margin-top:12px;
+  color: #ef4444;
 
-color:#ef4444;
+  font-size: 14px;
 
-font-size:14px;
-
-font-weight:500;
-
+  font-weight: 500;
 }
 
-.register-btn:disabled{
+.register-btn:disabled {
+  opacity: 0.7;
 
-opacity:.7;
-
-cursor:not-allowed;
-
+  cursor: not-allowed;
 }

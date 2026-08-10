@@ -5,21 +5,18 @@
   color: white;
 }
 
-/* TITLE */
 .favorites-title {
   font-size: 28px;
   margin-bottom: 25px;
   color: #facc15;
 }
 
-/* GRID */
 .favorites-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 20px;
 }
 
-/* EMPTY STATE */
 .empty-state {
   text-align: center;
   margin-top: 80px;
@@ -31,117 +28,90 @@
   margin-bottom: 10px;
 }
 
-.favorites-page{
+.favorites-page {
+  min-height: 100vh;
 
-min-height:100vh;
+  padding: 40px 8%;
 
-padding:40px 8%;
-
-background:#0f172a;
-
+  background: #0f172a;
 }
 
-.favorites-header{
+.favorites-header {
+  text-align: center;
 
-text-align:center;
-
-margin-bottom:35px;
-
+  margin-bottom: 35px;
 }
 
-.favorites-header h1{
+.favorites-header h1 {
+  color: white;
 
-color:white;
+  font-size: 42px;
 
-font-size:42px;
-
-margin-bottom:10px;
-
+  margin-bottom: 10px;
 }
 
-.favorites-header p{
+.favorites-header p {
+  color: #94a3b8;
 
-color:#94a3b8;
-
-font-size:18px;
-
+  font-size: 18px;
 }
 
-.favorite-count{
+.favorite-count {
+  margin-bottom: 25px;
 
-margin-bottom:25px;
+  font-size: 18px;
 
-font-size:18px;
-
-color:#cbd5e1;
-
+  color: #cbd5e1;
 }
 
-.favorite-count strong{
-
-color:#7c3aed;
-
+.favorite-count strong {
+  color: #7c3aed;
 }
 
-.favorites-grid{
+.favorites-grid {
+  display: grid;
 
-display:grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
 
-grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
-
-gap:30px;
-
+  gap: 30px;
 }
 
-.favorites-empty{
+.favorites-empty {
+  padding: 100px 20px;
 
-padding:100px 20px;
-
-text-align:center;
-
+  text-align: center;
 }
 
-.favorites-empty h2{
+.favorites-empty h2 {
+  font-size: 34px;
 
-font-size:34px;
+  color: white;
 
-color:white;
-
-margin-bottom:15px;
-
+  margin-bottom: 15px;
 }
 
-.favorites-empty p{
+.favorites-empty p {
+  color: #94a3b8;
 
-color:#94a3b8;
+  font-size: 17px;
 
-font-size:17px;
+  max-width: 500px;
 
-max-width:500px;
+  margin: auto;
 
-margin:auto;
-
-line-height:1.8;
-
+  line-height: 1.8;
 }
 
-@media(max-width:768px){
+@media (max-width: 768px) {
+  .favorites-page {
+    padding: 25px;
+  }
 
-.favorites-page{
-
-padding:25px;
-
+  .favorites-header h1 {
+    font-size: 30px;
+  }
 }
 
-.favorites-header h1{
-
-font-size:30px;
-
-}
-
-}
-
-/* RESPONSIVE */
 @media (max-width: 768px) {
   .favorites-page {
     padding: 20px;

@@ -1,16 +1,9 @@
-.movies-page{
+.movies-page {
+  min-height: 100vh;
 
-    min-height:100vh;
+  padding: 40px;
 
-    padding:40px;
-
-    background:
-    radial-gradient(
-        circle at top,
-        #1e293b,
-        #020617
-    );
-
+  background: radial-gradient(circle at top, #1e293b, #020617);
 }
 
 .movies-header {
@@ -109,93 +102,70 @@
   color: #94a3b8;
 }
 
-/* ========================= */
-/* RESULT */
 
-.movie-result{
-    color:white;
-    font-size:15px;
+.movie-result {
+  color: white;
+  font-size: 15px;
 }
 
-/* ========================= */
-/* ERROR */
 
-.movie-error{
+.movie-error {
+  width: 100%;
 
-    width:100%;
+  padding: 80px;
 
-    padding:80px;
+  text-align: center;
 
-    text-align:center;
-
-    color:white;
-
+  color: white;
 }
 
-.movie-error h2{
-
-    margin-bottom:20px;
-
+.movie-error h2 {
+  margin-bottom: 20px;
 }
 
-.movie-error button{
+.movie-error button {
+  padding: 12px 25px;
 
-    padding:12px 25px;
+  border: none;
 
-    border:none;
+  border-radius: 8px;
 
-    border-radius:8px;
+  background: #7c3aed;
 
-    background:#7c3aed;
+  color: white;
 
-    color:white;
+  cursor: pointer;
 
-    cursor:pointer;
-
-    transition:.3s;
-
+  transition: 0.3s;
 }
 
-.movie-error button:hover{
-
-    background:#6d28d9;
-
+.movie-error button:hover {
+  background: #6d28d9;
 }
 
-/* ========================= */
-/* EMPTY */
 
-.empty-state{
+.empty-state {
+  width: 100%;
 
-    width:100%;
+  padding: 90px 20px;
 
-    padding:90px 20px;
-
-    text-align:center;
-
+  text-align: center;
 }
 
-.empty-state h1{
-
-    font-size:70px;
-
+.empty-state h1 {
+  font-size: 70px;
 }
 
-.empty-state h2{
+.empty-state h2 {
+  color: white;
 
-    color:white;
-
-    margin:15px 0;
-
+  margin: 15px 0;
 }
 
-.empty-state p{
-
-    color:#94a3b8;
-
+.empty-state p {
+  color: #94a3b8;
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
   .movies-page {
     padding: 25px;

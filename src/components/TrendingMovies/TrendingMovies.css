@@ -1,231 +1,128 @@
 .trending-section {
+  padding: 40px 60px;
 
-    padding: 40px 60px;
+  background: #0f0f0f;
 
-    background: #0f0f0f;
-
-    color: white;
-
+  color: white;
 }
-
-
 
 .trending-section h2 {
+  font-size: 28px;
 
-    font-size: 28px;
-
-    margin-bottom: 25px;
-
+  margin-bottom: 25px;
 }
-
-
 
 .swiper {
-
-    padding-bottom: 30px;
-
+  padding-bottom: 30px;
 }
-
-
 
 .swiper-slide {
-
-    height: auto;
-
+  height: auto;
 }
-
-
-
-/* Arrow Design */
 
 .swiper-button-next,
 .swiper-button-prev {
-
-    color: white;
-
+  color: white;
 }
 
 .top10-section {
-
-    padding: 40px 5%;
-
+  padding: 40px 5%;
 }
-
-
 
 .top10-section h2 {
+  font-size: 32px;
 
-    font-size: 32px;
-
-    margin-bottom: 25px;
-
+  margin-bottom: 25px;
 }
-
-
 
 .top10-container {
+  display: flex;
 
+  gap: 25px;
 
-    display: flex;
+  overflow-x: auto;
 
-    gap: 25px;
-
-    overflow-x: auto;
-
-    padding-bottom: 20px;
-
-
+  padding-bottom: 20px;
 }
-
-
 
 .top10-container::-webkit-scrollbar {
-
-    display: none;
-
+  display: none;
 }
-
-
 
 .top10-card {
+  position: relative;
 
+  min-width: 220px;
 
-    position: relative;
+  cursor: pointer;
 
-    min-width: 220px;
-
-    cursor: pointer;
-
-    transition: 0.3s;
-
-
+  transition: 0.3s;
 }
-
-
 
 .top10-card:hover {
+  transform: scale(1.08);
 
-
-    transform: scale(1.08);
-
-    z-index: 5;
-
-
+  z-index: 5;
 }
-
-
-
 
 .top10-card img {
+  width: 220px;
 
+  height: 330px;
 
-    width: 220px;
+  object-fit: cover;
 
-    height: 330px;
-
-    object-fit: cover;
-
-    border-radius: 12px;
-
-
+  border-radius: 12px;
 }
-
-
-
 
 .rank-number {
+  position: absolute;
 
+  bottom: 10px;
 
-    position: absolute;
+  left: -20px;
 
-    bottom: 10px;
+  font-size: 120px;
 
-    left: -20px;
+  font-weight: 900;
 
+  color: white;
 
-    font-size: 120px;
+  z-index: 2;
 
-    font-weight: 900;
-
-
-    color: white;
-
-
-    z-index: 2;
-
-
-    text-shadow:
-
-        0 0 10px black;
-
-
+  text-shadow: 0 0 10px black;
 }
-
-
 
 .top10-info {
+  position: absolute;
 
+  right: 0;
 
-    position: absolute;
+  bottom: 0;
 
-    right: 0;
+  left: 0;
 
-    bottom: 0;
+  padding: 15px;
 
-    left: 0;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
 
-
-    padding: 15px;
-
-
-    background:
-
-        linear-gradient(transparent,
-            rgba(0, 0, 0, 0.9));
-
-
-
-    color: white;
-
-
+  color: white;
 }
-
-
 
 .top10-info h3 {
-
-
-    font-size: 18px;
-
-
+  font-size: 18px;
 }
-
-
 
 .top10-info p {
-
-
-    color: #ffd700;
-
-
+  color: #ffd700;
 }
 
+@media (max-width: 768px) {
+  .trending-section {
+    padding: 30px 20px;
+  }
 
-@media(max-width:768px) {
-
-
-    .trending-section {
-
-        padding: 30px 20px;
-
-    }
-
-
-    .trending-section h2 {
-
-        font-size: 22px;
-
-    }
-
-
+  .trending-section h2 {
+    font-size: 22px;
+  }
 }

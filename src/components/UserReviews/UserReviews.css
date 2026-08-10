@@ -1,78 +1,39 @@
-.user-reviews{
+.user-reviews {
+  background: #111;
 
+  padding: 25px;
 
-background:#111;
-
-
-padding:25px;
-
-border-radius:20px;
-
-
+  border-radius: 20px;
 }
 
+.review-card {
+  background: #181818;
 
+  padding: 20px;
 
-.review-card{
+  border-radius: 15px;
 
+  margin-bottom: 15px;
 
-background:#181818;
-
-
-padding:20px;
-
-
-border-radius:15px;
-
-
-margin-bottom:15px;
-
-
-border-left:4px solid #e50914;
-
-
+  border-left: 4px solid #e50914;
 }
 
-
-.review-card h3{
-
-
-color:white;
-
-
+.review-card h3 {
+  color: white;
 }
 
-
-.review-card p{
-
-
-color:#ccc;
-
-
+.review-card p {
+  color: #ccc;
 }
 
-
-
-.rating{
-
-
-color:#ffc107;
-
-
+.rating {
+  color: #ffc107;
 }
 
+.empty-review {
+  text-align: center;
 
+  padding: 30px;
 
-.empty-review{
-
-
-text-align:center;
-
-
-padding:30px;
-
-
-color:#777;
-
-
+  color: #777;
 }

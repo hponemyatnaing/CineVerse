@@ -29,8 +29,6 @@ function MovieCard({ movie }) {
     }
   }, []);
 
-  // Firebase + API support
-
   const movieId = String(movie.movieId || movie.id);
 
   const favoriteItem = favorites.find(

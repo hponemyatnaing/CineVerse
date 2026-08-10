@@ -24,10 +24,7 @@ export const updateMovieRating = async (movieId) => {
 
     const average =
       count > 0
-        ? reviews.reduce(
-            (sum, r) => sum + (Number(r.rating) || 0),
-            0,
-          ) / count
+        ? reviews.reduce((sum, r) => sum + (Number(r.rating) || 0), 0) / count
         : 0;
 
     const rounded = Math.round(average * 10) / 10;

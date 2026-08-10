@@ -1,55 +1,45 @@
-.error-box{
+.error-box {
+  padding: 60px 30px;
 
-    padding:60px 30px;
+  text-align: center;
 
-    text-align:center;
+  background: #1f1f1f;
 
-    background:#1f1f1f;
+  border-radius: 15px;
 
-    border-radius:15px;
+  margin: 40px auto;
 
-    margin:40px auto;
-
-    max-width:500px;
-
+  max-width: 500px;
 }
 
-.error-box h2{
+.error-box h2 {
+  color: #ff4757;
 
-    color:#ff4757;
-
-    margin-bottom:15px;
-
+  margin-bottom: 15px;
 }
 
-.error-box p{
+.error-box p {
+  color: #bbb;
 
-    color:#bbb;
-
-    margin-bottom:25px;
-
+  margin-bottom: 25px;
 }
 
-.error-box button{
+.error-box button {
+  background: #ff4757;
 
-    background:#ff4757;
+  color: white;
 
-    color:white;
+  border: none;
 
-    border:none;
+  padding: 12px 25px;
 
-    padding:12px 25px;
+  border-radius: 8px;
 
-    border-radius:8px;
+  cursor: pointer;
 
-    cursor:pointer;
-
-    transition:.3s;
-
+  transition: 0.3s;
 }
 
-.error-box button:hover{
-
-    background:#ff2d55;
-
+.error-box button:hover {
+  background: #ff2d55;
 }

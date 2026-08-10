@@ -34,8 +34,6 @@ function Footer() {
           </p>
         </div>
 
-        {/* Quick Links */}
-
         <div className="footer-section">
           <h3>Quick Links</h3>
 
@@ -63,8 +61,6 @@ function Footer() {
             <span>About</span>
           </Link>
         </div>
-
-        {/* Social */}
 
         <div className="footer-section">
           <h3>Follow Us</h3>

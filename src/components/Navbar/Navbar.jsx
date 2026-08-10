@@ -2,9 +2,7 @@ import "./Navbar.css";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useState, useContext } from "react";
 import { FaFilm, FaHeart, FaBars, FaTimes, FaSearch } from "react-icons/fa";
-import {
-  useAuth
-} from "../../context/AuthContext";
+import { useAuth } from "../../context/AuthContext";
 import { logoutUser } from "../../services/authService";
 import { ThemeContext } from "../../context/ThemeContext";
 import { useFavorites } from "../../context/FavoritesContext";
@@ -13,9 +11,7 @@ function Navbar() {
   const [open, setOpen] = useState(false);
   const [search, setSearch] = useState("");
 
-  const {
-    user: authUser
-  } = useAuth();
+  const { user: authUser } = useAuth();
 
   const navigate = useNavigate();
 
@@ -115,10 +111,7 @@ function Navbar() {
 
         <div className="nav-actions">
           {user && (
-            <button
-              onClick={handleLogout}
-              className="logout-btn"
-            >
+            <button onClick={handleLogout} className="logout-btn">
               Logout
             </button>
           )}

@@ -165,205 +165,127 @@ text-align:center;
 
 } */
 
-.profile-header{
+.profile-header {
+  display: flex;
 
-display:flex;
+  align-items: center;
 
-align-items:center;
+  gap: 30px;
 
-gap:30px;
+  background: #181818;
 
-background:#181818;
+  padding: 30px;
 
-padding:30px;
+  border-radius: 20px;
 
-border-radius:20px;
+  margin-bottom: 30px;
 
-margin-bottom:30px;
-
-color:white;
-
+  color: white;
 }
-
-
 
 .profile-avatar img,
-.avatar-default{
+.avatar-default {
+  width: 120px;
 
+  height: 120px;
 
-width:120px;
+  border-radius: 50%;
 
-height:120px;
-
-border-radius:50%;
-
-object-fit:cover;
-
+  object-fit: cover;
 }
 
+.avatar-default {
+  display: flex;
 
+  align-items: center;
 
-.avatar-default{
+  justify-content: center;
 
+  background: #e50914;
 
-display:flex;
+  font-size: 45px;
 
-align-items:center;
+  font-weight: bold;
 
-justify-content:center;
-
-
-background:#e50914;
-
-
-font-size:45px;
-
-font-weight:bold;
-
-color:white;
-
-
+  color: white;
 }
 
+.profile-info h1 {
+  margin: 0;
 
-
-
-.profile-info h1{
-
-
-margin:0;
-
-font-size:32px;
-
-
+  font-size: 32px;
 }
 
-
-
-.profile-info p{
-
-
-color:#bbb;
-
-
+.profile-info p {
+  color: #bbb;
 }
 
+.role-badge {
+  display: inline-block;
 
+  margin-top: 10px;
 
-.role-badge{
+  padding: 6px 18px;
 
+  background: #e50914;
 
-display:inline-block;
+  border-radius: 20px;
 
+  font-size: 13px;
 
-margin-top:10px;
-
-
-padding:6px 18px;
-
-
-background:#e50914;
-
-
-border-radius:20px;
-
-
-font-size:13px;
-
-
-font-weight:bold;
-
-
+  font-weight: bold;
 }
 
+.profile-info small {
+  display: block;
 
+  margin-top: 15px;
 
-.profile-info small{
-
-
-display:block;
-
-
-margin-top:15px;
-
-
-color:#888;
-
-
+  color: #888;
 }
 
-.profile-actions{
+.profile-actions {
+  display: flex;
 
-display:flex;
+  gap: 15px;
 
-gap:15px;
-
-margin-top:20px;
-
+  margin-top: 20px;
 }
 
+.profile-actions button {
+  padding: 10px 20px;
 
+  border: none;
 
-.profile-actions button{
+  border-radius: 25px;
 
+  cursor: pointer;
 
-padding:10px 20px;
+  font-weight: 600;
 
-
-border:none;
-
-
-border-radius:25px;
-
-
-cursor:pointer;
-
-
-font-weight:600;
-
-
-transition:.3s;
-
-
+  transition: 0.3s;
 }
 
+.edit-btn {
+  background: #e50914;
 
+  color: white;
 
-.edit-btn{
-
-background:#e50914;
-
-color:white;
-
-border:2px solid #e50914;
-
+  border: 2px solid #e50914;
 }
 
-.edit-btn:hover{
+.edit-btn:hover {
+  background: #b20710;
 
-background:#b20710;
-
-border-color:#b20710;
-
+  border-color: #b20710;
 }
 
-.logout-btn{
+.logout-btn {
+  background: #333;
 
-
-background:#333;
-
-
-color:white;
-
-
+  color: white;
 }
 
-
-
-.profile-actions button:hover{
-
-
-transform:translateY(-3px);
-
-
+.profile-actions button:hover {
+  transform: translateY(-3px);
 }

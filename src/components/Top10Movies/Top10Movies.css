@@ -1,92 +1,63 @@
-.top10-section{
+.top10-section {
+  padding: 40px 50px;
 
-padding:40px 50px;
-
-background:#000;
-
+  background: #000;
 }
 
+.top10-section h2 {
+  color: white;
 
+  font-size: 32px;
 
-.top10-section h2{
-
-color:white;
-
-font-size:32px;
-
-margin-bottom:30px;
-
+  margin-bottom: 30px;
 }
 
+.top10-container {
+  display: flex;
 
+  gap: 25px;
 
-.top10-container{
+  overflow-x: auto;
 
-display:flex;
-
-gap:25px;
-
-overflow-x:auto;
-
-padding-bottom:20px;
-
+  padding-bottom: 20px;
 }
 
+.top10-card {
+  display: flex;
 
+  align-items: flex-end;
 
-.top10-card{
+  min-width: 230px;
 
-display:flex;
-
-align-items:flex-end;
-
-min-width:230px;
-
-position:relative;
-
+  position: relative;
 }
 
+.rank-number {
+  font-size: 120px;
 
+  font-weight: 900;
 
-.rank-number{
+  color: white;
 
-font-size:120px;
+  line-height: 1;
 
-font-weight:900;
+  margin-right: -35px;
 
-color:white;
+  z-index: 2;
 
-line-height:1;
-
-margin-right:-35px;
-
-z-index:2;
-
--webkit-text-stroke:3px #000;
-
+  -webkit-text-stroke: 3px #000;
 }
 
-
-
-.top10-card .movie-card{
-
-width:180px;
-
+.top10-card .movie-card {
+  width: 180px;
 }
 
-
-
-.top10-container::-webkit-scrollbar{
-
-height:8px;
-
+.top10-container::-webkit-scrollbar {
+  height: 8px;
 }
 
+.top10-container::-webkit-scrollbar-thumb {
+  background: #555;
 
-.top10-container::-webkit-scrollbar-thumb{
-
-background:#555;
-
-border-radius:10px;
-
+  border-radius: 10px;
 }

@@ -87,98 +87,98 @@ function AdminMovies() {
       )}
 
       <div className="admin-header">
-          <h1>Manage Movies</h1>
+        <h1>Manage Movies</h1>
 
-          <button
-            className="add-btn"
-            onClick={() => {
-              setEditingMovie(null);
-              setShowModal(true);
-            }}
-          >
-            <FaPlus />
-            Add Movie
-          </button>
-        </div>
+        <button
+          className="add-btn"
+          onClick={() => {
+            setEditingMovie(null);
+            setShowModal(true);
+          }}
+        >
+          <FaPlus />
+          Add Movie
+        </button>
+      </div>
 
-        <input
-          className="search-box"
-          placeholder="Search movie..."
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
+      <input
+        className="search-box"
+        placeholder="Search movie..."
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+      />
 
-        {loading ? (
-          <p>Loading Movies...</p>
-        ) : (
-          <table className="movie-table">
-            <thead>
+      {loading ? (
+        <p>Loading Movies...</p>
+      ) : (
+        <table className="movie-table">
+          <thead>
+            <tr>
+              <th>Poster</th>
+
+              <th>Title</th>
+
+              <th>Genre</th>
+
+              <th>Year</th>
+
+              <th>Rating</th>
+
+              <th>Action</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {filteredMovies.length === 0 ? (
               <tr>
-                <th>Poster</th>
-
-                <th>Title</th>
-
-                <th>Genre</th>
-
-                <th>Year</th>
-
-                <th>Rating</th>
-
-                <th>Action</th>
+                <td colSpan="6" className="no-data">
+                  No Movies Found
+                </td>
               </tr>
-            </thead>
+            ) : (
+              filteredMovies.map((movie) => (
+                <tr key={movie.id}>
+                  <td>
+                    <img
+                      src={movie.image}
+                      alt={movie.title}
+                      className="movie-thumb"
+                    />
+                  </td>
 
-            <tbody>
-              {filteredMovies.length === 0 ? (
-                <tr>
-                  <td colSpan="6" className="no-data">
-                    No Movies Found
+                  <td>{movie.title}</td>
+
+                  <td>{movie.genre}</td>
+
+                  <td>{movie.year}</td>
+
+                  <td>{movie.rating}</td>
+
+                  <td>
+                    <button
+                      className="edit-btn"
+                      onClick={() => {
+                        setEditingMovie(movie);
+
+                        setShowModal(true);
+                      }}
+                    >
+                      <FaEdit />
+                    </button>
+
+                    <button
+                      className="delete-btn"
+                      onClick={() => handleDelete(movie.id)}
+                    >
+                      <FaTrash />
+                    </button>
                   </td>
                 </tr>
-              ) : (
-                filteredMovies.map((movie) => (
-                  <tr key={movie.id}>
-                    <td>
-                      <img
-                        src={movie.image}
-                        alt={movie.title}
-                        className="movie-thumb"
-                      />
-                    </td>
-
-                    <td>{movie.title}</td>
-
-                    <td>{movie.genre}</td>
-
-                    <td>{movie.year}</td>
-
-                    <td>{movie.rating}</td>
-
-                    <td>
-                      <button
-                        className="edit-btn"
-                        onClick={() => {
-                          setEditingMovie(movie);
-
-                          setShowModal(true);
-                        }}
-                      >
-                        <FaEdit />
-                      </button>
-
-                      <button
-                        className="delete-btn"
-                        onClick={() => handleDelete(movie.id)}
-                      >
-                        <FaTrash />
-                      </button>
-                    </td>
-                  </tr>
-                ))
-              )}
-            </tbody>
-          </table>
-        )}
+              ))
+            )}
+          </tbody>
+        </table>
+      )}
     </>
   );
 }

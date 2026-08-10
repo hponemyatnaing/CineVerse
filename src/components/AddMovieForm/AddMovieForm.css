@@ -1,19 +1,7 @@
-/* ================================
-   CINEVERSE ADMIN MOVIE FORM
-   PROFESSIONAL CINEMA STYLE
-================================ */
-
-
 .movie-form {
-
   width: 100%;
 
-  background:
-  linear-gradient(
-    145deg,
-    #111827,
-    #020617
-  );
+  background: linear-gradient(145deg, #111827, #020617);
 
   padding: 35px;
 
@@ -21,569 +9,240 @@
 
   color: white;
 
-  box-shadow:
-  0 20px 50px rgba(0,0,0,0.5);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
 
   animation: formShow 0.5s ease;
-
 }
-
-
-
-/* FORM OPEN ANIMATION */
 
 @keyframes formShow {
-
   from {
+    opacity: 0;
 
-    opacity:0;
-
-    transform:
-    translateY(30px)
-    scale(.95);
-
+    transform: translateY(30px) scale(0.95);
   }
-
 
   to {
+    opacity: 1;
 
-    opacity:1;
-
-    transform:
-    translateY(0)
-    scale(1);
-
+    transform: translateY(0) scale(1);
   }
-
 }
-
-
-
-
-/* TITLE */
 
 .movie-form h2 {
+  text-align: center;
 
-  text-align:center;
+  font-size: 32px;
 
-  font-size:32px;
+  margin-bottom: 30px;
 
-  margin-bottom:30px;
+  font-weight: 800;
 
-  font-weight:800;
+  background: linear-gradient(90deg, #facc15, #ef4444);
 
+  -webkit-background-clip: text;
 
-  background:
-  linear-gradient(
-    90deg,
-    #facc15,
-    #ef4444
-  );
+  color: transparent;
 
-
-  -webkit-background-clip:text;
-
-  color:transparent;
-
-
-  letter-spacing:1px;
-
+  letter-spacing: 1px;
 }
-
-
-
-
-
-/* ===============================
- INPUT GROUP
-================================ */
-
 
 .form-group {
-
-  margin-bottom:20px;
-
+  margin-bottom: 20px;
 }
-
-
 
 .form-group label {
+  display: block;
 
+  margin-bottom: 8px;
 
-  display:block;
+  color: #facc15;
 
-  margin-bottom:8px;
+  font-weight: 600;
 
-  color:#facc15;
-
-  font-weight:600;
-
-  font-size:15px;
-
-
+  font-size: 15px;
 }
-
-
-
-
-/* ALL INPUT SAME HEIGHT */
-
 
 .form-group input,
 .form-group select,
 .form-group textarea {
+  width: 100%;
 
+  background: #0f172a;
 
-  width:100%;
+  color: white;
 
+  border: 1px solid #334155;
 
-  background:#0f172a;
+  border-radius: 12px;
 
+  padding: 14px 16px;
 
-  color:white;
+  font-size: 15px;
 
+  height: 52px;
 
-  border:1px solid #334155;
+  outline: none;
 
-
-  border-radius:12px;
-
-
-  padding:14px 16px;
-
-
-  font-size:15px;
-
-
-  height:52px;
-
-
-  outline:none;
-
-
-  transition:
-  .3s ease;
-
-
+  transition: 0.3s ease;
 }
-
-
-
-
-/* TEXTAREA */
 
 .form-group textarea {
+  height: 130px;
 
-
-  height:130px;
-
-  resize:none;
-
-
+  resize: none;
 }
-
-
-
-
-
-/* INPUT FOCUS */
-
 
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus {
+  border-color: #facc15;
 
+  box-shadow: 0 0 0 3px rgba(250, 204, 21, 0.2);
 
-  border-color:#facc15;
-
-
-  box-shadow:
-
-  0 0 0 3px rgba(250,204,21,.2);
-
-
-  transform:translateY(-2px);
-
-
+  transform: translateY(-2px);
 }
-
-
-
-
-
-
-/* SELECT ARROW */
 
 .form-group select {
-
-
- cursor:pointer;
-
+  cursor: pointer;
 }
-
-
-
-
-/* ===============================
- TRAILER BOX
-================================ */
-
 
 .trailer-box {
-
-
- margin-top:20px;
-
+  margin-top: 20px;
 }
-
 
 .trailer-box input {
+  width: 100%;
 
+  height: 52px;
 
- width:100%;
+  background: #0f172a;
 
+  border: 1px solid #334155;
 
- height:52px;
+  border-radius: 12px;
 
+  padding: 14px;
 
- background:#0f172a;
-
-
- border:1px solid #334155;
-
-
- border-radius:12px;
-
-
- padding:14px;
-
-
- color:white;
-
-
+  color: white;
 }
-
-
-
-
-
-
-/* ===============================
- BUTTON AREA
-================================ */
-
 
 .form-actions {
+  display: flex;
 
+  gap: 15px;
 
- display:flex;
-
-
- gap:15px;
-
-
- margin-top:30px;
-
-
+  margin-top: 30px;
 }
-
-
-
 
 button {
-
-
- font-family:inherit;
-
+  font-family: inherit;
 }
-
-
-
 
 .save-btn,
 .cancel-btn {
+  flex: 1;
 
+  height: 52px;
 
- flex:1;
+  border: none;
 
+  border-radius: 14px;
 
- height:52px;
+  font-size: 16px;
 
+  font-weight: 700;
 
- border:none;
+  cursor: pointer;
 
+  transition: 0.25s;
 
- border-radius:14px;
+  position: relative;
 
-
- font-size:16px;
-
-
- font-weight:700;
-
-
- cursor:pointer;
-
-
- transition:.25s;
-
-
- position:relative;
-
-
- overflow:hidden;
-
-
+  overflow: hidden;
 }
-
-
-
-
-
-/* SAVE BUTTON */
-
 
 .save-btn {
+  background: linear-gradient(135deg, #dc2626, #facc15);
 
-
- background:
-
- linear-gradient(
- 135deg,
- #dc2626,
- #facc15
- );
-
-
- color:white;
-
-
+  color: white;
 }
-
-
-
-
 
 .save-btn:hover {
+  transform: translateY(-3px);
 
-
- transform:
- translateY(-3px);
-
-
- box-shadow:
-
- 0 10px 25px rgba(250,204,21,.4);
-
-
+  box-shadow: 0 10px 25px rgba(250, 204, 21, 0.4);
 }
-
-
-
 
 .save-btn:active {
-
-
- transform:
- scale(.94);
-
-
+  transform: scale(0.94);
 }
-
-
-
-
-
-
-/* CANCEL */
-
 
 .cancel-btn {
+  background: #334155;
 
-
- background:#334155;
-
-
- color:white;
-
-
+  color: white;
 }
-
-
-
 
 .cancel-btn:hover {
+  background: #475569;
 
-
- background:#475569;
-
-
- transform:
- translateY(-3px);
-
-
+  transform: translateY(-3px);
 }
-
-
-
 
 .cancel-btn:active {
-
-
- transform:
- scale(.94);
-
-
+  transform: scale(0.94);
 }
-
-
-
-
-
-/* ===============================
- MOVIE CATEGORY SELECT
-================================ */
-
 
 .movie-form select {
+  appearance: none;
 
+  background-image:
+    linear-gradient(45deg, transparent 50%, #facc15 50%),
+    linear-gradient(135deg, #facc15 50%, transparent 50%);
 
- appearance:none;
+  background-position:
+    calc(100% - 20px) 22px,
+    calc(100% - 15px) 22px;
 
+  background-size: 5px 5px;
 
- background-image:
-
- linear-gradient(
- 45deg,
- transparent 50%,
- #facc15 50%
- ),
-
- linear-gradient(
- 135deg,
- #facc15 50%,
- transparent 50%
- );
-
-
- background-position:
-
- calc(100% - 20px) 22px,
-
- calc(100% - 15px) 22px;
-
-
- background-size:
-
- 5px 5px;
-
-
- background-repeat:no-repeat;
-
-
+  background-repeat: no-repeat;
 }
-
-
-
-
-/* ===============================
- MODAL CARD
-================================ */
-
 
 .modal {
+  background: linear-gradient(145deg, #111827, #020617);
 
+  border-radius: 25px;
 
- background:
+  padding: 10px;
 
- linear-gradient(
- 145deg,
- #111827,
- #020617
- );
-
-
- border-radius:25px;
-
-
- padding:10px;
-
-
- animation:
-
- modalPop .4s ease;
-
-
+  animation: modalPop 0.4s ease;
 }
-
-
-
 
 @keyframes modalPop {
+  from {
+    opacity: 0;
 
+    transform: scale(0.8);
+  }
 
- from {
+  to {
+    opacity: 1;
 
- opacity:0;
-
- transform:
- scale(.8);
-
- }
-
-
- to {
-
- opacity:1;
-
- transform:
- scale(1);
-
- }
-
+    transform: scale(1);
+  }
 }
 
+@media (max-width: 768px) {
+  .movie-form {
+    padding: 20px;
+  }
 
+  .movie-form h2 {
+    font-size: 24px;
+  }
 
-
-
-/* ===============================
- RESPONSIVE
-================================ */
-
-
-
-@media(max-width:768px){
-
-
-.movie-form{
-
-
- padding:20px;
-
-
-}
-
-
-
-.movie-form h2{
-
-
- font-size:24px;
-
-
-}
-
-
-
-.form-actions{
-
-
- flex-direction:column;
-
-
-}
-
-
-
+  .form-actions {
+    flex-direction: column;
+  }
 }

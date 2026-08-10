@@ -1,149 +1,146 @@
 .review-list {
-    margin-top: 50px;
+  margin-top: 50px;
 }
 
 .review-list h2 {
-    font-size: 22px;
-    font-weight: 600;
-    color: #f8fafc;
-    margin-bottom: 25px;
-    border-left: 4px solid #7c3aed;
-    padding-left: 12px;
+  font-size: 22px;
+  font-weight: 600;
+  color: #f8fafc;
+  margin-bottom: 25px;
+  border-left: 4px solid #7c3aed;
+  padding-left: 12px;
 }
 
 .review-card {
-    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-    padding: 24px;
-    border-radius: 16px;
-    margin-bottom: 20px;
-    color: white;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
-    transition: transform 0.2s ease, border-color 0.2s ease;
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  padding: 24px;
+  border-radius: 16px;
+  margin-bottom: 20px;
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .review-card:hover {
-    border-color: rgba(124, 58, 237, 0.4);
+  border-color: rgba(124, 58, 237, 0.4);
 }
 
 .review-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
 }
 
 .review-header h3 {
-    margin: 0;
-    font-size: 16px;
-    font-weight: 600;
-    color: #f3f4f6;
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #f3f4f6;
 }
 
 .review-header span {
-    font-size: 13px;
-    color: #94a3b8;
-    background: rgba(255, 255, 255, 0.03);
-    padding: 4px 10px;
-    border-radius: 20px;
+  font-size: 13px;
+  color: #94a3b8;
+  background: rgba(255, 255, 255, 0.03);
+  padding: 4px 10px;
+  border-radius: 20px;
 }
 
 .review-stars {
-    display: flex;
-    gap: 4px;
-    margin-bottom: 14px;
+  display: flex;
+  gap: 4px;
+  margin-bottom: 14px;
 }
 
 .review-stars svg {
-    color: #334155;
-    font-size: 15px;
+  color: #334155;
+  font-size: 15px;
 }
 
 .review-stars .active {
-    color: #fbbf24;
+  color: #fbbf24;
 }
 
 .review-card p {
-    line-height: 1.6;
-    color: #cbd5e1;
-    font-size: 15px;
-    margin: 0 0 18px 0;
+  line-height: 1.6;
+  color: #cbd5e1;
+  font-size: 15px;
+  margin: 0 0 18px 0;
 }
 
-/* Edit textarea */
 .review-card textarea {
-    width: 100%;
-    min-height: 110px;
-    padding: 14px;
-    border-radius: 10px;
-    border: 1px solid #334155;
-    background: #0b0f19;
-    color: #f8fafc;
-    outline: none;
-    resize: vertical;
-    margin-bottom: 18px;
-    font-size: 15px;
-    font-family: inherit;
-    transition: border-color 0.2s;
+  width: 100%;
+  min-height: 110px;
+  padding: 14px;
+  border-radius: 10px;
+  border: 1px solid #334155;
+  background: #0b0f19;
+  color: #f8fafc;
+  outline: none;
+  resize: vertical;
+  margin-bottom: 18px;
+  font-size: 15px;
+  font-family: inherit;
+  transition: border-color 0.2s;
 }
 
 .review-card textarea:focus {
-    border-color: #7c3aed;
-    box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.2);
+  border-color: #7c3aed;
+  box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.2);
 }
 
-/* Action Buttons Container */
 .review-actions {
-    display: flex;
-    gap: 12px;
-    align-items: center;
+  display: flex;
+  gap: 12px;
+  align-items: center;
 }
 
-/* Edit / Save Buttons */
 .review-card button {
-    padding: 8px 18px;
-    border: none;
-    border-radius: 8px;
-    background: #7c3aed;
-    color: white;
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: 500;
-    transition: all 0.2s ease;
+  padding: 8px 18px;
+  border: none;
+  border-radius: 8px;
+  background: #7c3aed;
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s ease;
 }
 
 .review-card button:hover {
-    background: #6d28d9;
-    transform: translateY(-1px);
+  background: #6d28d9;
+  transform: translateY(-1px);
 }
 
 .review-empty {
-    margin-top: 40px;
-    text-align: center;
-    color: #64748b;
-    font-size: 15px;
-    font-style: italic;
-    background: #1e293b;
-    padding: 30px;
-    border-radius: 12px;
-    border: 1px dashed rgba(255, 255, 255, 0.05);
+  margin-top: 40px;
+  text-align: center;
+  color: #64748b;
+  font-size: 15px;
+  font-style: italic;
+  background: #1e293b;
+  padding: 30px;
+  border-radius: 12px;
+  border: 1px dashed rgba(255, 255, 255, 0.05);
 }
-
-/* Delete Button */
 .delete-review-btn {
-    background: rgba(239, 68, 68, 0.1) !important;
-    color: #ef4444 !important;
-    border: 1px solid rgba(239, 68, 68, 0.2) !important;
-    padding: 8px 16px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: 500;
-    font-size: 14px;
-    transition: all 0.2s ease;
+  background: rgba(239, 68, 68, 0.1) !important;
+  color: #ef4444 !important;
+  border: 1px solid rgba(239, 68, 68, 0.2) !important;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 14px;
+  transition: all 0.2s ease;
 }
 
 .delete-review-btn:hover {
-    background: #ef4444 !important;
-    color: white !important;
-    transform: translateY(-1px);
+  background: #ef4444 !important;
+  color: white !important;
+  transform: translateY(-1px);
 }

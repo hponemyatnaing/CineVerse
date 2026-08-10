@@ -2,8 +2,6 @@ import { collection, getCountFromServer, getDocs } from "firebase/firestore";
 
 import { db } from "../firebase/firebase";
 
-// Dashboard Statistics
-
 export async function getDashboardStats() {
   try {
     const movies = await getCountFromServer(collection(db, "movies"));
@@ -31,8 +29,6 @@ export async function getDashboardStats() {
     };
   }
 }
-
-// 🔥 Trending Movies (Most Views)
 
 export async function getTrendingMovies() {
   try {

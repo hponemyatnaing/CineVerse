@@ -136,10 +136,6 @@
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
 }
 
-/* ===============================
-   Movie Recommendation Sections
-================================ */
-
 .movie-row {
   display: grid;
 
@@ -149,8 +145,6 @@
 
   width: 100%;
 }
-
-/* Dashboard Movie Cards */
 
 .movie-row .movie-card {
   background: #1e293b;
@@ -168,8 +162,6 @@
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.35);
 }
 
-/* Movie Image */
-
 .movie-row .movie-image {
   position: relative;
 
@@ -185,8 +177,6 @@
 
   object-fit: cover;
 }
-
-/* Movie Title Area */
 
 .movie-row .movie-content {
   padding: 15px;
@@ -204,8 +194,6 @@
   text-overflow: ellipsis;
 }
 
-/* Section Title */
-
 .dashboard-section h2 {
   display: flex;
 
@@ -218,15 +206,11 @@
   gap: 10px;
 }
 
-/* Empty Data Text */
-
 .movie-row p {
   color: #94a3b8;
 
   font-size: 16px;
 }
-
-/* Tablet */
 
 @media (max-width: 900px) {
   .movie-row {
@@ -237,8 +221,6 @@
     height: 230px;
   }
 }
-
-/* Mobile */
 
 @media (max-width: 600px) {
   .movie-row {

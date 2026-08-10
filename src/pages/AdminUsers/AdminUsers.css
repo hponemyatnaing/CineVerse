@@ -1,302 +1,154 @@
 .admin-users {
+  min-height: 100vh;
 
-    min-height: 100vh;
+  padding: 30px;
 
-    padding: 30px;
+  background: #111;
 
-    background: #111;
-
-    color: white;
-
+  color: white;
 }
-
-
-/* TITLE */
 
 .admin-users h1 {
+  font-size: 32px;
 
-    font-size: 32px;
-
-    margin-bottom: 10px;
-
+  margin-bottom: 10px;
 }
-
-
-
-/* TOTAL USERS */
 
 .user-count {
+  color: #aaa;
 
-    color: #aaa;
+  font-size: 18px;
 
-    font-size: 18px;
-
-    margin-bottom: 30px;
-
+  margin-bottom: 30px;
 }
-
-
-
-/* TABLE CONTAINER */
 
 .users-table {
+  width: 100%;
 
-    width: 100%;
+  background: #181818;
 
-    background: #181818;
+  border-radius: 15px;
 
-    border-radius: 15px;
+  overflow: hidden;
 
-    overflow: hidden;
-
-    border: 1px solid #333;
-
+  border: 1px solid #333;
 }
-
-
-
-/* HEADER */
 
 .table-header {
+  display: grid;
 
-    display: grid;
+  grid-template-columns: 2fr 2.5fr 1fr 1.5fr 1fr;
 
-    grid-template-columns:
-        2fr 2.5fr 1fr 1.5fr 1fr;
+  padding: 18px 25px;
 
+  background: #222;
 
-    padding: 18px 25px;
+  font-weight: bold;
 
-
-    background: #222;
-
-
-    font-weight: bold;
-
-
-    color: #e50914;
-
-
+  color: #e50914;
 }
-
-
-
-
-/* USER ROW */
 
 .table-row {
+  display: grid;
 
-    display: grid;
+  grid-template-columns: 2fr 2.5fr 1fr 1.5fr 1fr;
 
+  align-items: center;
 
-    grid-template-columns:
-        2fr 2.5fr 1fr 1.5fr 1fr;
+  padding: 20px 25px;
 
+  border-bottom: 1px solid #333;
 
-    align-items: center;
-
-
-    padding: 20px 25px;
-
-
-    border-bottom: 1px solid #333;
-
-
-    transition: .3s;
-
-
+  transition: 0.3s;
 }
-
-
-
 
 .table-row:hover {
-
-    background: #242424;
-
+  background: #242424;
 }
-
-
-
 
 .table-row span {
+  color: #ddd;
 
-    color: #ddd;
-
-    font-size: 15px;
-
+  font-size: 15px;
 }
-
-
-
-
-/* ROLE */
 
 .admin-role {
+  display: inline-block;
 
+  width: fit-content;
 
-    display: inline-block;
+  padding: 6px 14px;
 
+  border-radius: 20px;
 
-    width: fit-content;
+  background: #e50914;
 
+  color: white !important;
 
-    padding: 6px 14px;
-
-
-    border-radius: 20px;
-
-
-    background: #e50914;
-
-
-    color: white !important;
-
-
-    font-size: 13px;
-
-
+  font-size: 13px;
 }
-
-
 
 .user-role {
+  display: inline-block;
 
+  width: fit-content;
 
-    display: inline-block;
+  padding: 6px 14px;
 
+  border-radius: 20px;
 
-    width: fit-content;
+  background: #333;
 
+  color: #ddd !important;
 
-    padding: 6px 14px;
-
-
-    border-radius: 20px;
-
-
-    background: #333;
-
-
-    color: #ddd !important;
-
-
-    font-size: 13px;
-
-
+  font-size: 13px;
 }
-
-
-
-
-/* DELETE BUTTON */
 
 .table-row button {
+  background: #e50914;
 
+  color: white;
 
-    background: #e50914;
+  border: none;
 
+  padding: 10px 15px;
 
-    color: white;
+  border-radius: 8px;
 
+  cursor: pointer;
 
-    border: none;
+  transition: 0.3s;
 
-
-    padding: 10px 15px;
-
-
-    border-radius: 8px;
-
-
-    cursor: pointer;
-
-
-    transition: .3s;
-
-
-    font-size: 14px;
-
-
+  font-size: 14px;
 }
-
-
 
 .table-row button:hover {
+  background: #b20710;
 
-
-    background: #b20710;
-
-
-    transform: scale(1.05);
-
-
+  transform: scale(1.05);
 }
-
-
-
-
-
-/* EMPTY */
 
 .users-table:empty {
-
-
-    text-align: center;
-
-
+  text-align: center;
 }
 
+@media (max-width: 900px) {
+  .users-table {
+    overflow-x: auto;
+  }
 
-
-
-
-/* RESPONSIVE */
-
-
-@media(max-width:900px) {
-
-
-    .users-table {
-
-        overflow-x: auto;
-
-    }
-
-
-    .table-header,
-    .table-row {
-
-
-        min-width: 900px;
-
-
-    }
-
-
+  .table-header,
+  .table-row {
+    min-width: 900px;
+  }
 }
 
+@media (max-width: 600px) {
+  .admin-users {
+    padding: 15px;
+  }
 
-
-
-@media(max-width:600px) {
-
-
-    .admin-users {
-
-
-        padding: 15px;
-
-    }
-
-
-
-    .admin-users h1 {
-
-
-        font-size: 25px;
-
-    }
-
-
+  .admin-users h1 {
+    font-size: 25px;
+  }
 }

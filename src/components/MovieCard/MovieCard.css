@@ -1,4 +1,3 @@
-/* Movie Card Container */
 .movie-card {
   background: #1e293b;
   border-radius: 18px;
@@ -8,18 +7,11 @@
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
 }
 
-.movie-card:hover{
+.movie-card:hover {
+  transform: translateY(-12px) scale(1.03);
 
-    transform:
-    translateY(-12px)
-    scale(1.03);
-
-    box-shadow:
-    0 30px 60px rgba(0,0,0,.5);
-
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
 }
-
-/* Poster/Image Section */
 .movie-image {
   position: relative;
   overflow: hidden;
@@ -36,8 +28,6 @@
 .movie-card:hover img {
   transform: scale(1.08);
 }
-
-/* Buttons and Badges */
 .favorite-btn {
   position: absolute;
   top: 15px;
@@ -73,11 +63,9 @@
   padding: 8px 12px;
   background: rgba(0, 0, 0, 0.75);
   border-radius: 25px;
-  color: #FFD700;
+  color: #ffd700;
   font-weight: 600;
 }
-
-/* Movie Content Info */
 .movie-content {
   padding: 18px;
 }

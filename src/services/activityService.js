@@ -23,8 +23,6 @@ export const addActivity = async (userId, data) => {
   );
 };
 
-// GET ACTIVITY
-
 export const getUserActivities = async (userId) => {
   const q = query(
     collection(db, "activities"),

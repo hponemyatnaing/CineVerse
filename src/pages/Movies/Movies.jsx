@@ -158,7 +158,7 @@ function Movies() {
 
         <div className="movie-result">
           Showing <strong>{filteredMovies.length}</strong>
-           Movies
+          Movies
         </div>
 
         <select value={sort} onChange={(e) => setSort(e.target.value)}>

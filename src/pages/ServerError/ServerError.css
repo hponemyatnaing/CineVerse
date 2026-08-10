@@ -1,25 +1,21 @@
-.server-error{
+.server-error {
+  min-height: 100vh;
 
-    min-height:100vh;
+  display: flex;
 
-    display:flex;
+  justify-content: center;
 
-    justify-content:center;
+  align-items: center;
 
-    align-items:center;
+  flex-direction: column;
 
-    flex-direction:column;
+  background: #020617;
 
-    background:#020617;
-
-    color:white;
-
+  color: white;
 }
 
-.server-error h1{
+.server-error h1 {
+  font-size: 90px;
 
-    font-size:90px;
-
-    color:#ef4444;
-
+  color: #ef4444;
 }

@@ -1,5 +1,4 @@
 .hero {
-
   display: flex;
   min-height: 85vh;
 
@@ -13,7 +12,6 @@
 }
 
 .hero-wrapper {
-
   display: flex;
   width: 100%;
 
@@ -79,7 +77,6 @@
 }
 
 .watch-btn {
-
   display: flex;
   background: linear-gradient(135deg, #8b5cf6, #ec4899);
 
@@ -103,7 +100,6 @@
 }
 
 .info-btn {
-
   display: flex;
   background: rgba(255, 255, 255, 0.15);
 
@@ -144,7 +140,6 @@
   }
 
   .hero {
-
     display: flex;
     min-height: 85vh;
 
@@ -158,7 +153,6 @@
   }
 
   .hero-wrapper {
-
     display: flex;
     width: 100%;
 
@@ -278,7 +272,6 @@
   /* POSTER */
 
   .poster-card {
-
     position: relative;
     width: 330px;
 
@@ -323,7 +316,6 @@
 /* POSTER */
 
 .poster-card {
-
   position: relative;
   width: 330px;
 
