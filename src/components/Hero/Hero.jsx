@@ -47,7 +47,7 @@ function Hero({ movies = [] }) {
 
           <p>
             {movie.overview ||
-              "Enjoy the latest trending movies and discover amazing stories."}
+              "Discover. Watch. Review. Enjoy your next favorite movie."}
           </p>
 
           <div className="hero-buttons">

@@ -178,7 +178,7 @@ function AddMovieForm({ movie, onClose, onSuccess }) {
         </div>
 
         <div className="form-group">
-          <label>Release Year</label>
+          {/* <label>Release Year</label> */}
 
           <label>Release Date</label>
 

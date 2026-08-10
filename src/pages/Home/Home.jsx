@@ -21,6 +21,10 @@ function Home() {
 
   const [latest, setLatest] = useState([]);
 
+  const [firebaseTrending, setFirebaseTrending] = useState([]);
+  const [firebaseHot, setFirebaseHot] = useState([]);
+  const [firebaseLatest, setFirebaseLatest] = useState([]);
+
   const [history, setHistory] = useState([]);
 
   const [top10, setTop10] = useState([]);
@@ -52,13 +56,26 @@ function Home() {
 
       setHot(hotData || []);
 
-      const latestMovies = (firebaseMovies || [])
-
+      const firebaseLatestMovies = (firebaseMovies || [])
+        .filter((movie) => movie.category === "latest")
         .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-
         .slice(0, 10);
 
-      setLatest(latestMovies);
+      const firebaseTrendingMovies = (firebaseMovies || [])
+        .filter((movie) => movie.category === "trending")
+        .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+        .slice(0, 10);
+
+      const firebaseHotMovies = (firebaseMovies || [])
+        .filter((movie) => movie.category === "hot")
+        .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+        .slice(0, 10);
+
+      setFirebaseTrending(firebaseTrendingMovies);
+      setFirebaseHot(firebaseHotMovies);
+      setFirebaseLatest(firebaseLatestMovies);
+
+      setLatest(firebaseLatestMovies);
 
       const watched = getWatchHistory();
 
@@ -76,7 +93,6 @@ function Home() {
 
   return (
     <main>
-
       <Hero movies={trending} />
 
       <Top10Movies movies={top10} />
@@ -87,11 +103,15 @@ function Home() {
 
       <MovieSection
         title="🔥 Trending Movies"
-        movies={trending}
+        movies={[...trending, ...firebaseTrending]}
         category="trending"
       />
 
-      <MovieSection title="⚡ Hot Today" movies={hot} category="hot" />
+      <MovieSection
+        title="⚡ Hot Today"
+        movies={[...hot, ...firebaseHot]}
+        category="hot"
+      />
 
       <MovieSection
         title="🆕 Latest Movies"
