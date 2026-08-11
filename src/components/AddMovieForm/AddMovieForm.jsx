@@ -153,7 +153,7 @@ function AddMovieForm({ movie, onClose, onSuccess }) {
     <form className="movie-form" onSubmit={handleSubmit}>
       <div className="form-title">
         <h2>{movie ? "Edit Movie" : "Add New Movie"}</h2>
-        <p>Manage movie information</p>
+        {/* <p>Manage movie information</p> */}
       </div>
 
       <div className="form-grid">

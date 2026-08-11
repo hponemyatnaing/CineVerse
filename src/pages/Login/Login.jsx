@@ -7,7 +7,8 @@ import { FaEnvelope, FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
 
 import * as Yup from "yup";
 
-import { loginUser } from "../../services/authService";
+import { loginUser, resetUserPassword } from "../../services/authService";
+
 import { getUserProfile } from "../../services/userService";
 
 function Login() {
@@ -116,6 +117,46 @@ function Login() {
     }
   };
 
+  const handleForgotPassword = async () => {
+    setError("");
+
+    const resetEmail = email.trim();
+
+    if (!resetEmail) {
+      setError("Please enter your email address first.");
+      return;
+    }
+
+    try {
+      setLoading(true);
+
+      await resetUserPassword(resetEmail);
+
+      alert("Password reset email sent successfully. Please check your email.");
+    } catch (error) {
+      console.log("Forgot Password Error:", error);
+
+      switch (error.code) {
+        case "auth/invalid-email":
+          setError("Please enter a valid email address.");
+          break;
+
+        case "auth/user-not-found":
+          setError("No account found with this email address.");
+          break;
+
+        case "auth/too-many-requests":
+          setError("Too many requests. Please try again later.");
+          break;
+
+        default:
+          setError(error.message || "Unable to send password reset email.");
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const handleInputChange = (setter) => (e) => {
     setter(e.target.value);
 
@@ -181,9 +222,7 @@ function Login() {
             <button
               type="button"
               className="forgot-password"
-              onClick={() => {
-                alert("Forgot password feature will be available soon.");
-              }}
+              onClick={handleForgotPassword}
               disabled={loading}
             >
               Forgot Password?

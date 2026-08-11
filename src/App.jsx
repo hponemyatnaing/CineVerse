@@ -16,6 +16,7 @@ import AdminDashboard from "./pages/Admin/AdminDashboard";
 import AdminMovies from "./pages/Admin/AdminMovies";
 import AddMovieForm from "./components/AddMovieForm/AddMovieForm";
 import AdminRoute from "./routes/AdminRoute";
+import AdminRedirectRoute from "./routes/AdminRedirectRoute";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import PublicRoute from "./routes/PublicRoute";
 import AdminUsers from "./pages/AdminUsers/AdminUsers";
@@ -28,7 +29,14 @@ function App() {
     <>
       <ScrollToTop />
       <Routes>
-        <Route path="/" element={<MainLayout />}>
+        <Route
+          path="/"
+          element={
+            <AdminRedirectRoute>
+              <MainLayout />
+            </AdminRedirectRoute>
+          }
+        >
           <Route index element={<Home />} />
           <Route path="movies" element={<Movies />} />
           <Route path="about" element={<About />} />
