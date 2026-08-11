@@ -203,20 +203,57 @@ export const getTop10Movies = async () => {
   }
 };
 
+const toGenreArray = (genre) => {
+  if (Array.isArray(genre)) {
+    return genre
+      .map((g) => (typeof g === "string" ? g.trim() : g?.name))
+      .filter(Boolean);
+  }
+
+  if (typeof genre === "string") {
+    return genre
+      .split(",")
+      .map((g) => g.trim())
+      .filter(Boolean);
+  }
+
+  return [];
+};
+
 export const getSimilarFirebaseMovies = async (currentMovie) => {
   try {
     const movies = await getMovies();
 
+    const currentGenres = toGenreArray(currentMovie.genre).map((g) =>
+      g.toLowerCase(),
+    );
+
+    if (currentGenres.length === 0) {
+      return [];
+    }
+
     const similar = movies
-      .filter(
-        (movie) =>
-          movie.id !== currentMovie.id &&
-          movie.genre &&
-          currentMovie.genre &&
-          movie.genre.toLowerCase() === currentMovie.genre.toLowerCase(),
+      .filter((movie) => movie.id !== currentMovie.id)
+      .map((movie) => {
+        const movieGenres = toGenreArray(movie.genre).map((g) =>
+          g.toLowerCase(),
+        );
+
+        const overlap = movieGenres.filter((g) => currentGenres.includes(g));
+
+        return {
+          movie,
+          overlapCount: overlap.length,
+          score: Number(movie.rating || 0),
+        };
+      })
+      .filter(({ overlapCount }) => overlapCount > 0)
+      .sort(
+        (a, b) =>
+          b.score - a.score || b.overlapCount - a.overlapCount,
       )
-      .sort((a, b) => Number(b.rating) - Number(a.rating))
-      .slice(0, 8);
+      .slice(0, 8)
+      .map(({ movie }) => movie);
 
     return similar;
   } catch (error) {
