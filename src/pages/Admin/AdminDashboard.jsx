@@ -159,7 +159,7 @@ function AdminDashboard() {
         </div>
       </div>
 
-      <div className="dashboard-section">
+      {/* <div className="dashboard-section">
         <h2>Project Status</h2>
 
         <div className="status-box">
@@ -171,7 +171,7 @@ function AdminDashboard() {
 
           <p>✅ Admin Movie Management Completed</p>
         </div>
-      </div>
+      </div> */}
     </>
   );
 }

@@ -33,6 +33,8 @@ function AdminFavorites() {
         ...item.data(),
       }));
 
+      data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
       setFavorites(data);
     } catch (error) {
       console.log("Load favorites error:", error);

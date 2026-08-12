@@ -29,6 +29,8 @@ function AdminReviews() {
         ...item.data(),
       }));
 
+      data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
       setReviews(data);
     } catch (error) {
       console.log("Load reviews error:", error);
@@ -91,13 +93,9 @@ function AdminReviews() {
                   {review.createdAt
                     ? new Date(review.createdAt).toLocaleString("en-US", {
                         year: "numeric",
-
                         month: "short",
-
                         day: "numeric",
-
                         hour: "2-digit",
-
                         minute: "2-digit",
                       })
                     : "Unknown date"}

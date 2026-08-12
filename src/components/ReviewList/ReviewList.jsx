@@ -127,7 +127,7 @@ function ReviewList({ movieId, refresh }) {
                 {editingId === review.id ? (
                   <button onClick={() => handleSave(review.id)}>Save</button>
                 ) : (
-                  <button onClick={() => handleEdit(review)}>Edit</button>
+                  <button onClick={() => handleEdit(review)}>✏️ Edit</button>
                 )}
 
                 <button

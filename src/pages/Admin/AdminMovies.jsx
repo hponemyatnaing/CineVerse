@@ -25,6 +25,8 @@ function AdminMovies() {
 
       const data = await getMovies();
 
+      data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
       setMovies(data);
     } catch (error) {
       console.log(error);
@@ -159,7 +161,6 @@ function AdminMovies() {
                       className="edit-btn"
                       onClick={() => {
                         setEditingMovie(movie);
-
                         setShowModal(true);
                       }}
                     >

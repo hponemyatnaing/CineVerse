@@ -247,11 +247,11 @@ function Profile() {
         <h2>🏆 Achievements</h2>
 
         <div className="achievement-grid">
-          <AchievementCard
+          {/* <AchievementCard
             icon="🎬"
             title="Movie Beginner"
             description="Watched your first movie"
-          />
+          /> */}
 
           <AchievementCard
             icon="❤️"

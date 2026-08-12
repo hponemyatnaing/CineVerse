@@ -9,7 +9,7 @@ function Top10Movies({ movies }) {
 
   return (
     <section className="top10-section">
-      <h2>🔥 Top 10 Today</h2>
+      <h2>🔥 Top 10 Movies</h2>
 
       <div className="top10-container">
         {movies.map((movie, index) => (

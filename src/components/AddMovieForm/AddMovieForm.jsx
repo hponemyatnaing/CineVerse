@@ -51,6 +51,14 @@ function AddMovieForm({ movie, onClose, onSuccess }) {
     trailerUrl: Yup.string().optional(),
     category: Yup.string().required("Category is required"),
   });
+  
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, []);
 
   useEffect(() => {
     if (movie) {
@@ -88,11 +96,16 @@ function AddMovieForm({ movie, onClose, onSuccess }) {
 
   const handleGenreChange = (e) => {
     const { value, checked } = e.target;
+
     setFormData((prev) => {
       const updatedGenres = checked
         ? [...prev.genre, value]
         : prev.genre.filter((item) => item !== value);
-      return { ...prev, genre: updatedGenres };
+
+      return {
+        ...prev,
+        genre: updatedGenres,
+      };
     });
 
     if (error) {
@@ -105,7 +118,9 @@ function AddMovieForm({ movie, onClose, onSuccess }) {
     setError("");
 
     try {
-      await movieSchema.validate(formData, { abortEarly: true });
+      await movieSchema.validate(formData, {
+        abortEarly: true,
+      });
 
       setLoading(true);
 
@@ -153,12 +168,14 @@ function AddMovieForm({ movie, onClose, onSuccess }) {
     <form className="movie-form" onSubmit={handleSubmit}>
       <div className="form-title">
         <h2>{movie ? "Edit Movie" : "Add New Movie"}</h2>
+
         {/* <p>Manage movie information</p> */}
       </div>
 
       <div className="form-grid">
         <div className="form-group">
           <label>Movie Title</label>
+
           <input
             type="text"
             name="title"
@@ -171,19 +188,23 @@ function AddMovieForm({ movie, onClose, onSuccess }) {
 
         <div className="form-group">
           <label>Category</label>
+
           <select
             name="category"
             value={formData.category}
             onChange={handleChange}
           >
             <option value="latest">Latest Movies</option>
+
             <option value="trending">Trending Movies</option>
+
             <option value="hot">Hot Movies</option>
           </select>
         </div>
 
         <div className="form-group">
           <label>Poster Image URL</label>
+
           <input
             type="text"
             name="image"
@@ -196,6 +217,7 @@ function AddMovieForm({ movie, onClose, onSuccess }) {
 
         <div className="form-group">
           <label>Release Date</label>
+
           <input
             type="date"
             name="releaseDate"
@@ -206,6 +228,7 @@ function AddMovieForm({ movie, onClose, onSuccess }) {
 
         <div className="form-group">
           <label>Rating</label>
+
           <input
             type="number"
             step="0.1"
@@ -222,6 +245,7 @@ function AddMovieForm({ movie, onClose, onSuccess }) {
 
       <div className="form-group full">
         <label>Genres (Select multiple)</label>
+
         <div
           className="genre-checkbox-grid"
           style={{
@@ -249,6 +273,7 @@ function AddMovieForm({ movie, onClose, onSuccess }) {
                 checked={formData.genre.includes(g)}
                 onChange={handleGenreChange}
               />
+
               {g}
             </label>
           ))}
@@ -257,6 +282,7 @@ function AddMovieForm({ movie, onClose, onSuccess }) {
 
       <div className="form-group full">
         <label>Trailer URL</label>
+
         <input
           type="text"
           name="trailerUrl"
@@ -268,6 +294,7 @@ function AddMovieForm({ movie, onClose, onSuccess }) {
 
       <div className="form-group full">
         <label>Description</label>
+
         <textarea
           rows="6"
           name="description"

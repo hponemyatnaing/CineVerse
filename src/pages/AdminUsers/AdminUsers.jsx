@@ -29,6 +29,8 @@ function AdminUsers() {
         ...item.data(),
       }));
 
+      data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
       setUsers(data);
     } catch (error) {
       console.log("Load users error:", error);
