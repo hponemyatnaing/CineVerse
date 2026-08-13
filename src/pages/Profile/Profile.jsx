@@ -4,11 +4,7 @@ import { useEffect, useState } from "react";
 
 import { useAuth } from "../../context/AuthContext";
 
-import {
-  getUserProfile,
-  updateUserProfile,
-  logoutUser,
-} from "../../services/userService";
+import { getUserProfile, updateUserProfile } from "../../services/userService";
 
 import { useFavorites } from "../../context/FavoritesContext";
 
@@ -73,19 +69,13 @@ function Profile() {
 
       const reviewQuery = query(
         collection(db, "reviews"),
-
-        or(
-          where("userId", "==", user.uid),
-
-          where("uid", "==", user.uid),
-        ),
+        or(where("userId", "==", user.uid), where("uid", "==", user.uid)),
       );
 
       const snapshot = await getDocs(reviewQuery);
 
       const reviewData = snapshot.docs.map((doc) => ({
         id: doc.id,
-
         ...doc.data(),
       }));
 
@@ -103,17 +93,12 @@ function Profile() {
     try {
       setLoading(true);
 
-      await updateUserProfile(
-        user.uid,
-
-        {
-          name,
-        },
-      );
+      await updateUserProfile(user.uid, {
+        name,
+      });
 
       setProfile((prev) => ({
         ...prev,
-
         name,
       }));
 
@@ -138,17 +123,12 @@ function Profile() {
       try {
         setUploading(true);
 
-        await updateUserProfile(
-          user.uid,
-
-          {
-            photoURL: image,
-          },
-        );
+        await updateUserProfile(user.uid, {
+          photoURL: image,
+        });
 
         setProfile((prev) => ({
           ...prev,
-
           photoURL: image,
         }));
       } catch (error) {
@@ -159,12 +139,6 @@ function Profile() {
     };
 
     reader.readAsDataURL(file);
-  };
-
-  const handleLogout = () => {
-    logoutUser();
-
-    window.location.href = "/login";
   };
 
   if (!profile) {
@@ -182,6 +156,7 @@ function Profile() {
         />
       )}
 
+      {/* Profile Header */}
       <div className="profile-header">
         <div className="avatar-container">
           {profile.photoURL ? (
@@ -206,53 +181,46 @@ function Profile() {
         </div>
 
         <div className="profile-details">
-          <h1>{profile.name}</h1>
+          <div className="name-row">
+            <h1>{profile.name}</h1>
+
+            <button
+              className="edit-name-icon"
+              onClick={() => setShowEdit(true)}
+              title="Edit Name"
+              aria-label="Edit Name"
+            >
+              ✏️
+            </button>
+          </div>
 
           <p>{profile.email}</p>
-
-          <button
-            className="edit-profile-btn"
-            onClick={() => setShowEdit(true)}
-          >
-            ✏️ Edit Name
-          </button>
-
-          <button className="logout-btn" onClick={handleLogout}>
-            🚪 Logout
-          </button>
         </div>
       </div>
 
+      {/* Profile Stats */}
       <div className="profile-stats">
         <div className="stat-card">
           <h2>{favorites.length}</h2>
-
           <p>❤️ Favorites</p>
         </div>
 
         <div className="stat-card">
           <h2>{reviews.length}</h2>
-
           <p>💬 Reviews</p>
         </div>
 
         <div className="stat-card">
           <h2>{watchedCount}</h2>
-
           <p>🎬 Watched</p>
         </div>
       </div>
 
+      {/* Achievements */}
       <section className="profile-section-block">
         <h2>🏆 Achievements</h2>
 
         <div className="achievement-grid">
-          {/* <AchievementCard
-            icon="🎬"
-            title="Movie Beginner"
-            description="Watched your first movie"
-          /> */}
-
           <AchievementCard
             icon="❤️"
             title="Collector"
@@ -267,30 +235,35 @@ function Profile() {
         </div>
       </section>
 
+      {/* Recent Activity */}
       <section className="profile-section-block">
         <h2>🕒 Recent Activity</h2>
 
         <ActivityTimeline activities={activities} />
       </section>
 
+      {/* My Reviews */}
       <section className="profile-section-block">
         <h2>💬 My Reviews</h2>
 
         {reviews.length ? (
-          reviews.map((review) => (
-            <div className="review-card" key={review.id}>
-              <h3>🎬 {review.movieTitle || "Movie"}</h3>
+          <div className="my-reviews-list">
+            {reviews.map((review) => (
+              <div className="review-card" key={review.id}>
+                <h3>🎬 {review.movieTitle || "Movie"}</h3>
 
-              <div className="review-rating">⭐ {review.rating}/5</div>
+                <div className="review-rating">⭐ {review.rating}/5</div>
 
-              <p>{review.comment}</p>
-            </div>
-          ))
+                <p>{review.comment}</p>
+              </div>
+            ))}
+          </div>
         ) : (
           <p className="empty-text">No reviews yet</p>
         )}
       </section>
 
+      {/* Favorite Movies */}
       <section className="profile-section-block">
         <h2>❤️ Favorite Movies</h2>
 
@@ -303,6 +276,7 @@ function Profile() {
         </div>
       </section>
 
+      {/* Recently Watched */}
       <section className="profile-section-block">
         <div className="section-title">
           <h2>🎬 Recently Watched</h2>
