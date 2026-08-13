@@ -1,12 +1,15 @@
 import "./Search.css";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import { searchMovies } from "../../services/tmdbService";
 import MovieCard from "../../components/MovieCard/MovieCard";
 import MovieSkeleton from "../../components/Skeleton/MovieSkeleton";
 
 function Search() {
-  const [query, setQuery] = useState("");
+  const [searchParams] = useSearchParams();
+
+  const urlQuery = searchParams.get("query") || "";
 
   const [movies, setMovies] = useState([]);
 
@@ -14,13 +17,13 @@ function Search() {
 
   const [searched, setSearched] = useState(false);
 
-  const handleSearch = async () => {
-    if (!query.trim()) return;
+  const runSearch = async (term) => {
+    if (!term.trim()) return;
 
     try {
       setLoading(true);
 
-      const results = await searchMovies(query);
+      const results = await searchMovies(term);
 
       setMovies(results || []);
 
@@ -34,28 +37,19 @@ function Search() {
     }
   };
 
+  useEffect(() => {
+    if (urlQuery) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      runSearch(urlQuery);
+    }
+  }, [urlQuery]);
+
   return (
     <section className="search-page">
       <div className="search-header">
         <h1>Search Movies</h1>
 
         <p>Find your favorite movies.</p>
-      </div>
-
-      <div className="search-box">
-        <input
-          type="text"
-          placeholder="Search movie..."
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") {
-              handleSearch();
-            }
-          }}
-        />
-
-        <button onClick={handleSearch}>Search</button>
       </div>
 
       {searched && (

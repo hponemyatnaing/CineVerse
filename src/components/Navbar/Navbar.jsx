@@ -1,6 +1,6 @@
 import "./Navbar.css";
-import { NavLink, useNavigate } from "react-router-dom";
-import { useState, useContext } from "react";
+import { NavLink, useNavigate, useLocation } from "react-router-dom";
+import { useState, useEffect, useContext } from "react";
 import { FaFilm, FaHeart, FaBars, FaTimes, FaSearch } from "react-icons/fa";
 import { useAuth } from "../../context/AuthContext";
 import { logoutUser } from "../../services/authService";
@@ -14,6 +14,17 @@ function Navbar() {
   const { user: authUser } = useAuth();
 
   const navigate = useNavigate();
+
+  const location = useLocation();
+
+  const urlQuery = new URLSearchParams(location.search).get("query") || "";
+
+  useEffect(() => {
+    if (location.pathname === "/search") {
+      setSearch(urlQuery);
+    }
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+  }, [urlQuery, location.pathname]);
 
   const { theme, toggleTheme } = useContext(ThemeContext);
   const { favorites } = useFavorites();
