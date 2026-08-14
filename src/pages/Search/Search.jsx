@@ -39,7 +39,6 @@ function Search() {
 
   useEffect(() => {
     if (urlQuery) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
       runSearch(urlQuery);
     }
   }, [urlQuery]);
